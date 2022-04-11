@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MotivationAndProductivityApp</string>
+
+    <string-array name="hoursSpinnerValues">
+        <item>30m</item>
+        <item>1h</item>
+        <item>2h</item>
+        <item>3h</item>
+        <item>4h</item>
+        <item>8h</item>
+    </string-array>
 </resources>

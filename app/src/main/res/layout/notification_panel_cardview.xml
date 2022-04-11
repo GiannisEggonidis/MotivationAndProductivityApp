@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notificationPanelParent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="7dp"
-    app:cardElevation="7dp">
+    app:cardElevation="10dp"
+    >
 
     <RelativeLayout
         android:layout_width="335dp"
-        android:layout_height="130dp">
+        android:layout_height="130dp"
+        >
 
         <EditText
             android:id="@+id/notificationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:maxLength="29"
             android:text="Notification"
             android:textSize="14sp"
-            android:layout_marginLeft="5dp"
-            android:maxLength="29"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <CheckBox
-            android:id="@+id/enableSwitchCheckbox"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+        <Switch
+            android:id="@+id/enableNotificationSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
+            android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/deleteNotificationPanel"
-            android:gravity="fill" />
+            android:gravity="fill"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/deleteNotificationPanel"
@@ -34,9 +41,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="6dp"
             android:background="@null"
-            android:src="@android:drawable/ic_delete" />
+            android:src="@android:drawable/ic_delete"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/notifyEvery"
@@ -54,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/notificationName"
             android:layout_toRightOf="@+id/notifyEvery"
-            />
+            android:entries="@array/hoursSpinnerValues"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -136,10 +145,10 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Sun"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
-
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
