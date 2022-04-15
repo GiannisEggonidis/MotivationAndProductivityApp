@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_toLeftOf="@+id/deleteNotificationPanel"
             android:gravity="fill"
             tools:ignore="TouchTargetSizeCheck" />
@@ -56,16 +56,52 @@
             android:text="Notify me every :"
             android:textSize="17sp" />
 
-        <Spinner
-            android:id="@+id/hoursSpinner"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/notificationName"
-            android:layout_toRightOf="@+id/notifyEvery"
-            android:entries="@array/hoursSpinnerValues"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            android:layout_above="@+id/chkboxes"
+            android:layout_toRightOf="@id/notifyEvery"
+            android:layout_marginLeft="7dp"
+            android:elevation="5dp">
+            <EditText
+                android:id="@+id/hoursEditText"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="2" />
+            <TextView
+                android:id="@+id/hoursTxt"
+                android:textSize="16sp"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/hoursEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="h" />
+
+            <EditText
+                android:id="@+id/minutesEditText"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/hoursTxt"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:maxLength="2"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/minutesTxt"
+                android:textSize="16sp"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/minutesEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m" />
+
+
+        </RelativeLayout>
+
 
         <RelativeLayout
+            android:id="@+id/chkboxes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/notifyEvery"
