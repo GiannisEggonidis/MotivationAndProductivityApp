@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#3457AC">
+    android:background="#accbee"
+    tools:context=".MainActivity">
 
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="520dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.207">
@@ -22,9 +21,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notificationPanelRecView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            />
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
 
 
     </RelativeLayout>
@@ -37,9 +35,11 @@
 
     <ImageButton
         android:id="@+id/addNotificationPanel"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/ic_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:background="@mipmap/ic_add_button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="119dp" />
+        app:layout_constraintGuide_percent="0.16826266" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="651dp" />
+        app:layout_constraintGuide_end="114dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

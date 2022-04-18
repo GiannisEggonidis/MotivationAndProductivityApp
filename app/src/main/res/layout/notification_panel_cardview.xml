@@ -8,6 +8,7 @@
     android:layout_margin="10dp"
     app:cardCornerRadius="7dp"
     app:cardElevation="10dp"
+    app:cardBackgroundColor="#e7f0fd"
     >
 
     <RelativeLayout
@@ -115,7 +116,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Mon"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/tuesdayCheckBox"
@@ -126,7 +129,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Tue"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/wednesdayCheckBox"
@@ -137,7 +142,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Wed"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/thursdayCheckBox"
@@ -148,7 +155,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Thu"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/fridayCheckBox"
@@ -159,7 +168,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Fri"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/saturdayCheckBox"
@@ -170,7 +181,9 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
                 android:text="Sat"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
 
             <CheckBox
                 android:id="@+id/sundayCheckBox"
@@ -182,7 +195,9 @@
                 android:gravity="center"
                 android:text="Sun"
                 android:textSize="13sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:scaleX="1.077"
+                android:scaleY="1.077"/>
         </RelativeLayout>
 
     </RelativeLayout>
