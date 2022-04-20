@@ -6,15 +6,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardCornerRadius="7dp"
-    app:cardElevation="10dp"
     app:cardBackgroundColor="#e7f0fd"
-    >
+    app:cardCornerRadius="7dp"
+    app:cardElevation="10dp">
 
     <RelativeLayout
         android:layout_width="335dp"
-        android:layout_height="130dp"
-        >
+        android:layout_height="130dp">
 
         <EditText
             android:id="@+id/notificationName"
@@ -30,8 +28,8 @@
             android:id="@+id/enableNotificationSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
             android:layout_marginTop="3dp"
+            android:layout_marginRight="4dp"
             android:layout_toLeftOf="@+id/deleteNotificationPanel"
             android:gravity="fill"
             tools:ignore="TouchTargetSizeCheck" />
@@ -41,10 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="4dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="6dp"
             android:background="@null"
-            android:src="@android:drawable/ic_delete"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:src="@drawable/ic_delete"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
@@ -61,41 +62,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/chkboxes"
-            android:layout_toRightOf="@id/notifyEvery"
             android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/notifyEvery"
             android:elevation="5dp">
+
             <EditText
                 android:id="@+id/hoursEditText"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:maxLength="2" />
+
             <TextView
                 android:id="@+id/hoursTxt"
-                android:textSize="16sp"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/hoursEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="h" />
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/hoursEditText"
+                android:text="h"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/minutesEditText"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/hoursTxt"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:maxLength="2"
-                android:inputType="number"/>
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/hoursTxt"
+                android:inputType="number"
+                android:maxLength="2" />
 
             <TextView
                 android:id="@+id/minutesTxt"
-                android:textSize="16sp"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/minutesEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="m" />
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/minutesEditText"
+                android:text="m"
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -115,10 +118,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Mon"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Mon"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/tuesdayCheckBox"
@@ -128,10 +131,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Tue"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Tue"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/wednesdayCheckBox"
@@ -141,10 +144,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Wed"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Wed"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/thursdayCheckBox"
@@ -154,10 +157,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Thu"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Thu"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/fridayCheckBox"
@@ -167,10 +170,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Fri"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Fri"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/saturdayCheckBox"
@@ -180,10 +183,10 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:text="Sat"
-                android:textSize="13sp"
                 android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                android:scaleY="1.077"
+                android:text="Sat"
+                android:textSize="13sp" />
 
             <CheckBox
                 android:id="@+id/sundayCheckBox"
@@ -193,11 +196,11 @@
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
+                android:scaleX="1.077"
+                android:scaleY="1.077"
                 android:text="Sun"
                 android:textSize="13sp"
-                tools:ignore="TouchTargetSizeCheck"
-                android:scaleX="1.077"
-                android:scaleY="1.077"/>
+                tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
 
     </RelativeLayout>
