@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         false, false, false,
                         false, false));
                 saveData();
+                Toast.makeText(MainActivity.this, "Total Panels : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
                 refreshActivity();
             }
         });

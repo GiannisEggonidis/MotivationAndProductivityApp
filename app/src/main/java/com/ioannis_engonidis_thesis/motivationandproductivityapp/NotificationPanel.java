@@ -140,4 +140,5 @@ public class NotificationPanel {
                 ", sundayCheckBox=" + sundayCheckBox +
                 '}';
     }
+
 }

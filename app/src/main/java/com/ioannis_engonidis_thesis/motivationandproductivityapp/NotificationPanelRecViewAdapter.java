@@ -67,10 +67,15 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         holder.deleteNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notificationPanel.remove(position);
-                notifyDataSetChanged();
-                Toast.makeText(mContext, "Panel Removed", Toast.LENGTH_SHORT).show();
-                saveData();
+                try {
+                    notificationPanel.remove(holder.getAdapterPosition());
+                    notifyDataSetChanged();
+                    Toast.makeText(mContext, "Panel Removed\nTotal Panels : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                    saveData();
+                }catch (Exception e){
+                    Toast.makeText(mContext, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -81,8 +86,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.enableNotifSwitch.isChecked()){
                     notificationPanel.get(position).setNotificationSwitch(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setNotificationSwitch(false);
+                    saveData();
                 }
             }
         });
@@ -96,7 +103,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notificationPanel.get(position).setNotificationName(String.valueOf(holder.notificationName.getText()));
+                notificationPanel.get(holder.getAdapterPosition()).setNotificationName(String.valueOf(holder.notificationName.getText()));
+                saveData();
             }
 
             @Override
@@ -114,7 +122,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notificationPanel.get(position).setHours(String.valueOf(holder.hoursEditText.getText()));
+                notificationPanel.get(holder.getAdapterPosition()).setHours(String.valueOf(holder.hoursEditText.getText()));
+                saveData();
             }
 
             @Override
@@ -130,7 +139,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notificationPanel.get(position).setMinutes(String.valueOf(holder.minutesEditText.getText()));
+                notificationPanel.get(holder.getAdapterPosition()).setMinutes(String.valueOf(holder.minutesEditText.getText()));
+                saveData();
             }
 
             @Override
@@ -145,8 +155,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.monCheckBox.isChecked()){
                     notificationPanel.get(position).setMondayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setMondayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -155,8 +167,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.tueCheckBox.isChecked()){
                     notificationPanel.get(position).setTuesdayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setTuesdayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -165,8 +179,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.wedCheckBox.isChecked()){
                     notificationPanel.get(position).setWednesdayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setWednesdayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -175,8 +191,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.thuCheckBox.isChecked()){
                     notificationPanel.get(position).setThursdayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setThursdayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -185,8 +203,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.friCheckBox.isChecked()){
                     notificationPanel.get(position).setFridayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setFridayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -195,8 +215,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.satCheckBox.isChecked()){
                     notificationPanel.get(position).setSaturdayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setSaturdayCheckBox(false);
+                    saveData();
                 }
             }
         });
@@ -205,8 +227,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onClick(View view) {
                 if (holder.sunCheckBox.isChecked()){
                     notificationPanel.get(position).setSundayCheckBox(true);
+                    saveData();
                 }else {
                     notificationPanel.get(position).setSundayCheckBox(false);
+                    saveData();
                 }
             }
         });
