@@ -12,6 +12,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
         addNotificationPanel = findViewById(R.id.addNotificationPanel);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(notificationPanel);
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
         Type type = new TypeToken<ArrayList<NotificationPanel>>() {
@@ -118,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
         finish(); //finish Activity.
         overridePendingTransition(0, 0);
     }
+
+
 
 
 }

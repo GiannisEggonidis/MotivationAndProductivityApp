@@ -44,5 +44,6 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.clans:fab:1.6.2'
+    implementation 'com.github.clans:fab:1.6.4'
+
 }
