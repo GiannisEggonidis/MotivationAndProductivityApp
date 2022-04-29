@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -250,7 +251,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         private CardView parent;
         private EditText notificationName , hoursEditText , minutesEditText ;
         private CheckBox monCheckBox ,tueCheckBox,wedCheckBox,thuCheckBox,friCheckBox,satCheckBox,sunCheckBox;
-        private Switch enableNotifSwitch;
+        private SwitchCompat enableNotifSwitch;
         private TextView notifyEvery;
         private ImageButton deleteNotificationPanel ;
 
@@ -278,7 +279,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     }
 
     private void saveData(){
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(notificationPanel);

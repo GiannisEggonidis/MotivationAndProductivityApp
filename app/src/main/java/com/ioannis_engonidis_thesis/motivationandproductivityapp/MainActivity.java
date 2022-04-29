@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView notificationPanelRecView;
     private RecyclerView.Adapter notificationPanelAdapter;
     private NotificationPanelRecViewAdapter adapter;
-    private Spinner hoursSpinner;
     private ImageButton addNotificationPanel;
+
     private ArrayList<NotificationPanel> notificationPanel;
 
     @Override
