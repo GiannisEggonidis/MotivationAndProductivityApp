@@ -23,14 +23,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2.5dp"
             android:layout_marginTop="-7dp"
+            android:ellipsize="end"
             android:hint="Notification"
             android:inputType="text"
+            android:lines="1"
             android:maxLength="29"
             android:maxLines="1"
-            android:lines="1"
-            android:ellipsize="end"
             android:text="Notification"
             android:textSize="16sp"
+            android:textCursorDrawable="@null"
             tools:ignore="TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -41,8 +42,8 @@
             android:layout_marginRight="4dp"
             android:layout_toLeftOf="@+id/deleteNotificationPanel"
             android:gravity="fill"
-            app:trackTint="@color/switch_track_selector"
             app:thumbTint="@color/switch_thumb_selector"
+            app:trackTint="@color/switch_track_selector"
             tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
@@ -72,16 +73,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="31.5dp"
+            android:layout_marginTop="28.5dp"
             android:layout_toRightOf="@id/notifyEvery"
             android:elevation="5dp">
 
             <EditText
                 android:id="@+id/hoursEditText"
-                android:layout_width="30dp"
+                android:layout_width="23dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="2"
+                android:maxLength="1"
+                android:textAlignment="center"
                 android:textSize="17sp" />
 
             <TextView
@@ -95,12 +97,13 @@
 
             <EditText
                 android:id="@+id/minutesEditText"
-                android:layout_width="30dp"
+                android:layout_width="29dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/hoursTxt"
                 android:inputType="number"
                 android:maxLength="2"
+                android:textAlignment="center"
                 android:textSize="17sp" />
 
             <TextView
@@ -125,99 +128,125 @@
 
             <CheckBox
                 android:id="@+id/mondayCheckBox"
-                android:theme="@style/checkbox_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="5dp"
                 android:backgroundTint="@color/background"
                 android:button="@color/black"
                 android:buttonTint="@color/background"
                 android:buttonTintMode="multiply"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Mon"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/tuesdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toRightOf="@+id/mondayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Tue"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/wednesdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toRightOf="@+id/tuesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Wed"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/thursdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toRightOf="@id/wednesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Thu"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/fridayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toRightOf="@+id/thursdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Fri"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/saturdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toRightOf="@+id/fridayCheckBox"
                 android:button="@null"
                 android:buttonTint="#1841be"
                 android:buttonTintMode="add"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Sat"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/checkbox_style" />
 
             <CheckBox
                 android:id="@+id/sundayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/saturdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:scaleX="1.077"
-                android:scaleY="1.077"
+                android:scaleX="1.23"
+                android:scaleY="1.23"
                 android:text="Sun"
+                android:textColor="@color/black"
                 android:textSize="14sp"
+                android:theme="@style/checkbox_style"
                 tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
 

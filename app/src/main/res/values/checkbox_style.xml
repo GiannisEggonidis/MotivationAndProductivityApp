@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="checkbox_style" parent="Base.Theme.AppCompat">
-        <item name="colorAccent">@color/background</item> <!-- for uncheck state -->
-        <item name="android:textColorSecondary">#A0A0A0A0</item> <!-- for check state -->
-        <item name="android:textSize"></item>
+        <item name="colorAccent">#E42D9AD6</item> <!-- for uncheck state -->
+        <item name="android:textColorSecondary">#A01B1B1B</item> <!-- for check state -->
+        <item name="android:textSize">22sp</item>
+        <item name="android:text">@color/black</item>
     </style>
 </resources>
