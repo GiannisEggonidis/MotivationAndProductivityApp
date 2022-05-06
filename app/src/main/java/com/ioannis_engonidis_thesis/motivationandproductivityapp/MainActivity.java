@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         loadData();
 
+
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu first item clicked
@@ -70,14 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {if (notificationPanel.size()>=10){
+                Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
+            }else{
                 notificationPanel.add(new NotificationPanel(10, "Notification", false,
                         "1","30", false, false,
                         false, false, false,
                         false, false));
                 saveData();
-                Toast.makeText(MainActivity.this, "Total Panels : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Created New Reminder\n"+ "Total Reminders : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
                 refreshActivity();
+            }
+
             }
         });
 

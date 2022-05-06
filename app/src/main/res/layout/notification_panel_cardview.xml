@@ -24,14 +24,17 @@
             android:layout_marginLeft="2.5dp"
             android:layout_marginTop="-7dp"
             android:ellipsize="end"
+            android:fontFamily="@font/sans_francisco_pro_text_light"
             android:hint="Notification"
             android:inputType="text"
             android:lines="1"
-            android:maxLength="29"
+            android:maxLength="20"
             android:maxLines="1"
             android:text="Notification"
-            android:textSize="16sp"
+            android:textColor="#CC000000"
             android:textCursorDrawable="@null"
+            android:textFontWeight="900"
+            android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -66,7 +69,10 @@
             android:layout_below="@+id/notificationName"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="5dp"
-            android:text="Notify me every :"
+            android:fontFamily="@font/sans_francisco_pro_display_regular"
+            android:text="Remind me every :"
+            android:textColor="#94000000"
+            android:textFontWeight="600"
             android:textSize="17sp" />
 
         <RelativeLayout
@@ -81,6 +87,7 @@
                 android:id="@+id/hoursEditText"
                 android:layout_width="23dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/sfuitext_regular"
                 android:inputType="number"
                 android:maxLength="1"
                 android:textAlignment="center"
@@ -92,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/hoursEditText"
+                android:fontFamily="@font/sans_francisco_pro_text_medium"
                 android:text="h"
                 android:textSize="14sp" />
 
@@ -101,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/hoursTxt"
+                android:fontFamily="@font/sfuitext_regular"
                 android:inputType="number"
                 android:maxLength="2"
                 android:textAlignment="center"
@@ -112,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/minutesEditText"
+                android:fontFamily="@font/sans_francisco_pro_text_medium"
                 android:text="m"
                 android:textSize="14sp" />
 
@@ -124,25 +134,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/notifyEvery"
+            android:layout_centerInParent="true"
             android:layout_marginTop="15dp">
 
             <CheckBox
                 android:id="@+id/mondayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:layout_marginRight="5dp"
                 android:backgroundTint="@color/background"
                 android:button="@color/black"
                 android:buttonTint="@color/background"
                 android:buttonTintMode="multiply"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Mon"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -154,12 +167,14 @@
                 android:layout_toRightOf="@+id/mondayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Tue"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -171,12 +186,14 @@
                 android:layout_toRightOf="@+id/tuesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Wed"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -188,12 +205,14 @@
                 android:layout_toRightOf="@id/wednesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Thu"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -205,12 +224,14 @@
                 android:layout_toRightOf="@+id/thursdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Fri"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -224,12 +245,14 @@
                 android:buttonTint="#1841be"
                 android:buttonTintMode="add"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Sat"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -240,12 +263,14 @@
                 android:layout_toRightOf="@id/saturdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
+                android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Sun"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textColor="#CC000000"
+                android:textFontWeight="600"
+                android:textSize="13.3sp"
                 android:theme="@style/checkbox_style"
                 tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>

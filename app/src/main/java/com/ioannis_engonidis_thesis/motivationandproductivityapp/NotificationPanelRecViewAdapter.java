@@ -2,8 +2,11 @@ package com.ioannis_engonidis_thesis.motivationandproductivityapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,11 +30,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 
-public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<NotificationPanelRecViewAdapter.ViewHolder>  {
+public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<NotificationPanelRecViewAdapter.ViewHolder> {
     private String TAG = "NotificationPanelRecViewAdapter";
 
     private ArrayList<NotificationPanel> notificationPanel = new ArrayList<>();
@@ -43,13 +48,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_panel_cardview,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_panel_cardview, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
-        Log.d(TAG,"onBindViewHolder: Called");
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        Log.d(TAG, "onBindViewHolder: Called");
 
         /** Configuring Buttons  **/
         holder.notificationName.setText(notificationPanel.get(position).getNotificationName());
@@ -69,12 +74,37 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             @Override
             public void onClick(View view) {
                 try {
-                    notificationPanel.remove(holder.getAdapterPosition());
-                    notifyDataSetChanged();
-                    Toast.makeText(mContext, "Panel Removed\nTotal Panels : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
-                    notifyDataSetChanged();
-                    saveData();
-                }catch (Exception e){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AlertDialog);
+                    builder.setTitle(notificationPanel.get(position).getNotificationName());
+                    builder.setMessage("Delete Reminder");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            notificationPanel.remove(holder.getAdapterPosition());
+                            notifyDataSetChanged();
+                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+                            saveData();
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+                    //Set negative button text color
+                    nbutton.setTextColor(Color.BLACK);
+                    nbutton.setTextSize(18);
+                    nbutton.setWidth(30);
+                    Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+                    //Set positive button text color
+                    pbutton.setTextColor(Color.BLACK);
+                    pbutton.setTextSize(18);
+                    pbutton.setWidth(30);
+
+                } catch (Exception e) {
                     Toast.makeText(mContext, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
                 }
 
@@ -85,10 +115,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         holder.enableNotifSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.enableNotifSwitch.isChecked()){
+                if (holder.enableNotifSwitch.isChecked()) {
                     notificationPanel.get(position).setNotificationSwitch(true);
                     saveData();
-                }else {
+                } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
                     saveData();
                 }
@@ -114,127 +144,129 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             }
         });
 
-        /** Configure notification frequency on change save data**/
-        holder.hoursEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        /** Configure notification frequency on change save data**/{
+            holder.hoursEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notificationPanel.get(holder.getAdapterPosition()).setHours(String.valueOf(holder.hoursEditText.getText()));
-                saveData();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        holder.minutesEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notificationPanel.get(holder.getAdapterPosition()).setMinutes(String.valueOf(holder.minutesEditText.getText()));
-                saveData();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        /** Configure weekdays checkboxes on change save data **/
-        holder.monCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.monCheckBox.isChecked()){
-                    notificationPanel.get(position).setMondayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setMondayCheckBox(false);
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    notificationPanel.get(holder.getAdapterPosition()).setHours(String.valueOf(holder.hoursEditText.getText()));
                     saveData();
                 }
-            }
-        });
-        holder.tueCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.tueCheckBox.isChecked()){
-                    notificationPanel.get(position).setTuesdayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setTuesdayCheckBox(false);
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+            holder.minutesEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    notificationPanel.get(holder.getAdapterPosition()).setMinutes(String.valueOf(holder.minutesEditText.getText()));
                     saveData();
                 }
-            }
-        });
-        holder.wedCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.wedCheckBox.isChecked()){
-                    notificationPanel.get(position).setWednesdayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setWednesdayCheckBox(false);
-                    saveData();
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
                 }
-            }
-        });
-        holder.thuCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.thuCheckBox.isChecked()){
-                    notificationPanel.get(position).setThursdayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setThursdayCheckBox(false);
-                    saveData();
+            });
+        }
+
+        /** Configure weekdays checkboxes on change save data **/{
+            holder.monCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.monCheckBox.isChecked()) {
+                        notificationPanel.get(position).setMondayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setMondayCheckBox(false);
+                        saveData();
+                    }
                 }
-            }
-        });
-        holder.friCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.friCheckBox.isChecked()){
-                    notificationPanel.get(position).setFridayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setFridayCheckBox(false);
-                    saveData();
+            });
+            holder.tueCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.tueCheckBox.isChecked()) {
+                        notificationPanel.get(position).setTuesdayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setTuesdayCheckBox(false);
+                        saveData();
+                    }
                 }
-            }
-        });
-        holder.satCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.satCheckBox.isChecked()){
-                    notificationPanel.get(position).setSaturdayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setSaturdayCheckBox(false);
-                    saveData();
+            });
+            holder.wedCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.wedCheckBox.isChecked()) {
+                        notificationPanel.get(position).setWednesdayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setWednesdayCheckBox(false);
+                        saveData();
+                    }
                 }
-            }
-        });
-        holder.sunCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.sunCheckBox.isChecked()){
-                    notificationPanel.get(position).setSundayCheckBox(true);
-                    saveData();
-                }else {
-                    notificationPanel.get(position).setSundayCheckBox(false);
-                    saveData();
+            });
+            holder.thuCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.thuCheckBox.isChecked()) {
+                        notificationPanel.get(position).setThursdayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setThursdayCheckBox(false);
+                        saveData();
+                    }
                 }
-            }
-        });
+            });
+            holder.friCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.friCheckBox.isChecked()) {
+                        notificationPanel.get(position).setFridayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setFridayCheckBox(false);
+                        saveData();
+                    }
+                }
+            });
+            holder.satCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.satCheckBox.isChecked()) {
+                        notificationPanel.get(position).setSaturdayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setSaturdayCheckBox(false);
+                        saveData();
+                    }
+                }
+            });
+            holder.sunCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.sunCheckBox.isChecked()) {
+                        notificationPanel.get(position).setSundayCheckBox(true);
+                        saveData();
+                    } else {
+                        notificationPanel.get(position).setSundayCheckBox(false);
+                        saveData();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -249,11 +281,11 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
-        private EditText notificationName , hoursEditText , minutesEditText ;
-        private CheckBox monCheckBox ,tueCheckBox,wedCheckBox,thuCheckBox,friCheckBox,satCheckBox,sunCheckBox;
+        private EditText notificationName, hoursEditText, minutesEditText;
+        private CheckBox monCheckBox, tueCheckBox, wedCheckBox, thuCheckBox, friCheckBox, satCheckBox, sunCheckBox;
         private SwitchCompat enableNotifSwitch;
         private TextView notifyEvery;
-        private ImageButton deleteNotificationPanel ;
+        private ImageButton deleteNotificationPanel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -278,12 +310,12 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
     }
 
-    private void saveData(){
+    private void saveData() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(notificationPanel);
-        editor.putString("task list",json);
+        editor.putString("task list", json);
         editor.apply();
     }
 }
