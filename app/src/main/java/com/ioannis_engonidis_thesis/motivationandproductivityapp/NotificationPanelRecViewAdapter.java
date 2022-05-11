@@ -94,12 +94,12 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     AlertDialog alert = builder.create();
                     alert.show();
                     Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
-                    //Set negative button text color
+                    //Set negative button text attributes
                     nbutton.setTextColor(Color.BLACK);
                     nbutton.setTextSize(18);
                     nbutton.setWidth(30);
                     Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-                    //Set positive button text color
+                    //Set positive button text attributes
                     pbutton.setTextColor(Color.BLACK);
                     pbutton.setTextSize(18);
                     pbutton.setWidth(30);

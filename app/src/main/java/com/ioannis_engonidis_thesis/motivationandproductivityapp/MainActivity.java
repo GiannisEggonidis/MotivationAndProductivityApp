@@ -33,11 +33,10 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionMenu materialDesignFAM;
-    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3,floatingActionButton4,floatingActionButton5;
+    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
     private RecyclerView notificationPanelRecView;
-    private RecyclerView.Adapter notificationPanelAdapter;
-    private NotificationPanelRecViewAdapter adapter;
+    private NotificationPanelRecViewAdapter adapter = new NotificationPanelRecViewAdapter(this);
     private ImageButton addNotificationPanel;
 
     private ArrayList<NotificationPanel> notificationPanel;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
 
         notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
         addNotificationPanel = findViewById(R.id.addNotificationPanel);
@@ -60,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         loadData();
 
+        adapter.setNotificationPanel(notificationPanel);
+
+        notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
+        notificationPanelRecView.setAdapter(adapter);
 
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
@@ -72,27 +74,20 @@ public class MainActivity extends AppCompatActivity {
 
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {if (notificationPanel.size()>=10){
-                Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
-            }else{
-                notificationPanel.add(new NotificationPanel(10, "Notification", false,
-                        "1","30", false, false,
-                        false, false, false,
-                        false, false));
-                saveData();
-                Toast.makeText(MainActivity.this,"Created New Reminder\n"+ "Total Reminders : "+notificationPanel.size(), Toast.LENGTH_SHORT).show();
-                refreshActivity();
-            }
-
+            public void onClick(View view) {
+                if (notificationPanel.size() >= 10) {
+                    Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
+                } else {
+                    notificationPanel.add(new NotificationPanel(10, "Reminder", false,
+                            "1", "30", false, false,
+                            false, false, false,
+                            false, false));
+                    saveData();
+                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
-
-        NotificationPanelRecViewAdapter adapter = new NotificationPanelRecViewAdapter(this);
-        adapter.setNotificationPanel(notificationPanel);
-
-        notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
-        notificationPanelRecView.setAdapter(adapter);
-
     }
 
     private void saveData() {
@@ -126,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
         finish(); //finish Activity.
         overridePendingTransition(0, 0);
     }
-
-
 
 
 }
