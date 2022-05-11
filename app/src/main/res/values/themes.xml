@@ -15,6 +15,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">#2888BD</item>
         <!-- Customize your theme here. -->
         <item name="colorAccent">#353535</item>
+        <item name="android:colorEdgeEffect">@color/background</item>
+
     </style>
 
     <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
