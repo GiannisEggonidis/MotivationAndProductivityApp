@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:id="@+id/main_layout"
+    android:background="@drawable/gradient_background_list"
     tools:context=".MainActivity">
 
 
@@ -24,11 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            android:requiresFadingEdge="vertical"
             android:scrollbars="vertical"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollIndicators="left"
-            />
+            android:fadeScrollbars="true"
+            android:requiresFadingEdge="vertical"/>
 
 
     </RelativeLayout>
