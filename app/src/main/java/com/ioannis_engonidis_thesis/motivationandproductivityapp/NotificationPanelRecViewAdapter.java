@@ -2,11 +2,17 @@ package com.ioannis_engonidis_thesis.motivationandproductivityapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -112,6 +118,9 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 if (holder.enableNotifSwitch.isChecked()) {
                     notificationPanel.get(position).setNotificationSwitch(true);
                     saveData();
+                    String notificationID = String.valueOf(notificationPanel.get(position).getId());
+                    createNotificationChannel();
+                    scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId());
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
                     saveData();
@@ -311,5 +320,32 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         String json = gson.toJson(notificationPanel);
         editor.putString("task list", json);
         editor.apply();
+    }
+
+    private void scheduleNotification(String notificationTitle, int notificationID) {
+        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
+        intent.putExtra("title", notificationTitle);
+        intent.putExtra("notificationID", notificationID);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, notificationID, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        long currentTime = System.currentTimeMillis() + 3000;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, currentTime, pendingIntent);
+        }
+    }
+
+    private void createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String name = "Notif Channel";
+            String desc = "A Description of the Channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("channelID", name, importance);
+            channel.setDescription(desc);
+            NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+        }
+
     }
 }
