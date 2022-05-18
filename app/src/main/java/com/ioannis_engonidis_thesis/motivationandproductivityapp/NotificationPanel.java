@@ -8,6 +8,9 @@ public class NotificationPanel {
     boolean notificationSwitch, mondayCheckBox, tuesdayCheckBox, wednesdayCheckBox, thursdayCheckBox,
             fridayCheckBox, saturdayCheckBox, sundayCheckBox;
 
+    public NotificationPanel(int id){
+        this.id = id;
+    }
 
     public NotificationPanel(int id, String notificationName, boolean notificationSwitch, String hours, String minutes,
                              boolean mondayCheckBox, boolean tuesdayCheckBox, boolean wednesdayCheckBox,

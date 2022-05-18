@@ -32,7 +32,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<NotificationPanelRecViewAdapter.ViewHolder> {
@@ -55,6 +57,19 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: Called");
+
+        //testing id generator
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"ID: "+ String.valueOf(notificationPanel.get(position).getId()), Toast.LENGTH_SHORT).show();
+
+                loadData();
+                String notificationID = String.valueOf(notificationPanel.get(holder.getAbsoluteAdapterPosition()).getId());
+                createNotificationChannel(notificationID);
+                scheduleNotification(notificationPanel.get(holder.getAbsoluteAdapterPosition()).getNotificationName(), notificationPanel.get(holder.getAbsoluteAdapterPosition()).getId());
+            }
+        });
 
         /** Configuring Buttons  **/
         holder.notificationName.setText(notificationPanel.get(position).getNotificationName());
@@ -82,7 +97,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                         public void onClick(DialogInterface dialog, int which) {
                             notificationPanel.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
-                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                             saveData();
                         }
                     });
@@ -118,9 +133,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 if (holder.enableNotifSwitch.isChecked()) {
                     notificationPanel.get(position).setNotificationSwitch(true);
                     saveData();
-                    String notificationID = String.valueOf(notificationPanel.get(position).getId());
-                    createNotificationChannel();
-                    scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId());
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
                     saveData();
@@ -321,6 +333,18 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         editor.putString("task list", json);
         editor.apply();
     }
+    private void loadData() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<NotificationPanel>>() {
+        }.getType();
+        notificationPanel = gson.fromJson(json, type);
+
+        if (notificationPanel == null) {
+            notificationPanel = new ArrayList<>();
+        }
+    }
 
     private void scheduleNotification(String notificationTitle, int notificationID) {
         Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
@@ -336,7 +360,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void createNotificationChannel() {
+    private void createNotificationChannel(String channelID) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String name = "Notif Channel";
             String desc = "A Description of the Channel";

@@ -22,6 +22,7 @@ import com.github.clans.fab.FloatingActionMenu;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,18 +74,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /** Add new panel Button **/
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (notificationPanel.size() >= 10) {
                     Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
-                    notificationPanel.add(new NotificationPanel(10, "Reminder", false,
+                    /** Generating new ID for reminder **/
+                    int maxValue = 1;
+                    int indexOfMaxValue = 0;
+                    if (notificationPanel.size()!=0){
+                        for(int i = 0; i < notificationPanel.size(); i++) {
+                            if(notificationPanel.get(i).getId() > maxValue) {
+                                indexOfMaxValue = i;
+                            }
+                        }
+                        maxValue = notificationPanel.get(indexOfMaxValue).getId()+1;
+                    }
+                    notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
                             "1", "30", false, false,
                             false, false, false,
                             false, false));
                     saveData();
-                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
             }
