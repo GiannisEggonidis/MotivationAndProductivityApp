@@ -1,6 +1,7 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -57,17 +58,18 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: Called");
-
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
         //testing id generator
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"ID: "+ String.valueOf(notificationPanel.get(position).getId()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"ID: "+ String.valueOf(notificationPanel.get(position).getId())+"\n"+notificationPanel.get(position).getNotificationName(), Toast.LENGTH_SHORT).show();
 
-                loadData();
-                String notificationID = String.valueOf(notificationPanel.get(holder.getAbsoluteAdapterPosition()).getId());
-                createNotificationChannel(notificationID);
-                scheduleNotification(notificationPanel.get(holder.getAbsoluteAdapterPosition()).getNotificationName(), notificationPanel.get(holder.getAbsoluteAdapterPosition()).getId());
+//                loadData();
+                String notificationID = String.valueOf(notificationPanel.get(position).getId());
+                createNotificationChannel(notificationID,notificationPanel.get(position).getNotificationName());
+                scheduleNotification(notificationPanel.get(position).getNotificationName()
+                                    , notificationPanel.get(position).getId());
             }
         });
 
@@ -95,6 +97,9 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                notificationManager.deleteNotificationChannel(String.valueOf(notificationPanel.get(position).getId()));
+                            }
                             notificationPanel.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
 //                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
@@ -133,6 +138,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 if (holder.enableNotifSwitch.isChecked()) {
                     notificationPanel.get(position).setNotificationSwitch(true);
                     saveData();
+
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
                     saveData();
@@ -151,6 +157,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 notificationPanel.get(holder.getAdapterPosition()).setNotificationName(String.valueOf(holder.notificationName.getText()));
                 saveData();
+
             }
 
             @Override
@@ -360,12 +367,11 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void createNotificationChannel(String channelID) {
+    private void createNotificationChannel(String channelID,String channelName) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            String name = "Notif Channel";
-            String desc = "A Description of the Channel";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("channelID", name, importance);
+            String desc = "No description";
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);

@@ -14,13 +14,15 @@ public class NotificationPanelReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Notification notification = new NotificationCompat.Builder(context, "channelID")
-                .setSmallIcon(R.drawable.ic_add_notification)
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        channelID = String.valueOf(intent.getIntExtra("notificationID",1));
+        Notification notification = new NotificationCompat.Builder(context,channelID )
+                .setSmallIcon(R.drawable.ic_repeating_reminder_notification_icon)
                 .setContentTitle(intent.getStringExtra("title"))
-                .setContentText("Test")
+                .setContentText(intent.getStringExtra("title"))
                 .build();
 
-        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(intent.getIntExtra("notificationID", notificationID), notification);
     }
 }
