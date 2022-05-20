@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.NotificationManager;
+import android.content.Context;
+import android.app.AlarmManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -85,18 +87,20 @@ public class MainActivity extends AppCompatActivity {
                     /** Generating new ID for reminder **/
                     int maxValue = 1;
                     int indexOfMaxValue = 0;
-                    if (notificationPanel.size()!=0){
-                        for(int i = 0; i < notificationPanel.size(); i++) {
-                            if(notificationPanel.get(i).getId() > maxValue) {
+                    if (notificationPanel.size() != 0) {
+                        for (int i = 0; i < notificationPanel.size(); i++) {
+                            if (notificationPanel.get(i).getId() > maxValue) {
                                 indexOfMaxValue = i;
                             }
                         }
-                        maxValue = notificationPanel.get(indexOfMaxValue).getId()+1;
+                        maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
                     }
+                    AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+
                     notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
-                            "1", "30", false, false,
+                            "0", "30", false, false,
                             false, false, false,
-                            false, false));
+                            false, false, manager));
                     saveData();
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();

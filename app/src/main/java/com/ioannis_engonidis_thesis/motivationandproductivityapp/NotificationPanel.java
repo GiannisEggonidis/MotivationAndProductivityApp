@@ -1,5 +1,6 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp;
 
+import android.app.AlarmManager;
 import android.widget.SpinnerAdapter;
 
 public class NotificationPanel {
@@ -7,6 +8,7 @@ public class NotificationPanel {
     private String notificationName, hours, minutes;
     boolean notificationSwitch, mondayCheckBox, tuesdayCheckBox, wednesdayCheckBox, thursdayCheckBox,
             fridayCheckBox, saturdayCheckBox, sundayCheckBox;
+    private AlarmManager alarmManager;
 
     public NotificationPanel(int id){
         this.id = id;
@@ -14,7 +16,7 @@ public class NotificationPanel {
 
     public NotificationPanel(int id, String notificationName, boolean notificationSwitch, String hours, String minutes,
                              boolean mondayCheckBox, boolean tuesdayCheckBox, boolean wednesdayCheckBox,
-                             boolean thursdayCheckBox, boolean fridayCheckBox, boolean saturdayCheckBox, boolean sundayCheckBox) {
+                             boolean thursdayCheckBox, boolean fridayCheckBox, boolean saturdayCheckBox, boolean sundayCheckBox, AlarmManager alarmManager) {
         this.id = id;
         this.notificationName = notificationName;
         this.notificationSwitch = notificationSwitch;
@@ -27,6 +29,7 @@ public class NotificationPanel {
         this.fridayCheckBox = fridayCheckBox;
         this.saturdayCheckBox = saturdayCheckBox;
         this.sundayCheckBox = sundayCheckBox;
+        this.alarmManager = alarmManager;
 
     }
 
@@ -124,6 +127,14 @@ public class NotificationPanel {
 
     public void setSundayCheckBox(boolean sundayCheckBox) {
         this.sundayCheckBox = sundayCheckBox;
+    }
+
+    public AlarmManager getAlarmManager() {
+        return alarmManager;
+    }
+
+    public void setAlarmManager(AlarmManager alarmManager) {
+        this.alarmManager = alarmManager;
     }
 
     @Override
