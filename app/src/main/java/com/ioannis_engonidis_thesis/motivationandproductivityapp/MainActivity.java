@@ -52,22 +52,13 @@ public class MainActivity extends AppCompatActivity {
             animationDrawable.start();
         }
 
-        notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
-        addNotificationPanel = findViewById(R.id.addNotificationPanel);
-        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
-        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
-        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
-        floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
-        floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
-
+        initializeViews();
         loadData();
 
         adapter.setNotificationPanel(notificationPanel);
 
         notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
         notificationPanelRecView.setAdapter(adapter);
-
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -85,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
-                    int maxValue = 1;
+                    int maxValue = 0;
                     int indexOfMaxValue = 0;
                     if (notificationPanel.size() != 0) {
                         for (int i = 0; i < notificationPanel.size(); i++) {
@@ -95,12 +86,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                         maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
                     }
-                    AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+                    AlarmManager manager = (AlarmManager)MainActivity.this.getSystemService(ALARM_SERVICE);
+
 
                     notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
                             "0", "30", false, false,
                             false, false, false,
-                            false, false, manager));
+                                false, false, manager));
                     saveData();
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
@@ -114,17 +106,18 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(notificationPanel);
-        editor.putString("task list", json);
+        editor.putString("repeating_reminder", json);
         editor.apply();
+
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<NotificationPanel>>() {
-        }.getType();
-        notificationPanel = gson.fromJson(json, type);
+        String json = sharedPreferences.getString("repeating_reminder", null);
+        Type type = new TypeToken<ArrayList<NotificationPanel>>() {}.getType();
+//        notificationPanel = gson.fromJson(json,type);
+        notificationPanel = gson.fromJson(json, (Type) NotificationPanel.class);
 
         if (notificationPanel == null) {
             notificationPanel = new ArrayList<>();
@@ -139,6 +132,17 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         finish(); //finish Activity.
         overridePendingTransition(0, 0);
+    }
+
+    private void initializeViews(){
+        notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
+        addNotificationPanel = findViewById(R.id.addNotificationPanel);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
+        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+        floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
+        floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
 }

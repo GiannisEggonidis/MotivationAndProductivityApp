@@ -161,7 +161,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     saveData();
 
                     // TODO: 20-May-22 Cancel the alarmManager
-                    notificationPanel.get(position).getAlarmManager().cancel(pendingIntent);
+//                    notificationPanel.get(position).getAlarmManager().cancel(pendingIntent);
                 }
             }
         });
@@ -357,14 +357,14 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(notificationPanel);
-        editor.putString("task list", json);
+        editor.putString("repeating_reminder", json);
         editor.apply();
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("task list", null);
+        String json = sharedPreferences.getString("repeating_reminder", null);
         Type type = new TypeToken<ArrayList<NotificationPanel>>() {
         }.getType();
         notificationPanel = gson.fromJson(json, type);
