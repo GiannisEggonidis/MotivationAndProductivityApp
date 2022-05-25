@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -149,12 +150,14 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     saveData();
 
                     String notificationID = String.valueOf(notificationPanel.get(position).getId());
+
                     createNotificationChannel(notificationID, notificationPanel.get(position).getNotificationName());
                     scheduleNotification(notificationPanel.get(position).getNotificationName()
                             , notificationPanel.get(position).getId()
                             , Integer.parseInt(notificationPanel.get(position).getHours())
                             , Integer.parseInt(notificationPanel.get(position).getMinutes())
-                            , notificationPanel.get(position).getAlarmManager());
+                            , notificationPanel.get(position).getAlarmManager()
+                            , notificationPanel.get(position).getIntent());
 
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
@@ -374,15 +377,18 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void scheduleNotification(String notificationTitle, int notificationID, int hours, int minutes, AlarmManager manager) {
-        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
+    private void scheduleNotification(String notificationTitle, int notificationID, int hours, int minutes, AlarmManager manager, Intent intent) {
+        intent = new Intent(mContext, NotificationPanelReceiver.class);
         intent.putExtra("title", notificationTitle);
         intent.putExtra("notificationID", notificationID);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext
-                , notificationID
+        int id =(int) System.currentTimeMillis();
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                mContext
+                , id
                 , intent
-                , PendingIntent.FLAG_CANCEL_CURRENT);
+                , PendingIntent.FLAG_IMMUTABLE );
 
         manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         long currentTime = System.currentTimeMillis();

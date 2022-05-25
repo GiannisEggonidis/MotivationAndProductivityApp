@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
                         maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
                     }
                     AlarmManager manager = (AlarmManager)MainActivity.this.getSystemService(ALARM_SERVICE);
-
+                    Intent intent = new Intent(MainActivity.this,NotificationPanelReceiver.class);
 
                     notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
                             "0", "30", false, false,
                             false, false, false,
-                                false, false, manager));
+                                false, false,null,intent));
                     saveData();
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("repeating_reminder", null);
         Type type = new TypeToken<ArrayList<NotificationPanel>>() {}.getType();
-//        notificationPanel = gson.fromJson(json,type);
-        notificationPanel = gson.fromJson(json, (Type) NotificationPanel.class);
+        notificationPanel = gson.fromJson(json,type);
+//        notificationPanel = gson.fromJson(json, (Type) NotificationPanel.class);
 
         if (notificationPanel == null) {
             notificationPanel = new ArrayList<>();
