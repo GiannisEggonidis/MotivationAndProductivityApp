@@ -9,13 +9,10 @@ public class NotificationPanel {
     private String notificationName, hours, minutes;
     boolean notificationSwitch, mondayCheckBox, tuesdayCheckBox, wednesdayCheckBox, thursdayCheckBox,
             fridayCheckBox, saturdayCheckBox, sundayCheckBox;
-    private AlarmManager alarmManager;
-    private Intent intent;
-
 
     public NotificationPanel(int id, String notificationName, boolean notificationSwitch, String hours, String minutes,
                              boolean mondayCheckBox, boolean tuesdayCheckBox, boolean wednesdayCheckBox,
-                             boolean thursdayCheckBox, boolean fridayCheckBox, boolean saturdayCheckBox, boolean sundayCheckBox, AlarmManager manager, Intent intent) {
+                             boolean thursdayCheckBox, boolean fridayCheckBox, boolean saturdayCheckBox, boolean sundayCheckBox) {
 
         this.id = id;
         this.notificationName = notificationName;
@@ -29,8 +26,6 @@ public class NotificationPanel {
         this.fridayCheckBox = fridayCheckBox;
         this.saturdayCheckBox = saturdayCheckBox;
         this.sundayCheckBox = sundayCheckBox;
-        this.alarmManager = manager;
-        this.intent = intent;
 
     }
 
@@ -128,22 +123,6 @@ public class NotificationPanel {
 
     public void setSundayCheckBox(boolean sundayCheckBox) {
         this.sundayCheckBox = sundayCheckBox;
-    }
-
-    public AlarmManager getAlarmManager() {
-        return alarmManager;
-    }
-
-    public void setAlarmManager(AlarmManager alarmManager) {
-        this.alarmManager = alarmManager;
-    }
-
-    public Intent getIntent() {
-        return intent;
-    }
-
-    public void setIntent(Intent intent) {
-        this.intent = intent;
     }
 
     @Override

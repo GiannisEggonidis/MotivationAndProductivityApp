@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
                             "0", "30", false, false,
                             false, false, false,
-                                false, false,null,intent));
+                                false, false));
                     saveData();
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();

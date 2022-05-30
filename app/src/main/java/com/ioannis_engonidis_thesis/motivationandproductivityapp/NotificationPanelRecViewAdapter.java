@@ -155,9 +155,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     scheduleNotification(notificationPanel.get(position).getNotificationName()
                             , notificationPanel.get(position).getId()
                             , Integer.parseInt(notificationPanel.get(position).getHours())
-                            , Integer.parseInt(notificationPanel.get(position).getMinutes())
-                            , notificationPanel.get(position).getAlarmManager()
-                            , notificationPanel.get(position).getIntent());
+                            , Integer.parseInt(notificationPanel.get(position).getMinutes()));
 
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
@@ -377,25 +375,27 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void scheduleNotification(String notificationTitle, int notificationID, int hours, int minutes, AlarmManager manager, Intent intent) {
-        intent = new Intent(mContext, NotificationPanelReceiver.class);
+    private void scheduleNotification(String notificationTitle, int notificationID, int hours, int minutes) {
+        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
         intent.putExtra("title", notificationTitle);
         intent.putExtra("notificationID", notificationID);
-
-        int id =(int) System.currentTimeMillis();
-
+        
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 mContext
-                , id
+                , notificationID
                 , intent
                 , PendingIntent.FLAG_IMMUTABLE );
 
-        manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         long currentTime = System.currentTimeMillis();
         long repeatInterval = (minutes * 60 * 1000) + (hours * 60 * 60 * 1000);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             manager.setRepeating(AlarmManager.RTC_WAKEUP, 5000, repeatInterval, pendingIntent);
         }
+    }
+    
+    private void cancelNotification(){
+        // TODO: 30/05/2022 cancel Alarm Manager function 
     }
 
     private void createNotificationChannel(String channelID, String channelName) {
