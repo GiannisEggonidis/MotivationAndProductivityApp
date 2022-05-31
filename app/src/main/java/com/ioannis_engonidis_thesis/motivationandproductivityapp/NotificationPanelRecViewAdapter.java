@@ -72,18 +72,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, "ID: " + String.valueOf(notificationPanel.get(position).getId()) + "\n" + notificationPanel.get(position).getNotificationName(), Toast.LENGTH_SHORT).show();
-
-//                String notificationID = String.valueOf(notificationPanel.get(position).getId());
-//                createNotificationChannel(notificationID, notificationPanel.get(position).getNotificationName());
-//                scheduleNotification(notificationPanel.get(position).getNotificationName()
-//                        , notificationPanel.get(position).getId()
-//                        , Integer.parseInt(notificationPanel.get(position).getHours())
-//                        , Integer.parseInt(notificationPanel.get(position).getMinutes())
-//                        , notificationPanel.get(position).getAlarmManager());
             }
         });
 
-        /** Configuring Buttons  **/
+        /** Configuring Buttons **/
         holder.notificationName.setText(notificationPanel.get(position).getNotificationName());
         holder.hoursEditText.setText(notificationPanel.get(position).getHours());
         holder.minutesEditText.setText(notificationPanel.get(position).getMinutes());
@@ -110,6 +102,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 notificationManager.deleteNotificationChannel(String.valueOf(notificationPanel.get(position).getId()));
                             }
+                            cancelNotification(notificationPanel.get(position).getId());
                             notificationPanel.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
 //                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
@@ -160,6 +153,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 } else {
                     notificationPanel.get(position).setNotificationSwitch(false);
                     saveData();
+                    cancelNotification(notificationPanel.get(position).getId());
 
                     // TODO: 20-May-22 Cancel the alarmManager
 //                    notificationPanel.get(position).getAlarmManager().cancel(pendingIntent);
@@ -348,7 +342,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             minutesEditText = itemView.findViewById(R.id.minutesEditText);
             deleteNotificationPanel = itemView.findViewById(R.id.deleteNotificationPanel);
 
-
         }
 
     }
@@ -379,30 +372,43 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
         intent.putExtra("title", notificationTitle);
         intent.putExtra("notificationID", notificationID);
-        
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 mContext
                 , notificationID
                 , intent
-                , PendingIntent.FLAG_IMMUTABLE );
+                , PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         long currentTime = System.currentTimeMillis();
         long repeatInterval = (minutes * 60 * 1000) + (hours * 60 * 60 * 1000);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, 5000, repeatInterval, pendingIntent);
+            manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
+                    , SystemClock.elapsedRealtime() + repeatInterval
+                    , repeatInterval
+                    , pendingIntent);
         }
     }
-    
-    private void cancelNotification(){
-        // TODO: 30/05/2022 cancel Alarm Manager function 
+
+    // TODO: 30/05/2022 cancel Alarm Manager function
+    private void cancelNotification(int notificationID) {
+        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                mContext
+                , notificationID
+                , intent
+                , PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
     }
 
     private void createNotificationChannel(String channelID, String channelName) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
             int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            NotificationChannel channel = new NotificationChannel("channelID", "channelName", importance);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
