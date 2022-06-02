@@ -408,7 +408,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
             int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel("channelID", "channelName", importance);
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);

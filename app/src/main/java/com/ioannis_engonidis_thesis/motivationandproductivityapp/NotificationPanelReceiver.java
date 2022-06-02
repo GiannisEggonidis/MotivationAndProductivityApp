@@ -12,19 +12,19 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 public class NotificationPanelReceiver extends BroadcastReceiver {
-    private String  channelID = "1";
+    private String channelID = "1";
     private int notificationID = 1;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        channelID = String.valueOf(intent.getIntExtra("notificationID",1));
-        NotificationChannel channel =manager.getNotificationChannel("channelID");
+        channelID = String.valueOf(intent.getIntExtra("notificationID", 1));
+        NotificationChannel channel = manager.getNotificationChannel(channelID);
         String channelName = (String) channel.getName();
 
 
-        Notification notification = new NotificationCompat.Builder(context,channelID )
+        Notification notification = new NotificationCompat.Builder(context, channelID)
                 .setSmallIcon(R.drawable.ic_repeating_reminder_notification_icon)
                 .setContentTitle(channelName)
                 .setContentText("Repeating Reminder")
