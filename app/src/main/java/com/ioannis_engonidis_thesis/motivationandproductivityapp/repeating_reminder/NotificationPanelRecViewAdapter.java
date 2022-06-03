@@ -1,4 +1,4 @@
-package com.ioannis_engonidis_thesis.motivationandproductivityapp;
+package com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -390,7 +390,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    // TODO: 30/05/2022 cancel Alarm Manager function
     private void cancelNotification(int notificationID) {
         Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
 

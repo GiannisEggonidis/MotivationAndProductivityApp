@@ -1,4 +1,4 @@
-package com.ioannis_engonidis_thesis.motivationandproductivityapp;
+package com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder;
 
 import android.app.AlarmManager;
 import android.content.Intent;

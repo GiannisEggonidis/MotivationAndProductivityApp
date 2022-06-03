@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_layout"
+    android:id="@+id/weeklyReminder_layout"
     android:background="@drawable/gradient_background_list"
     tools:context=".repeating_reminder.MainActivity">
 
@@ -21,13 +21,13 @@
         >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notificationPanelRecView"
+            android:id="@+id/weeklyReminderPanelRecView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:scrollbars="vertical"
             android:fadeScrollbars="true"
-            android:requiresFadingEdge="vertical"/>
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="vertical"
+            android:visibility="visible" />
 
 
     </RelativeLayout>
@@ -43,14 +43,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/addNotificationPanel"
+        android:id="@+id/addWeeklyReminderPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners"
         android:elevation="5dp"
         android:scaleX="1.4"
         android:scaleY="1.4"
-        android:src="@drawable/ic_add_notification"
+        android:src="@drawable/ic_add_weekly_reminder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

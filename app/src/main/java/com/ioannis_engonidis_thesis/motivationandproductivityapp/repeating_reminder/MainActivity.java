@@ -1,4 +1,4 @@
-package com.ioannis_engonidis_thesis.motivationandproductivityapp;
+package com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -6,8 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.app.AlarmManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,10 +20,11 @@ import com.google.gson.reflect.TypeToken;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        initializeViews();
+        loadData();
+        menuClickFunction();
+
+        adapter.setNotificationPanel(notificationPanel);
+        notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
+        notificationPanelRecView.setAdapter(adapter);
+
         /** Animated Background Configuration **/
         {
             ConstraintLayout constraintLayout = findViewById(R.id.main_layout);
@@ -51,22 +58,6 @@ public class MainActivity extends AppCompatActivity {
             animationDrawable.setExitFadeDuration(4000);
             animationDrawable.start();
         }
-
-        initializeViews();
-        loadData();
-
-        adapter.setNotificationPanel(notificationPanel);
-
-        notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
-        notificationPanelRecView.setAdapter(adapter);
-
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO something when floating action menu first item clicked
-                Toast.makeText(MainActivity.this, "Menu clicked", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
         /** Add new panel Button **/
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
@@ -86,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                         maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
                     }
-                    AlarmManager manager = (AlarmManager)MainActivity.this.getSystemService(ALARM_SERVICE);
-                    Intent intent = new Intent(MainActivity.this,NotificationPanelReceiver.class);
+                    AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(ALARM_SERVICE);
+                    Intent intent = new Intent(MainActivity.this, NotificationPanelReceiver.class);
 
                     notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
                             "0", "30", false, false,
                             false, false, false,
-                                false, false));
+                            false, false));
                     saveData();
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
@@ -115,8 +106,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("repeating_reminder", null);
-        Type type = new TypeToken<ArrayList<NotificationPanel>>() {}.getType();
-        notificationPanel = gson.fromJson(json,type);
+        Type type = new TypeToken<ArrayList<NotificationPanel>>() {
+        }.getType();
+        notificationPanel = gson.fromJson(json, type);
 //        notificationPanel = gson.fromJson(json, (Type) NotificationPanel.class);
 
         if (notificationPanel == null) {
@@ -124,17 +116,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void refreshActivity() {
-        overridePendingTransition(0, 0);
-        Intent refresh = new Intent(this, MainActivity.class);
-        overridePendingTransition(0, 0);
-        startActivity(refresh);//Start the same Activity
-        overridePendingTransition(0, 0);
-        finish(); //finish Activity.
-        overridePendingTransition(0, 0);
+    private void menuClickFunction() {
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Repeating Reminder Menu", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent refresh = new Intent(MainActivity.this, WeeklyReminderActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(refresh);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(MainActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
         addNotificationPanel = findViewById(R.id.addNotificationPanel);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
