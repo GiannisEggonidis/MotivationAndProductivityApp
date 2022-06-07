@@ -14,12 +14,10 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,11 +38,16 @@ public class SettingsActivity extends AppCompatActivity {
         initializeViews();
         menuClickFunction();
         setTimeClickFunction();
+        Calendar calendar = Calendar.getInstance();
 
-        loadData("startHour", startHour);
-        loadData("endHour", endHour);
+        startHour = loadData("startHour");
+        endHour = loadData("endHour");
+        long startHourHours = (startHour/(1000*60*60))%24;
+        long startHourMinutes = (startHour/(1000*60))%60;
+        long endHourHours = (endHour/(1000*60*60))%24;
+        long endHourMinutes = (endHour/(1000*60))%60;
 
-        Toast.makeText(this, "start: "+startHour+"\nend: "+endHour, Toast.LENGTH_SHORT).show();
+        loadActiveHours(startHourHours,startHourMinutes,endHourHours,endHourMinutes);
 
     }
 
@@ -75,6 +78,11 @@ public class SettingsActivity extends AppCompatActivity {
         floatingActionButton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent refresh = new Intent(SettingsActivity.this, SettingsActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(refresh);//Start the same Activity
+                overridePendingTransition(0, 0);
                 Toast.makeText(SettingsActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
             }
         });
@@ -153,14 +161,34 @@ public class SettingsActivity extends AppCompatActivity {
     private void saveData(long hour, String list) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putLong(list,hour);
+        editor.putLong(list, hour);
         editor.apply();
     }
 
-    // TODO: 07/06/2022 loadData returns 0 
-    private void loadData(String list, long hour) {
+    private long loadData(String list) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        hour = preferences.getLong(list, 1);
+        long hour;
+        return hour = preferences.getLong(list, 1);
+    }
+
+    private void loadActiveHours(long startHourHours,long startHourMinutes,long endHourHours, long endHourMinutes){
+        if (startHourHours<10){
+            startActiveHours.setText("0"+startHourHours+":"+startHourMinutes);
+            if (startHourMinutes<10){
+                startActiveHours.setText("0"+startHourHours+":"+"0"+startHourMinutes);
+            }
+        }else if (startHourMinutes<10){
+            startActiveHours.setText(startHourHours+":"+"0"+startHourMinutes);
+        }
+
+        if (endHourHours<10){
+            endActiveHours.setText("0"+endHourHours+":"+endHourMinutes);
+            if (endHourMinutes<10){
+                endActiveHours.setText("0"+endHourHours+":"+"0"+endHourMinutes);
+            }
+        }else if (startHourMinutes<10){
+            endActiveHours.setText(endHourHours+":"+"0"+endHourMinutes);
+        }
     }
 
 }
