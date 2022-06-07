@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 
 import java.lang.reflect.Type;
@@ -99,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(notificationPanel);
         editor.putString("repeating_reminder", json);
         editor.apply();
-
     }
 
     private void loadData() {
@@ -133,6 +133,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(refresh);//Start the same Activity
                 overridePendingTransition(0, 0);
                 Toast.makeText(MainActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent refresh = new Intent(MainActivity.this, SettingsActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(refresh);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(MainActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
             }
         });
     }

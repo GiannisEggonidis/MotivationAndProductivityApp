@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MotivationAndProductivityApp">
         <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".weekly_reminder.WeeklyReminderActivity"
             android:exported="false" />
 
