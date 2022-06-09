@@ -11,6 +11,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 
 public class WeeklyReminderActivity extends AppCompatActivity {
 
@@ -53,5 +54,26 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                 Toast.makeText(WeeklyReminderActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
             }
         });
+
+        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent refresh = new Intent(WeeklyReminderActivity.this, SettingsActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(refresh);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(WeeklyReminderActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBackPressed()
+    {
+        overridePendingTransition(0, 0);
+        this.startActivity(new Intent(WeeklyReminderActivity.this,MainActivity.class));
+        overridePendingTransition(0, 0);
+
+        return;
     }
 }

@@ -160,4 +160,16 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
+    @Override
+    //Back button closes app in main activity
+    public void onBackPressed() {
+        super.onBackPressed();
+        exitFromApp();
+    }
+    private void exitFromApp() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
+
 }

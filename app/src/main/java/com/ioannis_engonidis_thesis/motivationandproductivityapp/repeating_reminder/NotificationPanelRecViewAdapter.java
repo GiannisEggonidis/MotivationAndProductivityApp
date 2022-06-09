@@ -122,7 +122,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     nbutton.setTextSize(18);
                     nbutton.setWidth(30);
                     Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-//                    Set positive button text attributes
+                    /** Set positive button text attributes **/
                     pbutton.setTextColor(Color.BLACK);
                     pbutton.setTextSize(18);
                     pbutton.setWidth(30);
@@ -134,7 +134,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             }
         });
 
-        /** Configure Notification Switch on change save data **/
+        /** Configure Notification Switch **/
         holder.enableNotifSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,13 +155,11 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     saveData();
                     cancelNotification(notificationPanel.get(position).getId());
 
-                    // TODO: 20-May-22 Cancel the alarmManager
-//                    notificationPanel.get(position).getAlarmManager().cancel(pendingIntent);
                 }
             }
         });
 
-        /** Configure notificationName on change save data **/
+        /** Configure notificationName **/
         holder.notificationName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -181,7 +179,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             }
         });
 
-        /** Configure notification frequency on change save data**/{
+        /** Configure notification frequency **/{
             holder.hoursEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -218,7 +216,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             });
         }
 
-        /** Configure weekdays checkboxes on change save data **/{
+        /** Configure weekdays checkboxes **/{
             holder.monCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

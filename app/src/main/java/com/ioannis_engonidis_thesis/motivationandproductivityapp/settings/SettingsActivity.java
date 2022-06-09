@@ -191,4 +191,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    public void onBackPressed()
+    {
+        overridePendingTransition(0, 0);
+        this.startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+        overridePendingTransition(0, 0);
+
+        return;
+    }
 }
