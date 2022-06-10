@@ -54,7 +54,7 @@
                     android:layout_marginTop="7dp"
                     android:fontFamily="@font/sans_francisco_pro_text_semibold"
                     android:text="Active Hours:"
-                    android:textSize="19sp"/>
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/startActiveHours"

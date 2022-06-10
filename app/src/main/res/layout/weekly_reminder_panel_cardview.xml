@@ -36,22 +36,45 @@
             android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weeklyReminderName"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/sans_francisco_pro_text_semibold"
+            android:text="Schedule Reminder:"
+            android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/weeklyReminderHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weeklyReminderName"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-2dp"
+            android:layout_toRightOf="@+id/txt"
+            android:background="@color/buttonColor"
+            android:clickable="true"
+            android:fontFamily="@font/sans_francisco_pro_display_regular"
+            android:padding="2dp"
+            android:text="00:00"
+            android:textSize="21sp" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/enableWeeklyReminderSwitch"
+            android:id="@+id/weeklyReminderSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginRight="4dp"
-            android:layout_toLeftOf="@+id/deleteNotificationPanel"
+            android:layout_toLeftOf="@+id/deleteWeeklyReminderPanel"
             android:gravity="fill"
             app:thumbTint="@color/switch_thumb_selector"
             app:trackTint="@color/switch_track_selector"
             tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:id="@+id/deleteNotificationPanel"
+            android:id="@+id/deleteWeeklyReminderPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -67,13 +90,13 @@
             android:id="@+id/chkboxes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/weeklyReminderName"
+            android:layout_below="@+id/txt"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dp"
             android:elevation="5dp">
 
             <CheckBox
-                android:id="@+id/mondayCheckBox"
+                android:id="@+id/weeklyReminderMondayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -94,12 +117,12 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/tuesdayCheckBox"
+                android:id="@+id/weeklyReminderTuesdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/mondayCheckBox"
+                android:layout_toRightOf="@+id/weeklyReminderMondayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
@@ -113,12 +136,12 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/wednesdayCheckBox"
+                android:id="@+id/weeklyReminderWednesdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/tuesdayCheckBox"
+                android:layout_toRightOf="@+id/weeklyReminderTuesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
@@ -132,12 +155,12 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/thursdayCheckBox"
+                android:id="@+id/weeklyReminderThursdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@id/wednesdayCheckBox"
+                android:layout_toRightOf="@id/weeklyReminderWednesdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
@@ -151,12 +174,12 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/fridayCheckBox"
+                android:id="@+id/weeklyReminderFridayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/thursdayCheckBox"
+                android:layout_toRightOf="@+id/weeklyReminderThursdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
@@ -170,12 +193,12 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/saturdayCheckBox"
+                android:id="@+id/weeklyReminderSaturdayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/fridayCheckBox"
+                android:layout_toRightOf="@+id/weeklyReminderFridayCheckBox"
                 android:button="@null"
                 android:buttonTint="#1841be"
                 android:buttonTintMode="add"
@@ -191,11 +214,11 @@
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
-                android:id="@+id/sundayCheckBox"
+                android:id="@+id/weeklyReminderSundayCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/saturdayCheckBox"
+                android:layout_toRightOf="@id/weeklyReminderSaturdayCheckBox"
                 android:button="@null"
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
