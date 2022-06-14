@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             animationDrawable.start();
         }
 
-        /** Add new panel Button **/
+        /** Add new repeating panel Button **/
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
