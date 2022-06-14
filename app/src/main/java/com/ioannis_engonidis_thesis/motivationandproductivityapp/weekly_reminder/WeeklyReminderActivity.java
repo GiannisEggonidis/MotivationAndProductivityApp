@@ -1,10 +1,12 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -18,6 +20,10 @@ public class WeeklyReminderActivity extends AppCompatActivity {
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
+    private RecyclerView weeklyReminderPanelRecView;
+    private WeeklyReminderRecViewAdapter adapter = new WeeklyReminderRecViewAdapter(this);
+    private ImageButton addWeeklyReminderPanel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,8 @@ public class WeeklyReminderActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        weeklyReminderPanelRecView = findViewById(R.id.weeklyReminderPanelRecView);
+        addWeeklyReminderPanel = findViewById(R.id.addWeeklyReminderPanel);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);

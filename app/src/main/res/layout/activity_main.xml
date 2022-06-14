@@ -24,10 +24,10 @@
             android:id="@+id/notificationPanelRecView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:scrollbars="vertical"
             android:fadeScrollbars="true"
-            android:requiresFadingEdge="vertical"/>
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="vertical"
+            android:visibility="visible" />
 
 
     </RelativeLayout>
