@@ -25,7 +25,6 @@ public class NotificationPanelReceiver extends BroadcastReceiver {
         NotificationChannel channel = manager.getNotificationChannel(channelID);
         String channelName = (String) channel.getName();
 
-
         Notification notification = new NotificationCompat.Builder(context, channelID)
                 .setSmallIcon(R.drawable.ic_repeating_reminder_notification_icon)
                 .setContentTitle(channelName)

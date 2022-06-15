@@ -5,6 +5,7 @@ public class WeeklyReminder {
             weeklyReminderFridayCheckBox, weeklyReminderSaturdayCheckBox, weeklyReminderSundayCheckBox;
     private String weeklyReminderName,weeklyReminderHour;
     private int weeklyReminderId;
+    private long weeklyReminderHourMs;
 
     public WeeklyReminder(boolean weeklyReminderSwitch
             , boolean weeklyReminderMondayCheckBox
@@ -15,7 +16,8 @@ public class WeeklyReminder {
             , boolean weeklyReminderSaturdayCheckBox
             , boolean weeklyReminderSundayCheckBox
             , String weeklyReminderName, String weeklyReminderHour
-            , int weeklyReminderId) {
+            , int weeklyReminderId
+            ,long weeklyReminderHourMs) {
         this.weeklyReminderSwitch = weeklyReminderSwitch;
         this.weeklyReminderMondayCheckBox = weeklyReminderMondayCheckBox;
         this.weeklyReminderTuesdayCheckBox = weeklyReminderTuesdayCheckBox;
@@ -27,6 +29,7 @@ public class WeeklyReminder {
         this.weeklyReminderName = weeklyReminderName;
         this.weeklyReminderHour = weeklyReminderHour;
         this.weeklyReminderId = weeklyReminderId;
+        this.weeklyReminderHourMs = weeklyReminderHourMs;
     }
 
     @Override
@@ -132,5 +135,13 @@ public class WeeklyReminder {
 
     public void setWeeklyReminderId(int weeklyReminderId) {
         this.weeklyReminderId = weeklyReminderId;
+    }
+
+    public long getWeeklyReminderHourMs() {
+        return weeklyReminderHourMs;
+    }
+
+    public void setWeeklyReminderHourMs(long weeklyReminderHourMs) {
+        this.weeklyReminderHourMs = weeklyReminderHourMs;
     }
 }

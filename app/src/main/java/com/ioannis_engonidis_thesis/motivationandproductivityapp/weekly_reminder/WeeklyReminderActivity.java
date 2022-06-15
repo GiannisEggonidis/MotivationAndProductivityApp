@@ -79,7 +79,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
 
                     weeklyReminder.add(new WeeklyReminder(false,false,false,false
                     ,false,false,false,false,"Reminder"
-                    ,"17:00",maxValue));
+                    ,"17:00",maxValue,61200000));
                     saveData();
                     adapter.notifyDataSetChanged();
                 }
