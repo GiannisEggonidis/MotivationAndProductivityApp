@@ -177,8 +177,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private long loadData(String list) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        long hour;
-        return hour = preferences.getLong(list, 1);
+        return preferences.getLong(list, 1);
     }
 
     private void loadActiveHours(long startHourHours,long startHourMinutes,long endHourHours, long endHourMinutes){
@@ -189,6 +188,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }else if (startHourMinutes<10){
             startActiveHours.setText(startHourHours+":"+"0"+startHourMinutes);
+        }else{
+            startActiveHours.setText(startHourHours+":"+startHourMinutes);
         }
 
         if (endHourHours<10){
@@ -196,8 +197,10 @@ public class SettingsActivity extends AppCompatActivity {
             if (endHourMinutes<10){
                 endActiveHours.setText("0"+endHourHours+":"+"0"+endHourMinutes);
             }
-        }else if (startHourMinutes<10){
+        }else if (endHourMinutes<10){
             endActiveHours.setText(endHourHours+":"+"0"+endHourMinutes);
+        }else{
+            endActiveHours.setText(endHourHours+":"+endHourMinutes);
         }
     }
 
