@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:outlineAmbientShadowColor="@color/purple_700"
             android:outlineSpotShadowColor="@color/teal_700"
-            app:cardCornerRadius="17dp"
+            app:cardCornerRadius="30dp"
             app:cardElevation="8dp"
             >
 

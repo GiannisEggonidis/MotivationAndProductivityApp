@@ -31,7 +31,6 @@ import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import java.util.ArrayList;
 
 public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyReminderRecViewAdapter.ViewHolder> {
-    // TODO: 09/06/2022 Set Weekly Reminder object
     private String TAG = "WeeklyReminderPanelRecViewAdapter";
 
     private ArrayList<WeeklyReminder> weeklyReminder = new ArrayList<>();
@@ -229,6 +228,9 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                 }
             });
         }
+
+        // TODO: 17/06/2022 Configure weeklyReminderHour
+        /** Configure weeklyReminderHour **/
     }
 
     @Override
