@@ -3,6 +3,7 @@ package com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminde
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +30,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyReminderRecViewAdapter.ViewHolder> {
     private String TAG = "WeeklyReminderPanelRecViewAdapter";
@@ -48,99 +56,103 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeeklyReminderRecViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WeeklyReminderRecViewAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: Called");
 
-        /** Configuring Buttons **/
-        holder.weeklyReminderName.setText(weeklyReminder.get(position).getWeeklyReminderName());
-        holder.weeklyReminderHour.setText(weeklyReminder.get(position).getWeeklyReminderHour());
-        holder.weeklyReminderSwitch.setChecked(weeklyReminder.get(position).isWeeklyReminderSwitch());
-        holder.weeklyReminderMondayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderMondayCheckBox());
-        holder.weeklyReminderTuesdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox());
-        holder.weeklyReminderWednesdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox());
-        holder.weeklyReminderThursdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox());
-        holder.weeklyReminderFridayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderFridayCheckBox());
-        holder.weeklyReminderSaturdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox());
-        holder.weeklyReminderSundayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+        /** Configuring Buttons **/{
+            holder.weeklyReminderName.setText(weeklyReminder.get(position).getWeeklyReminderName());
+            holder.weeklyReminderHour.setText(weeklyReminder.get(position).getWeeklyReminderHour());
+            holder.weeklyReminderSwitch.setChecked(weeklyReminder.get(position).isWeeklyReminderSwitch());
+            holder.weeklyReminderMondayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderMondayCheckBox());
+            holder.weeklyReminderTuesdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox());
+            holder.weeklyReminderWednesdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox());
+            holder.weeklyReminderThursdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox());
+            holder.weeklyReminderFridayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderFridayCheckBox());
+            holder.weeklyReminderSaturdayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox());
+            holder.weeklyReminderSundayCheckBox.setChecked(weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+        }
 
-        /** Configuring Delete button **/
-        holder.deleteWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(wContext, R.style.AlertDialog);
-                    builder.setTitle(weeklyReminder.get(position).getWeeklyReminderName());
-                    builder.setMessage("Delete Reminder");
-                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+        /** Configuring Delete button **/{
+            holder.deleteWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(wContext, R.style.AlertDialog);
+                        builder.setTitle(weeklyReminder.get(position).getWeeklyReminderName());
+                        builder.setMessage("Delete Reminder");
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                            weeklyReminder.remove(holder.getAdapterPosition());
-                            notifyDataSetChanged();
+                                weeklyReminder.remove(holder.getAdapterPosition());
+                                notifyDataSetChanged();
 //                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
-                            saveData();
-                        }
-                    });
-                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                    Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
-                    /** Set negative button text attributes **/
-                    nbutton.setTextColor(Color.BLACK);
-                    nbutton.setTextSize(18);
-                    nbutton.setWidth(30);
-                    Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-                    /** Set positive button text attributes **/
-                    pbutton.setTextColor(Color.BLACK);
-                    pbutton.setTextSize(18);
-                    pbutton.setWidth(30);
+                                saveData();
+                            }
+                        });
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        /** Set negative button text attributes **/
+                        nbutton.setTextColor(Color.BLACK);
+                        nbutton.setTextSize(18);
+                        nbutton.setWidth(30);
+                        Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+                        /** Set positive button text attributes **/
+                        pbutton.setTextColor(Color.BLACK);
+                        pbutton.setTextSize(18);
+                        pbutton.setWidth(30);
 
-                } catch (Exception e) {
-                    Toast.makeText(wContext, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(wContext, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
+
+        /** Configure Notification Switch **/{
+            holder.weeklyReminderSwitch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.weeklyReminderSwitch.isChecked()) {
+                        weeklyReminder.get(position).setWeeklyReminderSwitch(true);
+                        saveData();
+
+                        String notificationID = String.valueOf(weeklyReminder.get(position).getWeeklyReminderId());
+                    } else {
+                        weeklyReminder.get(position).setWeeklyReminderSwitch(false);
+                        saveData();
+                    }
+                }
+            });
+        }
+
+        /** Configure notificationName **/{
+            holder.weeklyReminderName.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                 }
 
-            }
-        });
-
-        /** Configure Notification Switch **/
-        holder.weeklyReminderSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.weeklyReminderSwitch.isChecked()) {
-                    weeklyReminder.get(position).setWeeklyReminderSwitch(true);
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    weeklyReminder.get(holder.getAdapterPosition()).setWeeklyReminderName(String.valueOf(holder.weeklyReminderName.getText()));
                     saveData();
 
-                    String notificationID = String.valueOf(weeklyReminder.get(position).getWeeklyReminderId());
-                } else {
-                    weeklyReminder.get(position).setWeeklyReminderSwitch(false);
-                    saveData();
                 }
-            }
-        });
 
-        /** Configure notificationName **/
-        holder.weeklyReminderName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                @Override
+                public void afterTextChanged(Editable editable) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                weeklyReminder.get(holder.getAdapterPosition()).setWeeklyReminderName(String.valueOf(holder.weeklyReminderName.getText()));
-                saveData();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+                }
+            });
+        }
 
         /** Configure weekdays checkboxes **/{
             holder.weeklyReminderMondayCheckBox.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +242,42 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         }
 
         // TODO: 17/06/2022 Configure weeklyReminderHour
-        /** Configure weeklyReminderHour **/
+        /** Configure weeklyReminderHour **/{
+
+            Calendar subcalendar = Calendar.getInstance();
+            subcalendar.set(Calendar.HOUR_OF_DAY, 0);
+            subcalendar.set(Calendar.MINUTE, 0);
+            subcalendar.set(Calendar.SECOND, 0);
+            subcalendar.set(Calendar.MILLISECOND, 0);
+            Date subDate = subcalendar.getTime();
+            holder.weeklyReminderHour.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar c = Calendar.getInstance();
+                    int hours = c.get(Calendar.HOUR_OF_DAY);
+                    int mins = c.get(Calendar.MINUTE);
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(wContext, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            calendar.set(Calendar.MINUTE, minute);
+                            calendar.setTimeZone(TimeZone.getDefault());
+
+                            SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+                            String time = format.format(calendar.getTime());
+                            holder.weeklyReminderHour.setText(time);
+                            weeklyReminder.get(position).setWeeklyReminderHour(time);
+                            Date date = calendar.getTime();
+                            weeklyReminder.get(position).setWeeklyReminderHourMs(date.getTime() - subDate.getTime());
+                            saveData();
+                        }
+                    }, hours, mins, true);
+                    timePickerDialog.show();
+
+                }
+            });
+        }
     }
 
     @Override

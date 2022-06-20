@@ -31,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
     TextView startActiveHours, endActiveHours;
     long startHour, endHour;
+    String startHourString, endHourString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +49,13 @@ public class SettingsActivity extends AppCompatActivity {
         initializeViews();
         menuClickFunction();
         setTimeClickFunction();
-        Calendar calendar = Calendar.getInstance();
 
         startHour = loadData("startHour");
         endHour = loadData("endHour");
-        long startHourHours = (startHour/(1000*60*60))%24;
-        long startHourMinutes = (startHour/(1000*60))%60;
-        long endHourHours = (endHour/(1000*60*60))%24;
-        long endHourMinutes = (endHour/(1000*60))%60;
-
-        loadActiveHours(startHourHours,startHourMinutes,endHourHours,endHourMinutes);
+        startHourString = loadDataString("startHourString");
+        endHourString = loadDataString("endHourString");
+        startActiveHours.setText(startHourString);
+        endActiveHours.setText(endHourString);
 
     }
 
@@ -136,11 +134,13 @@ public class SettingsActivity extends AppCompatActivity {
                         Date date = calendar.getTime();
                         startHour = date.getTime() - subDate.getTime();
                         saveData(startHour, "startHour");
+                        saveData(time,"startHourString");
                     }
                 }, hours, mins, true);
                 timePickerDialog.show();
             }
         });
+
         endActiveHours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,6 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Date date = calendar.getTime();
                         endHour = date.getTime() - subDate.getTime();
                         saveData(endHour, "endHour");
+                        saveData(time,"endHourString");
                     }
                 }, hours, mins, true);
                 timePickerDialog.show();
@@ -174,34 +175,20 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putLong(list, hour);
         editor.apply();
     }
+    private void saveData(String hourString, String list) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(list, hourString);
+        editor.apply();
+    }
 
     private long loadData(String list) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getLong(list, 1);
     }
-
-    private void loadActiveHours(long startHourHours,long startHourMinutes,long endHourHours, long endHourMinutes){
-        if (startHourHours<10){
-            startActiveHours.setText("0"+startHourHours+":"+startHourMinutes);
-            if (startHourMinutes<10){
-                startActiveHours.setText("0"+startHourHours+":"+"0"+startHourMinutes);
-            }
-        }else if (startHourMinutes<10){
-            startActiveHours.setText(startHourHours+":"+"0"+startHourMinutes);
-        }else{
-            startActiveHours.setText(startHourHours+":"+startHourMinutes);
-        }
-
-        if (endHourHours<10){
-            endActiveHours.setText("0"+endHourHours+":"+endHourMinutes);
-            if (endHourMinutes<10){
-                endActiveHours.setText("0"+endHourHours+":"+"0"+endHourMinutes);
-            }
-        }else if (endHourMinutes<10){
-            endActiveHours.setText(endHourHours+":"+"0"+endHourMinutes);
-        }else{
-            endActiveHours.setText(endHourHours+":"+endHourMinutes);
-        }
+    private String loadDataString(String list) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getString(list,"12:00");
     }
 
     public void onBackPressed()
