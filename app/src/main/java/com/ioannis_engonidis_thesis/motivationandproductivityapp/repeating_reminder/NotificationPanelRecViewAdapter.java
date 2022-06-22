@@ -75,18 +75,19 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             }
         });
 
-        /** Configuring Buttons **/
-        holder.notificationName.setText(notificationPanel.get(position).getNotificationName());
-        holder.hoursEditText.setText(notificationPanel.get(position).getHours());
-        holder.minutesEditText.setText(notificationPanel.get(position).getMinutes());
-        holder.enableNotifSwitch.setChecked(notificationPanel.get(position).isNotificationSwitch());
-        holder.monCheckBox.setChecked(notificationPanel.get(position).isMondayCheckBox());
-        holder.tueCheckBox.setChecked(notificationPanel.get(position).isTuesdayCheckBox());
-        holder.wedCheckBox.setChecked(notificationPanel.get(position).isWednesdayCheckBox());
-        holder.thuCheckBox.setChecked(notificationPanel.get(position).isThursdayCheckBox());
-        holder.friCheckBox.setChecked(notificationPanel.get(position).isFridayCheckBox());
-        holder.satCheckBox.setChecked(notificationPanel.get(position).isSaturdayCheckBox());
-        holder.sunCheckBox.setChecked(notificationPanel.get(position).isSundayCheckBox());
+        /** Configuring Buttons **/{
+            holder.notificationName.setText(notificationPanel.get(position).getNotificationName());
+            holder.hoursEditText.setText(notificationPanel.get(position).getHours());
+            holder.minutesEditText.setText(notificationPanel.get(position).getMinutes());
+            holder.enableNotifSwitch.setChecked(notificationPanel.get(position).isNotificationSwitch());
+            holder.monCheckBox.setChecked(notificationPanel.get(position).isMondayCheckBox());
+            holder.tueCheckBox.setChecked(notificationPanel.get(position).isTuesdayCheckBox());
+            holder.wedCheckBox.setChecked(notificationPanel.get(position).isWednesdayCheckBox());
+            holder.thuCheckBox.setChecked(notificationPanel.get(position).isThursdayCheckBox());
+            holder.friCheckBox.setChecked(notificationPanel.get(position).isFridayCheckBox());
+            holder.satCheckBox.setChecked(notificationPanel.get(position).isSaturdayCheckBox());
+            holder.sunCheckBox.setChecked(notificationPanel.get(position).isSundayCheckBox());
+        }
 
         /** Configuring Delete button **/
         holder.deleteNotificationPanel.setOnClickListener(new View.OnClickListener() {

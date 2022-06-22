@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                             false, false, false,
                             false, false));
                     saveData();
+                    createNotificationChannel(String.valueOf(maxValue),"Reminder");
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
@@ -114,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
         if (notificationPanel == null) {
             notificationPanel = new ArrayList<>();
         }
+    }
+
+    private void createNotificationChannel(String channelID, String channelName) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String desc = "No description";
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            channel.setDescription(desc);
+            NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+        }
+
     }
 
     private void menuClickFunction() {

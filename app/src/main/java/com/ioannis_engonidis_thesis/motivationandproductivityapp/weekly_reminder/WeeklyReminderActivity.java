@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -65,12 +68,12 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                     Toast.makeText(WeeklyReminderActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
-                    int maxValue = 0;
+                    int maxValue = 100;
                     int indexOfMaxValue = 0;
                     if (weeklyReminder.size() != 0) {
                         for (int i = 0; i < weeklyReminder.size(); i++) {
                             if (weeklyReminder.get(i).getWeeklyReminderId() > maxValue) {
-                                indexOfMaxValue = i;
+                                indexOfMaxValue = i ;
                             }
                         }
                         maxValue = weeklyReminder.get(indexOfMaxValue).getWeeklyReminderId() + 1;
@@ -78,8 +81,9 @@ public class WeeklyReminderActivity extends AppCompatActivity {
 
 
                     weeklyReminder.add(new WeeklyReminder(false,false,false,false
-                    ,false,false,false,false,"Reminder"
+                    ,false,false,false,false,"Weekly Reminder"
                     ,"17:00",maxValue,61200000));
+                    createNotificationChannel(String.valueOf(maxValue),"Weekly Reminder");
                     saveData();
                     adapter.notifyDataSetChanged();
                 }
@@ -107,6 +111,18 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         if (weeklyReminder == null) {
             weeklyReminder = new ArrayList<>();
         }
+    }
+
+    private void createNotificationChannel(String channelID, String channelName) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String desc = "No description";
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            channel.setDescription(desc);
+            NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+        }
+
     }
 
     private void initializeViews() {

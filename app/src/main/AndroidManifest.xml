@@ -21,6 +21,10 @@
             android:name=".repeating_reminder.NotificationPanelReceiver"
             android:enabled="true" />
 
+        <receiver
+            android:name=".weekly_reminder.WeeklyReminderReceiver"
+            android:enabled="true" />
+
         <activity
             android:name=".repeating_reminder.MainActivity"
             android:exported="true"

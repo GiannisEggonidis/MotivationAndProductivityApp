@@ -2,13 +2,19 @@ package com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminde
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 
 import java.text.SimpleDateFormat;
@@ -40,6 +47,7 @@ import java.util.TimeZone;
 
 public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyReminderRecViewAdapter.ViewHolder> {
     private String TAG = "WeeklyReminderPanelRecViewAdapter";
+    private static long weekMs = 604800000;
 
     private ArrayList<WeeklyReminder> weeklyReminder = new ArrayList<>();
     private Context wContext;
@@ -321,6 +329,54 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         String json = gson.toJson(weeklyReminder);
         editor.putString("weekly_reminder", json);
         editor.apply();
+    }
+
+    private void scheduleNotification(String weeklyReminderTitle, int weeklyReminderID, long weeklyReminderHourMs
+    ) {
+        AlarmManager manager = (AlarmManager) wContext.getSystemService(Context.ALARM_SERVICE);
+        long currentTime = System.currentTimeMillis();
+
+        Intent intent = new Intent(wContext, WeeklyReminderReceiver.class);
+        intent.putExtra("weeklyTitle", weeklyReminderTitle);
+        intent.putExtra("weeklyReminderID", weeklyReminderID);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                wContext
+                , weeklyReminderID
+                , intent
+                , PendingIntent.FLAG_IMMUTABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
+                    , SystemClock.elapsedRealtime()
+                    , weekMs
+                    , pendingIntent);
+        }
+    }
+
+    private void cancelNotification(int notificationID) {
+        Intent intent = new Intent(wContext, NotificationPanelReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                wContext
+                , notificationID
+                , intent
+                , PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager manager = (AlarmManager) wContext.getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+    }
+
+    private void createNotificationChannel(String channelID, String channelName) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String desc = "No description";
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            channel.setDescription(desc);
+            NotificationManager manager = (NotificationManager) wContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+        }
+
     }
 
 }
