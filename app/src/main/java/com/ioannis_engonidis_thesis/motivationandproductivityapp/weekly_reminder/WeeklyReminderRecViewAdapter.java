@@ -331,10 +331,23 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         editor.apply();
     }
 
-    private void scheduleNotification(String weeklyReminderTitle, int weeklyReminderID, long weeklyReminderHourMs
+    private void scheduleWeeklyReminder(String weeklyReminderTitle, int weeklyReminderID, long weeklyReminderHourMs
+            , boolean weeklyReminderSwitch
+            , boolean weeklyReminderMondayCheckBox
+            , boolean weeklyReminderTuesdayCheckBox
+            , boolean weeklyReminderWednesdayCheckBo
+            , boolean weeklyReminderThursdayCheckBox
+            , boolean weeklyReminderFridayCheckBox
+            , boolean weeklyReminderSaturdayCheckBox
+            , boolean weeklyReminderSundayCheckBox
     ) {
         AlarmManager manager = (AlarmManager) wContext.getSystemService(Context.ALARM_SERVICE);
         long currentTime = System.currentTimeMillis();
+
+        int hour = Math.toIntExact(weeklyReminderHourMs / 1000 / 60 / 60 % 24);
+        int minutes = Math.toIntExact(weeklyReminderHourMs / 1000 / 60 % 60);
+
+        Calendar scheduleCalendar = Calendar.getInstance();
 
         Intent intent = new Intent(wContext, WeeklyReminderReceiver.class);
         intent.putExtra("weeklyTitle", weeklyReminderTitle);
