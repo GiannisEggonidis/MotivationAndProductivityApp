@@ -131,6 +131,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderSwitch.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderSwitch(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(),weeklyReminder.get(position).getWeeklyReminderId(),weeklyReminder.get(position).getWeeklyReminderHourMs(),weeklyReminder.get(position).isWeeklyReminderSwitch(),weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(),weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(),weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
                         String notificationID = String.valueOf(weeklyReminder.get(position).getWeeklyReminderId());
                     } else {
@@ -342,28 +343,102 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
             , boolean weeklyReminderSundayCheckBox
     ) {
         AlarmManager manager = (AlarmManager) wContext.getSystemService(Context.ALARM_SERVICE);
-        long currentTime = System.currentTimeMillis();
+        Date currentTime = Calendar.getInstance().getTime();
+        Calendar scheduleCalendar = Calendar.getInstance();
+        long scheduledMS;
 
         int hour = Math.toIntExact(weeklyReminderHourMs / 1000 / 60 / 60 % 24);
         int minutes = Math.toIntExact(weeklyReminderHourMs / 1000 / 60 % 60);
-
-        Calendar scheduleCalendar = Calendar.getInstance();
 
         Intent intent = new Intent(wContext, WeeklyReminderReceiver.class);
         intent.putExtra("weeklyTitle", weeklyReminderTitle);
         intent.putExtra("weeklyReminderID", weeklyReminderID);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                wContext
-                , weeklyReminderID
-                , intent
-                , PendingIntent.FLAG_IMMUTABLE);
+        if (weeklyReminderSwitch = true) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
-                    , SystemClock.elapsedRealtime()
-                    , weekMs
-                    , pendingIntent);
+            if (weeklyReminderMondayCheckBox = true) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 2);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
+
+                if (scheduledMS < currentTime.getTime()) {
+
+                    scheduledMS = scheduledMS + weekMs;
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            wContext
+                            , weeklyReminderID + 1000
+                            , intent
+                            , PendingIntent.FLAG_IMMUTABLE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , scheduledMS - currentTime.getTime()
+                                , 60000
+                                , pendingIntent);
+                    }
+
+                }
+            }
+                if (weeklyReminderTuesdayCheckBox = true) {
+                    scheduleCalendar.set(Calendar.DAY_OF_WEEK, 3);
+                    scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                    scheduleCalendar.set(Calendar.MINUTE, minutes);
+                    scheduleCalendar.set(Calendar.SECOND, 0);
+                    scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                    scheduledMS = scheduleCalendar.getTime().getTime();
+
+                    if (scheduledMS < currentTime.getTime()) {
+
+                        scheduledMS = scheduledMS + weekMs;
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                wContext
+                                , weeklyReminderID + 2000
+                                , intent
+                                , PendingIntent.FLAG_IMMUTABLE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                    , scheduledMS - currentTime.getTime()
+                                    , 83000
+                                    , pendingIntent);
+                        }
+
+                    }
+
+                }
+                if (weeklyReminderWednesdayCheckBo = true) {
+
+                }
+                if (weeklyReminderThursdayCheckBox = true) {
+
+                }
+                if (weeklyReminderFridayCheckBox = true) {
+
+                }
+                if (weeklyReminderSaturdayCheckBox = true) {
+
+                }
+                if (weeklyReminderSundayCheckBox = true) {
+
+                }
+
+
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    wContext
+                    , weeklyReminderID
+                    , intent
+                    , PendingIntent.FLAG_IMMUTABLE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
+                        , SystemClock.elapsedRealtime()
+                        , weekMs
+                        , pendingIntent);
+            }
         }
     }
 
@@ -384,7 +459,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
             int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) wContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
@@ -393,3 +468,4 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     }
 
 }
+
