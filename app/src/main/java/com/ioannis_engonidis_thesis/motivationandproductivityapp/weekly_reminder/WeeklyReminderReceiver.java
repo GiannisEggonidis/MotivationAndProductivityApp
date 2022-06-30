@@ -14,7 +14,6 @@ import androidx.core.app.NotificationCompat;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 
 public class WeeklyReminderReceiver extends BroadcastReceiver {
-    // TODO: 09/06/2022 Weekly Reminder Broadcast Receiver
 
     private String channelID = "1";
     private int weeklyReminderID = 1;

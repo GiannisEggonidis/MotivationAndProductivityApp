@@ -91,7 +91,10 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                /**Cancel Notification before Deleting Weekly Reminder **/
+                                for (int i = 1; i < 8; i++) {
+                                    cancelNotification(weeklyReminder.get(position).getWeeklyReminderId() + (i * 1000));
+                                }
                                 weeklyReminder.remove(holder.getAdapterPosition());
                                 notifyDataSetChanged();
 //                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
@@ -131,12 +134,14 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderSwitch.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderSwitch(true);
                         saveData();
-                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(),weeklyReminder.get(position).getWeeklyReminderId(),weeklyReminder.get(position).getWeeklyReminderHourMs(),weeklyReminder.get(position).isWeeklyReminderSwitch(),weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(),weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(),weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(),weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
                         String notificationID = String.valueOf(weeklyReminder.get(position).getWeeklyReminderId());
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderSwitch(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -153,12 +158,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     weeklyReminder.get(holder.getAdapterPosition()).setWeeklyReminderName(String.valueOf(holder.weeklyReminderName.getText()));
                     saveData();
-
                 }
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-
+                    weeklyReminder.get(holder.getAdapterPosition()).setWeeklyReminderName(String.valueOf(holder.weeklyReminderName.getText()));
+                    saveData();
+                    scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
                 }
             });
         }
@@ -170,9 +176,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderMondayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderMondayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderMondayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -182,9 +192,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderTuesdayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderTuesdayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderTuesdayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -194,9 +208,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderWednesdayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderWednesdayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderWednesdayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -206,9 +224,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderThursdayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderThursdayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderThursdayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -218,9 +240,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderFridayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderFridayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderFridayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -230,9 +256,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderSaturdayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderSaturdayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderSaturdayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
@@ -242,15 +272,18 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     if (holder.weeklyReminderSundayCheckBox.isChecked()) {
                         weeklyReminder.get(position).setWeeklyReminderSundayCheckBox(true);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     } else {
                         weeklyReminder.get(position).setWeeklyReminderSundayCheckBox(false);
                         saveData();
+                        scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+
                     }
                 }
             });
         }
 
-        // TODO: 17/06/2022 Configure weeklyReminderHour
         /** Configure weeklyReminderHour **/{
 
             Calendar subcalendar = Calendar.getInstance();
@@ -271,6 +304,8 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                             Calendar calendar = Calendar.getInstance();
                             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             calendar.set(Calendar.MINUTE, minute);
+                            calendar.set(Calendar.SECOND, 0);
+                            calendar.set(Calendar.MILLISECOND, 0);
                             calendar.setTimeZone(TimeZone.getDefault());
 
                             SimpleDateFormat format = new SimpleDateFormat("kk:mm");
@@ -280,9 +315,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                             Date date = calendar.getTime();
                             weeklyReminder.get(position).setWeeklyReminderHourMs(date.getTime() - subDate.getTime());
                             saveData();
+
                         }
                     }, hours, mins, true);
                     timePickerDialog.show();
+                    scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
                 }
             });
@@ -336,12 +373,14 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
             , boolean weeklyReminderSwitch
             , boolean weeklyReminderMondayCheckBox
             , boolean weeklyReminderTuesdayCheckBox
-            , boolean weeklyReminderWednesdayCheckBo
+            , boolean weeklyReminderWednesdayCheckBox
             , boolean weeklyReminderThursdayCheckBox
             , boolean weeklyReminderFridayCheckBox
             , boolean weeklyReminderSaturdayCheckBox
             , boolean weeklyReminderSundayCheckBox
     ) {
+        String idToString = String.valueOf(weeklyReminderID);
+        createNotificationChannel(idToString, weeklyReminderTitle);
         AlarmManager manager = (AlarmManager) wContext.getSystemService(Context.ALARM_SERVICE);
         Date currentTime = Calendar.getInstance().getTime();
         Calendar scheduleCalendar = Calendar.getInstance();
@@ -354,9 +393,9 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         intent.putExtra("weeklyTitle", weeklyReminderTitle);
         intent.putExtra("weeklyReminderID", weeklyReminderID);
 
-        if (weeklyReminderSwitch = true) {
+        if (weeklyReminderSwitch) {
 
-            if (weeklyReminderMondayCheckBox = true) {
+            if (weeklyReminderMondayCheckBox) {
                 scheduleCalendar.set(Calendar.DAY_OF_WEEK, 2);
                 scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
                 scheduleCalendar.set(Calendar.MINUTE, minutes);
@@ -367,77 +406,202 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                 if (scheduledMS < currentTime.getTime()) {
 
                     scheduledMS = scheduledMS + weekMs;
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                            wContext
-                            , weeklyReminderID + 1000
-                            , intent
-                            , PendingIntent.FLAG_IMMUTABLE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , scheduledMS - currentTime.getTime()
-                                , 60000
-                                , pendingIntent);
-                    }
-
                 }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 1000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 1000);
             }
-                if (weeklyReminderTuesdayCheckBox = true) {
-                    scheduleCalendar.set(Calendar.DAY_OF_WEEK, 3);
-                    scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
-                    scheduleCalendar.set(Calendar.MINUTE, minutes);
-                    scheduleCalendar.set(Calendar.SECOND, 0);
-                    scheduleCalendar.set(Calendar.MILLISECOND, 0);
-                    scheduledMS = scheduleCalendar.getTime().getTime();
+            if (weeklyReminderTuesdayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 3);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
 
-                    if (scheduledMS < currentTime.getTime()) {
-
-                        scheduledMS = scheduledMS + weekMs;
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                                wContext
-                                , weeklyReminderID + 2000
-                                , intent
-                                , PendingIntent.FLAG_IMMUTABLE);
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                    , scheduledMS - currentTime.getTime()
-                                    , 83000
-                                    , pendingIntent);
-                        }
-
-                    }
-
+                if (scheduledMS < currentTime.getTime()) {
+                    scheduledMS = scheduledMS + weekMs;
                 }
-                if (weeklyReminderWednesdayCheckBo = true) {
 
-                }
-                if (weeklyReminderThursdayCheckBox = true) {
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 2000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
 
-                }
-                if (weeklyReminderFridayCheckBox = true) {
-
-                }
-                if (weeklyReminderSaturdayCheckBox = true) {
-
-                }
-                if (weeklyReminderSundayCheckBox = true) {
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
                 }
 
 
+            } else {
+                cancelNotification(weeklyReminderID + 2000);
+            }
+            if (weeklyReminderWednesdayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 4);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                    wContext
-                    , weeklyReminderID
-                    , intent
-                    , PendingIntent.FLAG_IMMUTABLE);
+                if (scheduledMS < currentTime.getTime()) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
-                        , SystemClock.elapsedRealtime()
-                        , weekMs
-                        , pendingIntent);
+                    scheduledMS = scheduledMS + weekMs;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 3000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 3000);
+            }
+            if (weeklyReminderThursdayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 5);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
+
+                if (scheduledMS < currentTime.getTime()) {
+
+                    scheduledMS = scheduledMS + weekMs;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 4000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 4000);
+            }
+            if (weeklyReminderFridayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 6);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
+
+                if (scheduledMS < currentTime.getTime()) {
+
+                    scheduledMS = scheduledMS + weekMs;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 5000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 5000);
+            }
+            if (weeklyReminderSaturdayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 7);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
+
+                if (scheduledMS < currentTime.getTime()) {
+
+                    scheduledMS = scheduledMS + weekMs;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 6000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 6000);
+            }
+            if (weeklyReminderSundayCheckBox) {
+                scheduleCalendar.set(Calendar.DAY_OF_WEEK, 1);
+                scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                scheduleCalendar.set(Calendar.MINUTE, minutes);
+                scheduleCalendar.set(Calendar.SECOND, 0);
+                scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                scheduledMS = scheduleCalendar.getTime().getTime();
+
+                if (scheduledMS < currentTime.getTime()) {
+
+                    scheduledMS = scheduledMS + weekMs;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        wContext
+                        , weeklyReminderID + 7000
+                        , intent
+                        , PendingIntent.FLAG_IMMUTABLE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                            , scheduledMS - currentTime.getTime()
+                            , weekMs
+                            , pendingIntent);
+                }
+
+
+            } else {
+                cancelNotification(weeklyReminderID + 7000);
+            }
+
+        } else {
+            for (int i = 1; i < 8; i++) {
+                cancelNotification(weeklyReminderID + (i * 1000));
             }
         }
     }
@@ -459,7 +623,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
             int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelID,"Weekly Reminder: "+ channelName, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) wContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
@@ -468,4 +632,5 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     }
 
 }
+// TODO: 30/06/2022 Test Weekly Reminder Functionality
 
