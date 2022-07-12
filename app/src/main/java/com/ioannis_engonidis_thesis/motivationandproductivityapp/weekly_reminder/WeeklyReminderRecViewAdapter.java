@@ -646,7 +646,4 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     }
 
 }
-// TODO: 30/06/2022 Test Weekly Reminder Functionality
-// TODO: 01/07/2022 currentTime.getTime() not needed in the manager.setRepeating ?
-// TODO: 01/07/2022 Should be only scheduledMS in setRepeating() trigger time ?
 
