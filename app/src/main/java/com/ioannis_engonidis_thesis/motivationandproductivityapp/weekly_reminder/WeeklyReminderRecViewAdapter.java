@@ -315,6 +315,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                             Date date = calendar.getTime();
                             weeklyReminder.get(position).setWeeklyReminderHourMs(date.getTime() - subDate.getTime());
                             saveData();
+                            scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
                         }
                     }, hours, mins, true);
@@ -322,6 +323,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
                 }
+
             });
         }
     }
@@ -415,11 +417,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Mon Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Mon Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -446,11 +448,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Tue Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Tue Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -477,11 +479,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Wed Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Wed Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -508,11 +510,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Thu Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Thu Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -539,11 +541,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Fri Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Fri Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -570,11 +572,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Sat Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Sat Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -601,11 +603,11 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     manager.setRepeating(AlarmManager.RTC_WAKEUP
-                            , scheduledMS
-                            , weekMs
+                            , scheduledMS - 40000
+                            , weekMs - 60000
                             , pendingIntent);
-                    System.out.println("Sun Schedule Ms : "+scheduledMS+"\n"+"Current Time Ms : "+currentTime.getTime());
-                    System.out.println("Scheduled - Current Time : "+(scheduledMS - currentTime.getTime()));
+                    System.out.println("Sun Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                    System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
                 }
 
 
@@ -637,7 +639,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
             int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(channelID,"Weekly Reminder: "+ channelName, NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelID, "Weekly Reminder: " + channelName, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) wContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);

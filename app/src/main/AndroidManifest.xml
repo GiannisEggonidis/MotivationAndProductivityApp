@@ -22,7 +22,10 @@
 
         <receiver
             android:name=".repeating_reminder.NotificationPanelReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -33,7 +36,9 @@
 
         <receiver
             android:name=".weekly_reminder.WeeklyReminderReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
