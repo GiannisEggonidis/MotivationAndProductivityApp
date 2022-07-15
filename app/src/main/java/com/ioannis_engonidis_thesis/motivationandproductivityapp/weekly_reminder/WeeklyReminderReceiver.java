@@ -6,14 +6,23 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class WeeklyReminderReceiver extends BroadcastReceiver {
+    private Context rContext;
+
 
     private String channelID = "1";
     private int weeklyReminderID = 1;
@@ -21,6 +30,9 @@ public class WeeklyReminderReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
+        this.rContext = context;
+        Intent rIntent = new Intent(rContext, NotificationPanelReceiver.class);
+
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         channelID = String.valueOf(intent.getIntExtra("weeklyReminderID", 1));
         NotificationChannel channel = manager.getNotificationChannel(channelID);
@@ -33,5 +45,11 @@ public class WeeklyReminderReceiver extends BroadcastReceiver {
                 .build();
 
         manager.notify(intent.getIntExtra("weeklyReminderID", weeklyReminderID), notification);
+
+        if (intent.getAction() == "android.intent.action.BOOT_COMPLETED") {
+            onReceive(rContext, rIntent);
+        }
     }
+
+
 }

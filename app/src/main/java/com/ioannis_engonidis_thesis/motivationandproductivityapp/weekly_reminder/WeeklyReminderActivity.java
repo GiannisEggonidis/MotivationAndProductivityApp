@@ -83,7 +83,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                     weeklyReminder.add(new WeeklyReminder(false,false,false,false
                     ,false,false,false,false,"Weekly Reminder"
                     ,"17:00",maxValue,61200000));
-                    createNotificationChannel(String.valueOf(maxValue),"Weekly Reminder");
+                    createNotificationChannel(String.valueOf(maxValue)," ");
                     saveData();
                     adapter.notifyDataSetChanged();
                 }
@@ -101,7 +101,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("weeklySharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("weeklySharedPreferences",MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("weekly_reminder", null);
         Type type = new TypeToken<ArrayList<WeeklyReminder>>() {
