@@ -69,7 +69,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         Log.d(TAG, "onBindViewHolder: Called");
         scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
 
-        /** Configuring Buttons **/{
+        /** Initialize **/{
             holder.weeklyReminderName.setText(weeklyReminder.get(position).getWeeklyReminderName());
             holder.weeklyReminderHour.setText(weeklyReminder.get(position).getWeeklyReminderHour());
             holder.weeklyReminderSwitch.setChecked(weeklyReminder.get(position).isWeeklyReminderSwitch());

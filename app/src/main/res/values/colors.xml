@@ -11,4 +11,6 @@
     <color name="background">#AFDEFD</color>
     <color name="buttonColor">#F9F6EE</color>
     <color name="panels">#E8EFF6</color>
+
+    <color name="transparent">#00FFFFFF</color>
 </resources>
