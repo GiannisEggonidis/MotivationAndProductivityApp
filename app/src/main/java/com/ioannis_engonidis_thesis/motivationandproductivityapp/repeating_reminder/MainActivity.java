@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         addNotificationPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (notificationPanel.size() >= 10) {
+                if (notificationPanel.size() >= 4) {
                     Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
@@ -149,6 +150,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(refresh);//Start the same Activity
                 overridePendingTransition(0, 0);
                 Toast.makeText(MainActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overridePendingTransition(0, 0);
+                Intent start = new Intent(MainActivity.this, CalendarActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(start);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(MainActivity.this, "Calendar Activity Tracker", Toast.LENGTH_SHORT).show();
             }
         });
 

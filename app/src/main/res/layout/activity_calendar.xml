@@ -2,12 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calendar_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_layout"
     android:background="@drawable/gradient_background_list"
-    tools:context=".repeating_reminder.MainActivity">
-
+    tools:context=".calendar.CalendarActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -21,7 +20,7 @@
         >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notificationPanelRecView"
+            android:id="@+id/calendarRecView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fadeScrollbars="true"
@@ -31,6 +30,7 @@
 
 
     </RelativeLayout>
+
 
     <include
         android:id="@+id/include"
@@ -43,14 +43,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/addNotificationPanel"
+        android:id="@+id/addCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners"
         android:elevation="5dp"
         android:scaleX="1.4"
         android:scaleY="1.4"
-        android:src="@drawable/ic_add_notification"
+        android:src="@drawable/ic_add_calendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

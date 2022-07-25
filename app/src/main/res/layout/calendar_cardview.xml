@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weeklyReminderParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:outlineAmbientShadowColor="@color/purple_700"
+    android:outlineSpotShadowColor="@color/teal_700"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_panel"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/calendarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginTop="-8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/sans_francisco_pro_text_light"
+            android:hint="Calendar Activity Tracker"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLength="27"
+            android:maxLines="1"
+            android:textColor="#CC000000"
+            android:textCursorDrawable="@null"
+            android:textFontWeight="900"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Spinner
+            android:id="@+id/pickColor"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/rgb_circle" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/calendarName"
+            android:layout_marginTop="15dp"
+            />
+
+
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

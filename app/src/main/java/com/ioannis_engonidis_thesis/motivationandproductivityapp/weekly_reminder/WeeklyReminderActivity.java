@@ -22,6 +22,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanel;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
@@ -64,7 +65,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         addWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (weeklyReminder.size() >= 10) {
+                if (weeklyReminder.size() >= 5) {
                     Toast.makeText(WeeklyReminderActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
@@ -153,6 +154,18 @@ public class WeeklyReminderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(WeeklyReminderActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overridePendingTransition(0, 0);
+                Intent start = new Intent(WeeklyReminderActivity.this, CalendarActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(start);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(WeeklyReminderActivity.this, "Calendar Activity Tracker", Toast.LENGTH_SHORT).show();
             }
         });
 
