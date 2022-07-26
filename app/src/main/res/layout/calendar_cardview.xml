@@ -43,7 +43,8 @@
             android:layout_marginTop="1dp"
             android:layout_marginRight="12dp"
             android:layout_toLeftOf="@+id/deleteCalendar"
-            android:background="@drawable/rgb_circle" />
+            android:background="@drawable/rgb_circle"
+            />
 
         <ImageButton
             android:id="@+id/deleteCalendar"
@@ -60,14 +61,12 @@
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
-            app:mcv_tileSize="45dp"
-            android:layout_width="350dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/calendarName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             app:mcv_dateTextAppearance="@color/purple_500" />
-
 
     </RelativeLayout>
 

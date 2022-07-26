@@ -1,7 +1,12 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.style.ForegroundColorSpan;
 
+import androidx.core.content.ContextCompat;
+
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
@@ -11,14 +16,14 @@ import java.util.HashSet;
 
 public class CalendarDayDecorator implements DayViewDecorator {
 
-    Context cContext;
+    Context dContext;
     private int color;
     private HashSet<CalendarDay> dates;
 
-    public CalendarDayDecorator(Context cContext, int color, HashSet<CalendarDay> dates) {
-        this.cContext = cContext;
+    public CalendarDayDecorator(int color, Collection<CalendarDay> dates, Context context) {
+        this.dContext = context;
         this.color = color;
-        this.dates = dates;
+        this.dates =new HashSet<>(dates);
     }
 
     @Override
@@ -29,6 +34,10 @@ public class CalendarDayDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
+
+        view.addSpan(new ForegroundColorSpan(Color.BLACK));
+        view.setSelectionDrawable(ContextCompat.getDrawable(dContext, R.drawable.selected_day_color));
+
 
     }
 }
