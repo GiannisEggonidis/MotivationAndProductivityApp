@@ -15,6 +15,10 @@
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/ic_add_weekly_reminder.xml" value="0.212" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/rounded_corners.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__green.xml" value="0.1875" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__orange.xml" value="0.1875" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__red.xml" value="0.1875" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__yellow.xml" value="0.1875" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_calendar.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_main.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_settings.xml" value="0.2" />
@@ -23,6 +27,7 @@
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/floating_action_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/frequency_spinner.xml" value="0.371875" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/notification_panel_cardview.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/spinner_item_layout.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/weekly_reminder_panel_cardview.xml" value="0.5" />
       </map>
     </option>

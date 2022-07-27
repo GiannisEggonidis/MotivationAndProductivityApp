@@ -82,7 +82,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                     ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
-                    calendars.add(new Calendar(maxValue,1,"Calendar", calendarDays));
+                    calendars.add(new Calendar(maxValue,0,"Calendar", calendarDays));
                     saveData();
 
                     adapter.notifyDataSetChanged();
