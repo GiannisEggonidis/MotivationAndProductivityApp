@@ -42,8 +42,7 @@
             android:layout_height="26dp"
             android:layout_marginTop="1dp"
             android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/deleteCalendar"
-            android:background="@drawable/rgb_circle" />
+            android:layout_toLeftOf="@+id/deleteCalendar" />
 
         <ImageButton
             android:id="@+id/deleteCalendar"
@@ -66,6 +65,17 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             app:mcv_dateTextAppearance="@color/purple_500" />
+
+        <TextView
+            android:id="@+id/countDaysText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendarView"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="6dp"
+            android:fontFamily="@font/sans_francisco_pro_text_regular"
+            android:text="Text" />
 
     </RelativeLayout>
 

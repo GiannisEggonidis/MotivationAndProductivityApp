@@ -52,9 +52,6 @@ public class CalendarDayDecorator implements DayViewDecorator {
             case 4:
                 view.setSelectionDrawable(ContextCompat.getDrawable(dContext, R.drawable.spinner__yellow));
                 break;
-            default:
-                view.setSelectionDrawable(ContextCompat.getDrawable(dContext, R.drawable.spinner__blue));
-
         }
 
 

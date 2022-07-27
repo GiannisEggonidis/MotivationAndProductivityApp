@@ -10,8 +10,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +28,7 @@ import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -34,7 +37,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
 
-public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecViewAdapter.ViewHolder> implements AdapterView.OnItemSelectedListener {
+public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecViewAdapter.ViewHolder> {
     private String TAG = "CalendarRecViewAdapter";
 
     private ArrayList<Calendar> calendars = new ArrayList<>();
@@ -55,28 +58,59 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
     @Override
     public CalendarRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.calendar_cardview, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CalendarRecViewAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: Called");
-        holder.calendarView.setSelectionColor(cContext.getResources().getColor(R.color.transparent));
-        holder.calendarView.addDecorator(new CalendarDayDecorator(1, calendars.get(position).getCalendarDays(), cContext));
 
         /** Initialize **/{
+            holder.calendarView.setSelectionColor(cContext.getResources().getColor(R.color.transparent));
+            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor(),
+                    calendars.get(position).getCalendarDays(), cContext));
             holder.calendarName.setText(calendars.get(position).getCalendarName());
             holder.calendarView.removeDecorators();
-            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
-                    , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
+            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
+                    , calendars.get(position).getCalendarDays(), cContext));
+            holder.countDaysText.setText("Days Counter: " + calendars.get(position).getCalendarDays().size());
 
-            switch (calendars.get(position).getPickColor()){
-                case 0:
-                    holder.pickColor.setBackground(cContext.getResources().getDrawable(colorIcons[0]));
-                    break;
+        }
 
-            }
+        /** Configure Spinner **/{
+            SpinnerItemAdapter spinnerItemAdapter = new SpinnerItemAdapter(cContext, colorIcons);
+            holder.pickColor.setAdapter(spinnerItemAdapter);
+            holder.pickColor.setBackground(cContext.getResources().getDrawable(colorIcons[calendars.get(position).getPickColor()]));
+            holder.pickColor.setSelection(calendars.get(position).getPickColor(), true);
+            holder.pickColor.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    holder.pickColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+
+                            holder.pickColor.setBackground(cContext.getResources().getDrawable(colorIcons[i]));
+                            holder.pickColor.setSelection(i);
+                            calendars.get(position).setPickColor(i);
+                            saveData();
+
+                            holder.calendarView.removeDecorators();
+                            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
+                                    , calendars.get(position).getCalendarDays(), cContext));
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                    return false;
+                }
+            });
+
+            saveData();
+
         }
 
         /** Configure Calendar Name **/{
@@ -111,9 +145,9 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                         holder.calendarView.removeDecorators();
                         holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
-                        Toast.makeText(cContext, "Size of Dates : " + calendars.get(holder.getAdapterPosition()).getCalendarDays().size() +
-                                "\n Selected Date : " + holder.calendarView.getSelectedDate(), Toast.LENGTH_SHORT).show();
+
                         System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
+                        holder.countDaysText.setText("Days Counter: " + calendars.get(position).getCalendarDays().size());
                         saveData();
                     } else {
                         calendars.get(holder.getAdapterPosition()).getCalendarDays().add(holder.calendarView.getSelectedDate());
@@ -121,10 +155,10 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                         holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
 
-                        Toast.makeText(cContext, "Size of Dates : " + calendars.get(holder.getAdapterPosition()).getCalendarDays().size() +
-                                "\n Selected Date : " + holder.calendarView.getSelectedDate(), Toast.LENGTH_SHORT).show();
                         System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
+                        holder.countDaysText.setText("Days Counter: " + calendars.get(position).getCalendarDays().size());
                         saveData();
+
                     }
                 }
             });
@@ -174,11 +208,6 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
             });
         }
 
-        /** Configure Spinner **/{
-            holder.pickColor.setOnItemSelectedListener(CalendarRecViewAdapter.this);
-            SpinnerItemAdapter spinnerItemAdapter = new SpinnerItemAdapter(cContext,colorIcons);
-            holder.pickColor.setAdapter(spinnerItemAdapter);
-        }
 
     }
 
@@ -187,34 +216,18 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
         return calendars.size();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-        Toast.makeText(cContext, colorIcons[i]+"\n"+i, Toast.LENGTH_SHORT).show();
-        ViewHolder holder = new ViewHolder(adapterView);
-        holder.pickColor.setBackground(cContext.getResources().getDrawable(colorIcons[i]));
-        calendars.get(holder.getBindingAdapterPosition()+1).setPickColor(i);
-
-//        holder.calendarView.removeDecorators();
-//        holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
-//                , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private EditText calendarName;
+        private TextView countDaysText;
         public Spinner pickColor;
         private ImageButton deleteCalendar;
         private MaterialCalendarView calendarView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            countDaysText = itemView.findViewById(R.id.countDaysText);
             calendarName = itemView.findViewById(R.id.calendarName);
             pickColor = itemView.findViewById(R.id.pickColor);
             deleteCalendar = itemView.findViewById(R.id.deleteCalendar);
