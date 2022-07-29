@@ -88,6 +88,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                     holder.pickColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                            System.out.println("**********\n"+"Ping " + calendars.get(position)+"\n**********");
 
                             holder.pickColor.setBackground(cContext.getResources().getDrawable(colorIcons[i]));
                             holder.pickColor.setSelection(i);
@@ -178,7 +179,6 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                             public void onClick(DialogInterface dialog, int which) {
                                 holder.calendarView.removeDecorators();
                                 calendars.remove(holder.getAdapterPosition());
-                                notifyDataSetChanged();
                                 saveData();
                             }
                         });
