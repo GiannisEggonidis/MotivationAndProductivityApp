@@ -82,7 +82,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                     ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
-                    calendars.add(new Calendar(maxValue,0,"Calendar", calendarDays));
+                    calendars.add(new Calendar(maxValue, 0, "Calendar", calendarDays));
                     saveData();
 
                     adapter.notifyDataSetChanged();
@@ -91,6 +91,7 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
     }
+
     public void onBackPressed() {
         overridePendingTransition(0, 0);
         this.startActivity(new Intent(CalendarActivity.this, MainActivity.class));
@@ -165,7 +166,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("calendarsSharedPreferences",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("calendarsSharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("calendars", null);
         Type type = new TypeToken<ArrayList<Calendar>>() {
