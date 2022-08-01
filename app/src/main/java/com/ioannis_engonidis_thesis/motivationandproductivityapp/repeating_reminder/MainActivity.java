@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
                     AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(ALARM_SERVICE);
                     Intent intent = new Intent(MainActivity.this, NotificationPanelReceiver.class);
 
-                    notificationPanel.add(new NotificationPanel(maxValue, "Reminder", false,
-                            "0", "30", false, false,
+                    notificationPanel.add(new NotificationPanel(maxValue,0, "Reminder", false,
+                            false, false,
                             false, false, false,
-                            false, false));
+                            false, false,false,28800000,"08:00",72000000,"20:00"));
                     saveData();
-                    createNotificationChannel(String.valueOf(maxValue),"Reminder");
+                    createNotificationChannel(String.valueOf(maxValue), "Reminder");
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         exitFromApp();
     }
+
     private void exitFromApp() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);

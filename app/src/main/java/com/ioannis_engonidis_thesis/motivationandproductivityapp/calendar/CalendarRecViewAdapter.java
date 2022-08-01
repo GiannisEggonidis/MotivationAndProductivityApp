@@ -221,7 +221,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
 
         private EditText calendarName;
         private TextView countDaysText;
-        public Spinner pickColor;
+        private Spinner pickColor;
         private ImageButton deleteCalendar;
         private MaterialCalendarView calendarView;
 

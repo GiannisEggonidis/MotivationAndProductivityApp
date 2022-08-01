@@ -14,8 +14,8 @@
     <RelativeLayout
         android:layout_width="345dp"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/gradient_panel">
+        android:background="@drawable/gradient_panel"
+        android:padding="10dp">
 
         <EditText
             android:id="@+id/notificationName"
@@ -74,68 +74,107 @@
             android:textFontWeight="600"
             android:textSize="17sp" />
 
-        <RelativeLayout
+        <Spinner
+            android:id="@+id/intervalSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="28.5dp"
-            android:layout_toRightOf="@id/notifyEvery"
-            android:elevation="5dp">
+            android:layout_below="@+id/notificationName"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/notifyEvery"
+            android:entries="@array/hoursSpinnerValues" />
 
-            <EditText
-                android:id="@+id/hoursEditText"
-                android:layout_width="23dp"
+        <ImageView
+            android:id="@+id/scheduleImg"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/notifyEvery"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+
+            android:src="@drawable/ic_week" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scheduleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notifyEvery"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/scheduleImg"
+            app:thumbTint="@color/switch_thumb_selector"
+            app:trackTint="@color/switch_track_selector" />
+
+        <RelativeLayout
+            android:id="@+id/scheduleTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notifyEvery"
+            android:layout_toRightOf="@+id/scheduleSwitch">
+
+            <TextView
+                android:id="@+id/fromTxt"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/sfuitext_regular"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textAlignment="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/sans_francisco_pro_display_regular"
+                android:text="From:"
+                android:textColor="#94000000"
+                android:textFontWeight="600"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/hoursTxt"
+                android:id="@+id/fromHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/hoursEditText"
-                android:fontFamily="@font/sans_francisco_pro_text_medium"
-                android:text="h"
-                android:textSize="14sp" />
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="18dp"
+                android:layout_toRightOf="@+id/fromTxt"
+                android:background="@color/buttonColor"
+                android:clickable="true"
+                android:fontFamily="@font/sans_francisco_pro_display_regular"
+                android:padding="2dp"
+                android:text="00:00"
+                android:textSize="19sp" />
 
-            <EditText
-                android:id="@+id/minutesEditText"
-                android:layout_width="29dp"
+            <TextView
+                android:id="@+id/untilTxt"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/hoursTxt"
-                android:fontFamily="@font/sfuitext_regular"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textAlignment="center"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/fromHours"
+                android:fontFamily="@font/sans_francisco_pro_display_regular"
+                android:text="Until:"
+                android:textColor="#94000000"
+                android:textFontWeight="600"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/minutesTxt"
+                android:id="@+id/untilHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/minutesEditText"
-                android:fontFamily="@font/sans_francisco_pro_text_medium"
-                android:text="m"
-                android:textSize="14sp" />
-
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="18dp"
+                android:layout_toRightOf="@+id/untilTxt"
+                android:background="@color/buttonColor"
+                android:clickable="true"
+                android:fontFamily="@font/sans_francisco_pro_display_regular"
+                android:padding="2dp"
+                android:text="00:00"
+                android:textSize="19sp" />
 
         </RelativeLayout>
 
 
-
         <RelativeLayout
-            android:id="@+id/chkboxes"
+            android:id="@+id/checkBoxes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/notifyEvery"
+            android:layout_below="@+id/scheduleSwitch"
             android:layout_centerInParent="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:elevation="5dp">
 
             <CheckBox
