@@ -5,17 +5,22 @@
     android:id="@+id/weeklyReminderParent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginTop="45dp"
+    android:layout_marginBottom="45dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:outlineAmbientShadowColor="@color/purple_700"
     android:outlineSpotShadowColor="@color/teal_700"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_panel"
-        android:padding="10dp">
+        android:padding="10dp"
+        >
 
         <EditText
             android:id="@+id/calendarName"

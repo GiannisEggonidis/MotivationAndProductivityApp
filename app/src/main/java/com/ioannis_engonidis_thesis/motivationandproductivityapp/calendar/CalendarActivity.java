@@ -3,7 +3,9 @@ package com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.app.AlarmManager;
 import android.content.Intent;
@@ -49,8 +51,11 @@ public class CalendarActivity extends AppCompatActivity {
 
 
         adapter.setCalendars(calendars);
-        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
+//        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
+        calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         calendarRecView.setAdapter(adapter);
+        SnapHelper helper = new LinearSnapHelper();
+        helper.attachToRecyclerView(calendarRecView);
 
         /** Animated Background Configuration **/
         {
