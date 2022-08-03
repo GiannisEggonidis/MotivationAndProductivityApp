@@ -89,7 +89,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(wContext, R.style.AlertDialog);
                         builder.setTitle(weeklyReminder.get(position).getWeeklyReminderName());
-                        builder.setMessage("Delete Reminder");
+                        builder.setMessage("Delete Reminder?");
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -310,7 +310,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                             calendar.set(Calendar.MILLISECOND, 0);
                             calendar.setTimeZone(TimeZone.getDefault());
 
-                            SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+                            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                             String time = format.format(calendar.getTime());
                             holder.weeklyReminderHour.setText(time);
                             weeklyReminder.get(position).setWeeklyReminderHour(time);

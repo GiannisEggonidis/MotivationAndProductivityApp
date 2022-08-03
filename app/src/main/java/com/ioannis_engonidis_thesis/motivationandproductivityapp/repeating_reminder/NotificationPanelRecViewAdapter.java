@@ -51,6 +51,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<NotificationPanelRecViewAdapter.ViewHolder> {
@@ -169,7 +170,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             calendar.set(Calendar.MILLISECOND, 0);
                             calendar.setTimeZone(TimeZone.getDefault());
 
-                            SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+                            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                             String time = format.format(calendar.getTime());
                             holder.fromHours.setText(time);
                             notificationPanel.get(position).setFromHoursTxt(time);
@@ -200,7 +201,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             calendar.set(Calendar.MILLISECOND, 0);
                             calendar.setTimeZone(TimeZone.getDefault());
 
-                            SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+                            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                             String time = format.format(calendar.getTime());
                             holder.untilHours.setText(time);
                             notificationPanel.get(position).setUntilHoursTxt(time);
@@ -223,7 +224,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AlertDialog);
                         builder.setTitle(notificationPanel.get(position).getNotificationName());
-                        builder.setMessage("Delete Reminder");
+                        builder.setMessage("Delete Reminder?");
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

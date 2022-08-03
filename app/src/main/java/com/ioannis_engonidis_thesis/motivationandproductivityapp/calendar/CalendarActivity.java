@@ -54,8 +54,8 @@ public class CalendarActivity extends AppCompatActivity {
 //        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
         calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         calendarRecView.setAdapter(adapter);
-        SnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(calendarRecView);
+//        SnapHelper helper = new LinearSnapHelper();
+//        helper.attachToRecyclerView(calendarRecView);
 
         /** Animated Background Configuration **/
         {

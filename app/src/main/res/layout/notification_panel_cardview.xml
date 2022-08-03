@@ -12,7 +12,7 @@
     app:cardElevation="8dp">
 
     <RelativeLayout
-        android:layout_width="345dp"
+        android:layout_width="365dp"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_panel"
         android:padding="10dp">
@@ -189,13 +189,14 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Mon"
                 android:textColor="#CC000000"
                 android:textFontWeight="600"
 
-                android:textSize="13.3sp"
+                android:textSize="13.2sp"
                 android:theme="@style/checkbox_style" />
 
             <CheckBox
@@ -209,6 +210,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Tue"
@@ -228,6 +230,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Wed"
@@ -247,6 +250,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Thu"
@@ -266,6 +270,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Fri"
@@ -287,6 +292,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Sat"
@@ -305,6 +311,7 @@
                 android:drawableBottom="?android:attr/listChoiceIndicatorMultiple"
                 android:fontFamily="@font/sans_francisco_pro_text_light"
                 android:gravity="center"
+                android:padding="1dp"
                 android:scaleX="1.23"
                 android:scaleY="1.23"
                 android:text="Sun"

@@ -67,8 +67,8 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
 
         /** Initialize **/{
             holder.calendarView.setSelectionColor(cContext.getResources().getColor(R.color.transparent));
-            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor(),
-                    calendars.get(position).getCalendarDays(), cContext));
+            holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
+                    , calendars.get(position).getCalendarDays(), cContext));
             holder.calendarName.setText(calendars.get(position).getCalendarName());
             holder.calendarView.removeDecorators();
             holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
@@ -172,7 +172,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(cContext, R.style.AlertDialog);
                         builder.setTitle(calendars.get(position).getCalendarName());
-                        builder.setMessage("Delete Reminder");
+                        builder.setMessage("Delete Calendar?");
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
