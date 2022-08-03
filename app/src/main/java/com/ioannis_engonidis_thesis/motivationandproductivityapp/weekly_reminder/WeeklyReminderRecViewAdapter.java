@@ -640,7 +640,6 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     private void createNotificationChannel(String channelID, String channelName) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
-            int importance = NotificationManager.IMPORTANCE_MAX;
             NotificationChannel channel = new NotificationChannel(channelID, " " + channelName, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) wContext.getSystemService(Context.NOTIFICATION_SERVICE);

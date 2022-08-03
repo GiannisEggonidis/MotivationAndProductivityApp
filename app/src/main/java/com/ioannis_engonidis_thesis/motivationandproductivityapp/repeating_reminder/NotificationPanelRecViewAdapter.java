@@ -137,7 +137,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                         notificationPanel.get(position).setScheduleSwitch(true);
                         holder.scheduleTime.setVisibility(View.VISIBLE);
                         holder.checkBoxes.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         notificationPanel.get(position).setScheduleSwitch(false);
                         holder.scheduleTime.setVisibility(View.GONE);
                         holder.checkBoxes.setVisibility(View.GONE);
@@ -463,26 +463,20 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void scheduleNotification(String notificationTitle, int notificationID, int hours, int minutes) {
-        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
-        intent.putExtra("title", notificationTitle);
-        intent.putExtra("notificationID", notificationID);
+    private void scheduleNotification(String notificationTitle, int notificationID, int pickInterval
+            , boolean notificationSwitch
+            , boolean mondayCheckBox
+            , boolean tuesdayCheckBox
+            , boolean wednesdayCheckBox
+            , boolean thursdayCheckBox
+            , boolean fridayCheckBox
+            , boolean saturdayCheckBox
+            , boolean sundayCheckBox
+            , boolean scheduleSwitch
+            , long fromHours
+            , long untilHours) {
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                mContext
-                , notificationID
-                , intent
-                , PendingIntent.FLAG_IMMUTABLE);
 
-        AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        long currentTime = System.currentTimeMillis();
-        long repeatInterval = (minutes * 60 * 1000) + (hours * 60 * 60 * 1000);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP
-                    , SystemClock.elapsedRealtime() + repeatInterval
-                    , repeatInterval
-                    , pendingIntent);
-        }
     }
 
     private void cancelNotification(int notificationID) {
@@ -501,8 +495,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     private void createNotificationChannel(String channelID, String channelName) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String desc = "No description";
-            int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            NotificationChannel channel = new NotificationChannel(channelID, " " + channelName, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
