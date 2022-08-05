@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarDayDecorator;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.SpinnerItemAdapter;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderReceiver;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -464,7 +466,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         }
     }
 
-    private void scheduleNotification(String notificationTitle, int notificationID, int pickInterval
+    private void scheduleNotification(String notificationName, int notificationID, int pickInterval
             , boolean notificationSwitch
             , boolean mondayCheckBox
             , boolean tuesdayCheckBox
@@ -476,6 +478,118 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             , boolean scheduleSwitch
             , long fromHours
             , long untilHours) {
+
+        String idToString = String.valueOf(notificationID);
+        createNotificationChannel(idToString, notificationName);
+        AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        Date currentTime = Calendar.getInstance().getTime();
+        Calendar scheduleCalendar = Calendar.getInstance();
+        long scheduledMS;
+
+        int fromHour = Math.toIntExact(fromHours / 1000 / 60 / 60 % 24);
+        int fromMinutes = Math.toIntExact(fromHours / 1000 / 60 % 60);
+
+        int untilHour = Math.toIntExact(untilHours / 1000 / 60 / 60 % 24);
+        int untilMinutes = Math.toIntExact(untilHours / 1000 / 60 / 60 % 24);
+
+        Intent intent = new Intent(mContext, WeeklyReminderReceiver.class);
+        intent.putExtra("repeatingTitle", notificationName);
+        intent.putExtra("notificationID", notificationID);
+
+        if (notificationSwitch) {
+
+            if (scheduleSwitch) {
+                if (mondayCheckBox) {
+                    scheduleCalendar.set(Calendar.DAY_OF_WEEK, 2);
+                    scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                    scheduleCalendar.set(Calendar.MINUTE, minutes);
+                    scheduleCalendar.set(Calendar.SECOND, 0);
+                    scheduleCalendar.set(Calendar.MILLISECOND, 0);
+                    scheduledMS = scheduleCalendar.getTime().getTime();
+
+                    if (scheduledMS < currentTime.getTime()) {
+
+                        scheduledMS = scheduledMS + weekMs;
+                    }
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            wContext
+                            , weeklyReminderID + 1000
+                            , intent
+                            , PendingIntent.FLAG_CANCEL_CURRENT);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , scheduledMS - 40000
+                                , weekMs - 60000
+                                , pendingIntent);
+                        System.out.println("Mon Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
+                        System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
+                    }
+
+
+                } else {
+//                cancelNotification(weeklyReminderID + 1000);
+                }
+            } else {
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        mContext
+                        , notificationID
+                        , intent
+                        , PendingIntent.FLAG_CANCEL_CURRENT);
+
+                switch (pickInterval) {
+                    case 0:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 30)
+                                , 1000 * 60 * 30
+                                , pendingIntent);
+                        break;
+                    case 1:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60)
+                                , 1000 * 60 * 60
+                                , pendingIntent);
+                        break;
+                    case 2:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 2)
+                                , 1000 * 60 * 60 * 2
+                                , pendingIntent);
+                        break;
+                    case 3:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 3)
+                                , 1000 * 60 * 60 * 3
+                                , pendingIntent);
+                        break;
+                    case 4:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 4)
+                                , 1000 * 60 * 60 * 4
+                                , pendingIntent);
+                        break;
+                    case 5:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 5)
+                                , 1000 * 60 * 60 * 5
+                                , pendingIntent);
+                        break;
+                    case 6:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 6)
+                                , 1000 * 60 * 60 * 6
+                                , pendingIntent);
+                        break;
+
+                }
+            }
+
+
+        } else {
+            for (int i = 1; i < 8; i++) {
+//                cancelNotification(weeklyReminderID + (i * 1000));
+            }
+        }
 
 
     }
