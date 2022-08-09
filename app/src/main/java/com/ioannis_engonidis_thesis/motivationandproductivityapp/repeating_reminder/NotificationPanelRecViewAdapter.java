@@ -61,6 +61,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
     private ArrayList<NotificationPanel> notificationPanel = new ArrayList<>();
     private Context mContext;
+    private static long weekMs = 604800000;
+
 
     public NotificationPanelRecViewAdapter(Context mContext) {
         this.mContext = mContext;
@@ -276,7 +278,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                         String notificationID = String.valueOf(notificationPanel.get(position).getId());
 
-                        createNotificationChannel(notificationID, notificationPanel.get(position).getNotificationName());
+                        createNotificationChannel(notificationID + 100, notificationPanel.get(position).getNotificationName());
 
 
                     } else {
@@ -480,11 +482,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             , long untilHours) {
 
         String idToString = String.valueOf(notificationID);
-        createNotificationChannel(idToString, notificationName);
+        createNotificationChannel(idToString + 100, notificationName);
         AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Date currentTime = Calendar.getInstance().getTime();
-        Calendar scheduleCalendar = Calendar.getInstance();
-        long scheduledMS;
+        Calendar fromCalendar = Calendar.getInstance();
+        Calendar untilCalendar = Calendar.getInstance();
+        long fromMS;
+        long untilMS;
 
         int fromHour = Math.toIntExact(fromHours / 1000 / 60 / 60 % 24);
         int fromMinutes = Math.toIntExact(fromHours / 1000 / 60 % 60);
@@ -500,40 +504,219 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
             if (scheduleSwitch) {
                 if (mondayCheckBox) {
-                    scheduleCalendar.set(Calendar.DAY_OF_WEEK, 2);
-                    scheduleCalendar.set(Calendar.HOUR_OF_DAY, hour);
-                    scheduleCalendar.set(Calendar.MINUTE, minutes);
-                    scheduleCalendar.set(Calendar.SECOND, 0);
-                    scheduleCalendar.set(Calendar.MILLISECOND, 0);
-                    scheduledMS = scheduleCalendar.getTime().getTime();
+                    fromCalendar.set(Calendar.DAY_OF_WEEK, 2);
+                    fromCalendar.set(Calendar.HOUR_OF_DAY, fromHour);
+                    fromCalendar.set(Calendar.MINUTE, fromMinutes);
+                    fromCalendar.set(Calendar.SECOND, 0);
+                    fromCalendar.set(Calendar.MILLISECOND, 0);
+                    fromMS = fromCalendar.getTime().getTime();
 
-                    if (scheduledMS < currentTime.getTime()) {
+                    untilCalendar.set(Calendar.DAY_OF_WEEK, 2);
+                    untilCalendar.set(Calendar.HOUR_OF_DAY, untilHour);
+                    untilCalendar.set(Calendar.MINUTE, untilMinutes);
+                    untilCalendar.set(Calendar.SECOND, 0);
+                    untilCalendar.set(Calendar.MILLISECOND, 0);
+                    untilMS = fromCalendar.getTime().getTime();
 
-                        scheduledMS = scheduledMS + weekMs;
+                    long triggerTime;
+                    int counter;
+
+                    switch (pickInterval) {
+                        case 0:
+                            triggerTime = fromMS + (1000 * 60 * 30);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 30);
+                            }
+                            break;
+                        case 1:
+                            triggerTime = fromMS + (1000 * 60 * 60);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60);
+                            }
+                            break;
+                        case 2:
+                            triggerTime = fromMS + (1000 * 60 * 60 * 2);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                            }
+                            break;
+                        case 3:
+                            triggerTime = fromMS + (1000 * 60 * 60 * 3);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                            }
+                            break;
+                        case 4:
+                            triggerTime = fromMS + (1000 * 60 * 60 * 4);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                            }
+                            break;
+                        case 5:
+                            triggerTime = fromMS + (1000 * 60 * 60 * 5);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                            }
+                            break;
+                        case 6:
+                            triggerTime = fromMS + (1000 * 60 * 60 * 6);
+                            counter = 1;
+                            while (triggerTime <= untilMS) {
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        mContext
+                                        , (notificationID * 10000000) + 1000000 + counter
+                                        , intent
+                                        , PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+
+                                if (currentTime.getTime() >= triggerTime) {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime + weekMs
+                                            , weekMs
+                                            , pendingIntent);
+                                } else {
+                                    manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                            , triggerTime
+                                            , weekMs
+                                            , pendingIntent);
+                                }
+                                counter++;
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                            }
+                            break;
                     }
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                            wContext
-                            , weeklyReminderID + 1000
-                            , intent
-                            , PendingIntent.FLAG_CANCEL_CURRENT);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , scheduledMS - 40000
-                                , weekMs - 60000
-                                , pendingIntent);
-                        System.out.println("Mon Schedule Ms : " + scheduledMS + "\n" + "Current Time Ms : " + currentTime.getTime());
-                        System.out.println("Scheduled - Current Time : " + (scheduledMS - currentTime.getTime()));
-                    }
-
 
                 } else {
-//                cancelNotification(weeklyReminderID + 1000);
+                    for (int i = 1; i <= 48; i++) {
+                        cancelNotification((notificationID * 10000000) + 1000000 + i);
+                    }
                 }
+
+                // TODO: 09/08/2022 Rest of the weekdays schedule 
             } else {
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                         mContext
-                        , notificationID
+                        , (notificationID + 1) * 10000
                         , intent
                         , PendingIntent.FLAG_CANCEL_CURRENT);
 

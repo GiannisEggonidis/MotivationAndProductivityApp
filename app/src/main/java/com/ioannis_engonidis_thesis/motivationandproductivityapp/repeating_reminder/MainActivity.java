@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                             false, false, false,
                             false, false,false,28800000,"08:00",72000000,"20:00"));
                     saveData();
-                    createNotificationChannel(String.valueOf(maxValue), "Reminder");
+                    createNotificationChannel(String.valueOf(maxValue)+100, "Reminder");
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
