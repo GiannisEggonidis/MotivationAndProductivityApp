@@ -85,6 +85,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 mContext, 1, myIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
+        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
         /** Configuring Buttons **/{
             holder.intervalSpinner.setSelection(notificationPanel.get(position).getPickInterval());
@@ -118,6 +119,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             holder.intervalSpinner.setSelection(i);
                             notificationPanel.get(holder.getPosition()).setPickInterval(i);
                             saveData();
+                            scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                         }
 
@@ -130,7 +132,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 }
             });
 
-            saveData();
 
         }
 
@@ -142,10 +143,16 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                         notificationPanel.get(position).setScheduleSwitch(true);
                         holder.scheduleTime.setVisibility(View.VISIBLE);
                         holder.checkBoxes.setVisibility(View.VISIBLE);
+                        saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setScheduleSwitch(false);
                         holder.scheduleTime.setVisibility(View.GONE);
                         holder.checkBoxes.setVisibility(View.GONE);
+                        saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -181,6 +188,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             Date date = calendar.getTime();
                             notificationPanel.get(position).setFromHours(date.getTime() - subDate.getTime());
                             saveData();
+                            scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                         }
                     }, hours, mins, true);
                     timePickerDialog.show();
@@ -212,6 +221,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             Date date = calendar.getTime();
                             notificationPanel.get(position).setUntilHours(date.getTime() - subDate.getTime());
                             saveData();
+                            scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                         }
                     }, hours, mins, true);
                     timePickerDialog.show();
@@ -232,13 +243,25 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                cancelNotification((notificationPanel.get(position).getId() + 1) * 10000);
+
+                                for (int i = 1; i <= 48; i++) {
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 1000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 2000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 3000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 4000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 5000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 6000000 + i);
+                                    cancelNotification((notificationPanel.get(position).getId() * 10000000) + 7000000 + i);
+                                }
+
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     notificationManager.deleteNotificationChannel(String.valueOf(notificationPanel.get(position).getId()));
                                 }
-                                cancelNotification(notificationPanel.get(position).getId());
+
                                 notificationPanel.remove(holder.getAdapterPosition());
                                 notifyDataSetChanged();
-//                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+
                                 saveData();
                             }
                         });
@@ -275,16 +298,12 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.enableNotifSwitch.isChecked()) {
                         notificationPanel.get(position).setNotificationSwitch(true);
                         saveData();
-
-                        String notificationID = String.valueOf(notificationPanel.get(position).getId());
-
-                        createNotificationChannel(notificationID + 100, notificationPanel.get(position).getNotificationName());
-
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                     } else {
                         notificationPanel.get(position).setNotificationSwitch(false);
                         saveData();
-                        cancelNotification(notificationPanel.get(position).getId());
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                     }
                 }
@@ -302,6 +321,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     notificationPanel.get(holder.getAdapterPosition()).setNotificationName(String.valueOf(holder.notificationName.getText()));
                     saveData();
+                    scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                 }
 
@@ -319,9 +339,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.monCheckBox.isChecked()) {
                         notificationPanel.get(position).setMondayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setMondayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -331,9 +355,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.tueCheckBox.isChecked()) {
                         notificationPanel.get(position).setTuesdayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setTuesdayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -343,9 +371,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.wedCheckBox.isChecked()) {
                         notificationPanel.get(position).setWednesdayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setWednesdayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -355,9 +387,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.thuCheckBox.isChecked()) {
                         notificationPanel.get(position).setThursdayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setThursdayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -367,9 +403,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.friCheckBox.isChecked()) {
                         notificationPanel.get(position).setFridayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setFridayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -379,9 +419,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.satCheckBox.isChecked()) {
                         notificationPanel.get(position).setSaturdayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setSaturdayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -391,9 +435,13 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     if (holder.sunCheckBox.isChecked()) {
                         notificationPanel.get(position).setSundayCheckBox(true);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     } else {
                         notificationPanel.get(position).setSundayCheckBox(false);
                         saveData();
+                        scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
+
                     }
                 }
             });
@@ -2028,13 +2076,19 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 }
             }
 
-
         } else {
-            for (int i = 1; i < 8; i++) {
-//                cancelNotification(weeklyReminderID + (i * 1000));
+            cancelNotification((notificationID + 1) * 10000);
+
+            for (int i = 1; i <= 48; i++) {
+                cancelNotification((notificationID * 10000000) + 1000000 + i);
+                cancelNotification((notificationID * 10000000) + 2000000 + i);
+                cancelNotification((notificationID * 10000000) + 3000000 + i);
+                cancelNotification((notificationID * 10000000) + 4000000 + i);
+                cancelNotification((notificationID * 10000000) + 5000000 + i);
+                cancelNotification((notificationID * 10000000) + 6000000 + i);
+                cancelNotification((notificationID * 10000000) + 7000000 + i);
             }
         }
-
 
     }
 
@@ -2058,6 +2112,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             channel.setDescription(desc);
             NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
+
         }
 
     }

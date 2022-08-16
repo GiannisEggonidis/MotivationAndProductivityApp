@@ -1,6 +1,7 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -68,6 +69,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
     public void onBindViewHolder(@NonNull WeeklyReminderRecViewAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: Called");
         scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+        NotificationManager notificationManager = (NotificationManager) wContext.getSystemService(NOTIFICATION_SERVICE);
 
         /** Initialize **/{
             holder.weeklyReminderName.setText(weeklyReminder.get(position).getWeeklyReminderName());
@@ -97,9 +99,13 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                                 for (int i = 1; i < 8; i++) {
                                     cancelNotification(weeklyReminder.get(position).getWeeklyReminderId() + (i * 1000));
                                 }
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    notificationManager.deleteNotificationChannel(String.valueOf(weeklyReminder.get(position).getWeeklyReminderId()));
+                                }
+
                                 weeklyReminder.remove(holder.getAdapterPosition());
                                 notifyDataSetChanged();
-//                            Toast.makeText(mContext, "Reminder Removed\nTotal Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+
                                 saveData();
                             }
                         });

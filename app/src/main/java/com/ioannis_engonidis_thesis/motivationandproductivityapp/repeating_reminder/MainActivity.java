@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
-                    int maxValue = 0;
+                    int maxValue = 1;
                     int indexOfMaxValue = 0;
                     if (notificationPanel.size() != 0) {
                         for (int i = 0; i < notificationPanel.size(); i++) {
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                             false, false, false,
                             false, false,false,28800000,"08:00",72000000,"20:00"));
                     saveData();
-                    createNotificationChannel(String.valueOf(maxValue)+100, "Reminder");
 //                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
