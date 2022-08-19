@@ -21,7 +21,7 @@ public class NotificationPanelReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        channelID = String.valueOf(intent.getIntExtra("notificationID", 1));
+        channelID = String.valueOf(intent.getIntExtra("notificationID", 1))+100;
         NotificationChannel channel = manager.getNotificationChannel(channelID);
         String channelName = (String) channel.getName();
 

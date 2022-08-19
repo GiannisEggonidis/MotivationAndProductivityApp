@@ -256,7 +256,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                 }
 
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                    notificationManager.deleteNotificationChannel(String.valueOf(notificationPanel.get(position).getId()));
+                                    notificationManager.deleteNotificationChannel(String.valueOf(notificationPanel.get(position).getId())+100);
                                 }
 
                                 notificationPanel.remove(holder.getAdapterPosition());
@@ -544,7 +544,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         int untilHour = Math.toIntExact(untilHours / 1000 / 60 / 60 % 24);
         int untilMinutes = Math.toIntExact(untilHours / 1000 / 60 / 60 % 24);
 
-        Intent intent = new Intent(mContext, WeeklyReminderReceiver.class);
+        Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
         intent.putExtra("repeatingTitle", notificationName);
         intent.putExtra("notificationID", notificationID);
 
@@ -2032,43 +2032,43 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 switch (pickInterval) {
                     case 0:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 30)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 30
                                 , pendingIntent);
                         break;
                     case 1:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60
                                 , pendingIntent);
                         break;
                     case 2:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 2)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60 * 2
                                 , pendingIntent);
                         break;
                     case 3:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 3)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60 * 3
                                 , pendingIntent);
                         break;
                     case 4:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 4)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60 * 4
                                 , pendingIntent);
                         break;
                     case 5:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 5)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60 * 5
                                 , pendingIntent);
                         break;
                     case 6:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 6)
+                                , currentTime.getTime()
                                 , 1000 * 60 * 60 * 6
                                 , pendingIntent);
                         break;

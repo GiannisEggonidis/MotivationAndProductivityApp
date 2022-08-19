@@ -31,7 +31,7 @@ public class WeeklyReminderReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.rContext = context;
-        Intent rIntent = new Intent(rContext, NotificationPanelReceiver.class);
+        Intent rIntent = new Intent(rContext, WeeklyReminderReceiver.class);
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         channelID = String.valueOf(intent.getIntExtra("weeklyReminderID", 1));
