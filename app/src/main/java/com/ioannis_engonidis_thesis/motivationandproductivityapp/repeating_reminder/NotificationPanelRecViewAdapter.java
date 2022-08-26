@@ -83,7 +83,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         Intent myIntent = new Intent(mContext, NotificationPanelReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 mContext, 1, myIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_CANCEL_CURRENT);
 
         scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
@@ -321,12 +321,12 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     notificationPanel.get(holder.getAdapterPosition()).setNotificationName(String.valueOf(holder.notificationName.getText()));
                     saveData();
-                    scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                 }
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    scheduleNotification(notificationPanel.get(position).getNotificationName(), notificationPanel.get(position).getId(), notificationPanel.get(position).getPickInterval(), notificationPanel.get(position).isNotificationSwitch(), notificationPanel.get(position).isMondayCheckBox(), notificationPanel.get(position).isTuesdayCheckBox(), notificationPanel.get(position).isWednesdayCheckBox(), notificationPanel.get(position).isThursdayCheckBox(), notificationPanel.get(position).isFridayCheckBox(), notificationPanel.get(position).isSaturdayCheckBox(), notificationPanel.get(position).isSundayCheckBox(), notificationPanel.get(position).isScheduleSwitch(), notificationPanel.get(position).getFromHours(), notificationPanel.get(position).getUntilHours());
 
                 }
             });
@@ -456,64 +456,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     public void setNotificationPanel(ArrayList<NotificationPanel> notificationPanel) {
         this.notificationPanel = notificationPanel;
         notifyDataSetChanged();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView parent;
-        private Spinner intervalSpinner;
-        private EditText notificationName;
-        private CheckBox monCheckBox, tueCheckBox, wedCheckBox, thuCheckBox, friCheckBox, satCheckBox, sunCheckBox;
-        private SwitchCompat enableNotifSwitch, scheduleSwitch;
-        private TextView notifyEvery, fromHours, untilHours;
-        private ImageButton deleteNotificationPanel;
-        private RelativeLayout scheduleTime, checkBoxes;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            parent = itemView.findViewById(R.id.notificationPanelParent);
-            intervalSpinner = itemView.findViewById(R.id.intervalSpinner);
-            notificationName = itemView.findViewById(R.id.notificationName);
-            monCheckBox = itemView.findViewById(R.id.mondayCheckBox);
-            tueCheckBox = itemView.findViewById(R.id.tuesdayCheckBox);
-            wedCheckBox = itemView.findViewById(R.id.wednesdayCheckBox);
-            thuCheckBox = itemView.findViewById(R.id.thursdayCheckBox);
-            friCheckBox = itemView.findViewById(R.id.fridayCheckBox);
-            satCheckBox = itemView.findViewById(R.id.saturdayCheckBox);
-            sunCheckBox = itemView.findViewById(R.id.sundayCheckBox);
-            enableNotifSwitch = itemView.findViewById(R.id.enableNotificationSwitch);
-            notifyEvery = itemView.findViewById(R.id.notifyEvery);
-            fromHours = itemView.findViewById(R.id.fromHours);
-            untilHours = itemView.findViewById(R.id.untilHours);
-            scheduleSwitch = itemView.findViewById(R.id.scheduleSwitch);
-            checkBoxes = itemView.findViewById(R.id.checkBoxes);
-            scheduleTime = itemView.findViewById(R.id.scheduleTime);
-            deleteNotificationPanel = itemView.findViewById(R.id.deleteNotificationPanel);
-
-        }
-
-    }
-
-    private void saveData() {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(notificationPanel);
-        editor.putString("repeating_reminder", json);
-        editor.apply();
-    }
-
-    private void loadData() {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("repeating_reminder", null);
-        Type type = new TypeToken<ArrayList<NotificationPanel>>() {
-        }.getType();
-        notificationPanel = gson.fromJson(json, type);
-
-        if (notificationPanel == null) {
-            notificationPanel = new ArrayList<>();
-        }
     }
 
     private void scheduleNotification(String notificationName, int notificationID, int pickInterval
@@ -2033,7 +1975,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     case 0:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
                                 , currentTime.getTime()
-                                , 1000 * 60 * 30
+                                , 1000 * 60 * 3
                                 , pendingIntent);
                         break;
                     case 1:
@@ -2099,7 +2041,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 mContext
                 , notificationID
                 , intent
-                , PendingIntent.FLAG_IMMUTABLE);
+                , PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         manager.cancel(pendingIntent);
@@ -2115,5 +2057,63 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
         }
 
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private CardView parent;
+        private Spinner intervalSpinner;
+        private EditText notificationName;
+        private CheckBox monCheckBox, tueCheckBox, wedCheckBox, thuCheckBox, friCheckBox, satCheckBox, sunCheckBox;
+        private SwitchCompat enableNotifSwitch, scheduleSwitch;
+        private TextView notifyEvery, fromHours, untilHours;
+        private ImageButton deleteNotificationPanel;
+        private RelativeLayout scheduleTime, checkBoxes;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            parent = itemView.findViewById(R.id.notificationPanelParent);
+            intervalSpinner = itemView.findViewById(R.id.intervalSpinner);
+            notificationName = itemView.findViewById(R.id.notificationName);
+            monCheckBox = itemView.findViewById(R.id.mondayCheckBox);
+            tueCheckBox = itemView.findViewById(R.id.tuesdayCheckBox);
+            wedCheckBox = itemView.findViewById(R.id.wednesdayCheckBox);
+            thuCheckBox = itemView.findViewById(R.id.thursdayCheckBox);
+            friCheckBox = itemView.findViewById(R.id.fridayCheckBox);
+            satCheckBox = itemView.findViewById(R.id.saturdayCheckBox);
+            sunCheckBox = itemView.findViewById(R.id.sundayCheckBox);
+            enableNotifSwitch = itemView.findViewById(R.id.enableNotificationSwitch);
+            notifyEvery = itemView.findViewById(R.id.notifyEvery);
+            fromHours = itemView.findViewById(R.id.fromHours);
+            untilHours = itemView.findViewById(R.id.untilHours);
+            scheduleSwitch = itemView.findViewById(R.id.scheduleSwitch);
+            checkBoxes = itemView.findViewById(R.id.checkBoxes);
+            scheduleTime = itemView.findViewById(R.id.scheduleTime);
+            deleteNotificationPanel = itemView.findViewById(R.id.deleteNotificationPanel);
+
+        }
+
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(notificationPanel);
+        editor.putString("repeating_reminder", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("repeatingSharedPreferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("repeating_reminder", null);
+        Type type = new TypeToken<ArrayList<NotificationPanel>>() {
+        }.getType();
+        notificationPanel = gson.fromJson(json, type);
+
+        if (notificationPanel == null) {
+            notificationPanel = new ArrayList<>();
+        }
     }
 }
