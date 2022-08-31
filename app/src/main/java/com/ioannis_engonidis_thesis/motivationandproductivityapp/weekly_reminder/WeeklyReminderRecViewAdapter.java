@@ -9,6 +9,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.app.slice.SliceItem;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,11 +64,16 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_reminder_panel_cardview, parent, false);
 
         return new ViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull WeeklyReminderRecViewAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: Called");
+        Intent bootIntent = new Intent(wContext,WeeklyReminderRecViewAdapter.class);
+        if ("android.intent.action.BOOT_COMPLETED".equals(bootIntent.getAction())) {
+            scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
+        }
         scheduleWeeklyReminder(weeklyReminder.get(position).getWeeklyReminderName(), weeklyReminder.get(position).getWeeklyReminderId(), weeklyReminder.get(position).getWeeklyReminderHourMs(), weeklyReminder.get(position).isWeeklyReminderSwitch(), weeklyReminder.get(position).isWeeklyReminderMondayCheckBox(), weeklyReminder.get(position).isWeeklyReminderTuesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderWednesdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderThursdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderFridayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSaturdayCheckBox(), weeklyReminder.get(position).isWeeklyReminderSundayCheckBox());
         NotificationManager notificationManager = (NotificationManager) wContext.getSystemService(NOTIFICATION_SERVICE);
 

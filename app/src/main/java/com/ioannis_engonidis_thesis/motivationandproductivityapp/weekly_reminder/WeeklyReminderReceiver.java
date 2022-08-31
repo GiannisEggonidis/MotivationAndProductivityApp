@@ -46,9 +46,6 @@ public class WeeklyReminderReceiver extends BroadcastReceiver {
 
         manager.notify(intent.getIntExtra("weeklyReminderID", weeklyReminderID), notification);
 
-        if (intent.getAction() == "android.intent.action.BOOT_COMPLETED") {
-            onReceive(rContext, rIntent);
-        }
     }
 
 
