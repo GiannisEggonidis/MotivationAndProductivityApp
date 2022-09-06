@@ -12,6 +12,7 @@
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="5dp"
+        fab:menu_buttonToggleAnimation="@anim/fab_slide_in_from_left"
         fab:menu_colorNormal="@color/buttonColor"
         fab:menu_colorPressed="#BAE7F0FD"
         fab:menu_colorRipple="#99d4d4d4"
