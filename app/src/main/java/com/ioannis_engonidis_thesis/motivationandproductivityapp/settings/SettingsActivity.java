@@ -48,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         initializeViews();
         menuClickFunction();
-        setTimeClickFunction();
+
 
         startHour = loadData("startHour");
         endHour = loadData("endHour");
@@ -107,67 +107,67 @@ public class SettingsActivity extends AppCompatActivity {
         floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
-    private void setTimeClickFunction() {
-        Calendar subcalendar = Calendar.getInstance();
-        subcalendar.set(Calendar.HOUR_OF_DAY, 0);
-        subcalendar.set(Calendar.MINUTE, 0);
-        subcalendar.set(Calendar.SECOND, 0);
-        subcalendar.set(Calendar.MILLISECOND, 0);
-        Date subDate = subcalendar.getTime();
-        startActiveHours.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar c = Calendar.getInstance();
-                int hours = c.get(Calendar.HOUR_OF_DAY);
-                int mins = c.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calendar.set(Calendar.MINUTE, minute);
-                        calendar.setTimeZone(TimeZone.getDefault());
-
-                        SimpleDateFormat format = new SimpleDateFormat("kk:mm");
-                        String time = format.format(calendar.getTime());
-                        startActiveHours.setText(time);
-                        Date date = calendar.getTime();
-                        startHour = date.getTime() - subDate.getTime();
-                        saveData(startHour, "startHour");
-                        saveData(time,"startHourString");
-                    }
-                }, hours, mins, true);
-                timePickerDialog.show();
-            }
-        });
-
-        endActiveHours.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar c = Calendar.getInstance();
-                int hours = c.get(Calendar.HOUR_OF_DAY);
-                int mins = c.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calendar.set(Calendar.MINUTE, minute);
-                        calendar.setTimeZone(TimeZone.getDefault());
-
-                        SimpleDateFormat format = new SimpleDateFormat("kk:mm");
-                        String time = format.format(calendar.getTime());
-                        endActiveHours.setText(time);
-                        Date date = calendar.getTime();
-                        endHour = date.getTime() - subDate.getTime();
-                        saveData(endHour, "endHour");
-                        saveData(time,"endHourString");
-                    }
-                }, hours, mins, true);
-                timePickerDialog.show();
-            }
-        });
-    }
+//    private void setTimeClickFunction() {
+//        Calendar subcalendar = Calendar.getInstance();
+//        subcalendar.set(Calendar.HOUR_OF_DAY, 0);
+//        subcalendar.set(Calendar.MINUTE, 0);
+//        subcalendar.set(Calendar.SECOND, 0);
+//        subcalendar.set(Calendar.MILLISECOND, 0);
+//        Date subDate = subcalendar.getTime();
+//        startActiveHours.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Calendar c = Calendar.getInstance();
+//                int hours = c.get(Calendar.HOUR_OF_DAY);
+//                int mins = c.get(Calendar.MINUTE);
+//                TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+//                        Calendar calendar = Calendar.getInstance();
+//                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//                        calendar.set(Calendar.MINUTE, minute);
+//                        calendar.setTimeZone(TimeZone.getDefault());
+//
+//                        SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+//                        String time = format.format(calendar.getTime());
+//                        startActiveHours.setText(time);
+//                        Date date = calendar.getTime();
+//                        startHour = date.getTime() - subDate.getTime();
+//                        saveData(startHour, "startHour");
+//                        saveData(time,"startHourString");
+//                    }
+//                }, hours, mins, true);
+//                timePickerDialog.show();
+//            }
+//        });
+//
+//        endActiveHours.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Calendar c = Calendar.getInstance();
+//                int hours = c.get(Calendar.HOUR_OF_DAY);
+//                int mins = c.get(Calendar.MINUTE);
+//                TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+//                        Calendar calendar = Calendar.getInstance();
+//                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//                        calendar.set(Calendar.MINUTE, minute);
+//                        calendar.setTimeZone(TimeZone.getDefault());
+//
+//                        SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+//                        String time = format.format(calendar.getTime());
+//                        endActiveHours.setText(time);
+//                        Date date = calendar.getTime();
+//                        endHour = date.getTime() - subDate.getTime();
+//                        saveData(endHour, "endHour");
+//                        saveData(time,"endHourString");
+//                    }
+//                }, hours, mins, true);
+//                timePickerDialog.show();
+//            }
+//        });
+//    }
 
     private void saveData(long hour, String list) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

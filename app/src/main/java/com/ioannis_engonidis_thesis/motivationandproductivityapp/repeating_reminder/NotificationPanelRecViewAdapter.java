@@ -463,6 +463,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         notifyDataSetChanged();
     }
 
+    /**
+     * TODO: 07/09/2022 Fix schedule method it seems that only Mondays schedule work.
+     * TODO:            Maybe try to make alarmManagers and pendingIntents into arrays.
+     */
     private void scheduleNotification(String notificationName, int notificationID, int pickInterval
             , boolean notificationSwitch
             , boolean mondayCheckBox
