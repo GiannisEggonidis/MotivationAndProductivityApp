@@ -10,4 +10,37 @@
         <item>5h</item>
         <item>6h</item>
     </string-array>
+
+                                  <!--Floating Menu-->
+    <string name="repeating_menu_button">Repeating</string>
+    <string name="weekly_menu_button">Weekly</string>
+    <string name="calendar_menu_button">Calendar</string>
+    <string name="help_menu_button">Help</string>
+
+                        <!--    Repeating Reminder Card View-->
+    <string name="notificationName">Repeating Reminder</string>
+    <string name="notifyEvery">Remind me every :</string>
+    <string name="fromTxt">From:</string>
+    <string name="untilTxt">Until:</string>
+
+                        <!--    Weekly Reminder Card View-->
+    <string name="weeklyReminderName">Weekly Reminder</string>
+    <string name="scheduleReminderTxt">Schedule Reminder:</string>
+
+                        <!--Week days-->
+    <string name="mondayCheckBox">Mon</string>
+    <string name="tuesdayCheckBox">Tue</string>
+    <string name="wednesdayCheckBox">Wed</string>
+    <string name="thursdayCheckBox">Thu</string>
+    <string name="fridayCheckBox">Fri</string>
+    <string name="saturdayCheckBox">Sat</string>
+    <string name="sundayCheckBox">Sun</string>
+
+                        <!--    Calendar Reminder Card View-->
+    <string name="calendarName">Calendar Activity Tracker</string>
+    <string name="countDaysText">Days Counter: </string>
+
+    <string name="delete_reminder">Delete Reminder?</string>
+    <string name="delete_calendar">Delete Calendar?</string>
+
 </resources>

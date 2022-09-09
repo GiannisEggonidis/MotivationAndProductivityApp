@@ -7,15 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView notificationPanelRecView;
     private NotificationPanelRecViewAdapter adapter = new NotificationPanelRecViewAdapter(this);
-    private ImageButton addNotificationPanel;
+    private ImageButton addNotificationPanel, languagesButton;
 
     private ArrayList<NotificationPanel> notificationPanel;
 
@@ -64,37 +69,81 @@ public class MainActivity extends AppCompatActivity {
             animationDrawable.start();
         }
 
-        /** Add new repeating panel Button **/
-        addNotificationPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (notificationPanel.size() >= 4) {
-                    Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
-                } else {
-                    /** Generating new ID for reminder **/
-                    int maxValue = 1;
-                    int indexOfMaxValue = 0;
-                    if (notificationPanel.size() != 0) {
-                        for (int i = 0; i < notificationPanel.size(); i++) {
-                            if (notificationPanel.get(i).getId() > maxValue) {
-                                indexOfMaxValue = i;
-                            }
-                        }
-                        maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
-                    }
-                    AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(ALARM_SERVICE);
-                    Intent intent = new Intent(MainActivity.this, NotificationPanelReceiver.class);
+        /** Language Button  **/
+        // TODO: 09/09/2022 set image buttons for AlertDialog 
+        {
+            languagesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageView imageGr = new ImageView(MainActivity.this);
+                    ImageView imageEn = new ImageView(MainActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.AlertDialog);
+                    imageGr.setImageResource(R.drawable.greece);
+                    builder.setPositiveButton("En", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                    notificationPanel.add(new NotificationPanel(maxValue,0, "Reminder", false,
-                            false, false,
-                            false, false, false,
-                            false, false,false,28800000,"08:00",72000000,"20:00"));
-                    saveData();
-//                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
-                    adapter.notifyDataSetChanged();
+                        }
+
+                    }).setView(imageGr);
+                    imageEn.setImageResource(R.drawable.united_kingdom);
+                    builder.setNegativeButton("Ελ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).setView(imageEn);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+                    /** Set negative button text attributes **/
+                    nbutton.setTextColor(Color.BLACK);
+                    nbutton.setTextSize(18);
+                    nbutton.setWidth(500);
+                    Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+                    /** Set positive button text attributes **/
+                    pbutton.setTextColor(Color.BLACK);
+                    pbutton.setTextSize(18);
+                    pbutton.setWidth(500);
                 }
-            }
-        });
+            });
+
+
+        }
+
+        /** Add new repeating panel Button **/
+        {
+            addNotificationPanel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (notificationPanel.size() >= 4) {
+                        Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
+                    } else {
+                        /** Generating new ID for reminder **/
+                        int maxValue = 1;
+                        int indexOfMaxValue = 0;
+                        if (notificationPanel.size() != 0) {
+                            for (int i = 0; i < notificationPanel.size(); i++) {
+                                if (notificationPanel.get(i).getId() > maxValue) {
+                                    indexOfMaxValue = i;
+                                }
+                            }
+                            maxValue = notificationPanel.get(indexOfMaxValue).getId() + 1;
+                        }
+                        AlarmManager manager = (AlarmManager) MainActivity.this.getSystemService(ALARM_SERVICE);
+                        Intent intent = new Intent(MainActivity.this, NotificationPanelReceiver.class);
+
+                        notificationPanel.add(new NotificationPanel(maxValue, 0, getString(R.string.notificationName), false,
+                                false, false,
+                                false, false, false,
+                                false, false, false, 28800000, "08:00", 72000000, "20:00"));
+                        saveData();
+//                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
     }
 
     private void saveData() {
@@ -180,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeViews() {
         notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
         addNotificationPanel = findViewById(R.id.addNotificationPanel);
+        languagesButton = findViewById(R.id.languagesButton);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);

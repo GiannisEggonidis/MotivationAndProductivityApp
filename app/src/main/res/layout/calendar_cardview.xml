@@ -30,7 +30,7 @@
             android:layout_marginTop="-8dp"
             android:ellipsize="end"
             android:fontFamily="@font/sans_francisco_pro_text_light"
-            android:hint="Calendar Activity Tracker"
+            android:hint="@string/calendarName"
             android:inputType="text"
             android:lines="1"
             android:maxLength="27"
@@ -78,8 +78,8 @@
             android:layout_below="@+id/calendarView"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="6dp"
-            android:paddingBottom="6dp"
             android:fontFamily="@font/sans_francisco_pro_text_regular"
+            android:paddingBottom="6dp"
             android:text="Text" />
 
     </RelativeLayout>

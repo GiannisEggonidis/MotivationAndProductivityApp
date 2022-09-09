@@ -61,7 +61,7 @@
             fab:fab_colorNormal="@color/buttonColor"
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Help"
+            fab:fab_label="@string/help_menu_button"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -73,7 +73,7 @@
             fab:fab_colorNormal="@color/buttonColor"
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Calendar"
+            fab:fab_label="@string/calendar_menu_button"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -85,7 +85,7 @@
             fab:fab_colorNormal="@color/buttonColor"
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Weekly"
+            fab:fab_label="@string/weekly_menu_button"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -97,7 +97,7 @@
             fab:fab_colorNormal="@color/buttonColor"
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Repeating"
+            fab:fab_label="@string/repeating_menu_button"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>

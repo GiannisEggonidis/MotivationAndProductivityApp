@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MotivationAndProductivityApp</string>
+
+    <string-array name="hoursSpinnerValues">
+        <item>30λ</item>
+        <item>1ω</item>
+        <item>2ω</item>
+        <item>3ω</item>
+        <item>4ω</item>
+        <item>5ω</item>
+        <item>6ω</item>
+    </string-array>
+
+    <!--Floating Menu-->
+    <string name="repeating_menu_button">Επαναλαμβανόμενη</string>
+    <string name="weekly_menu_button">Εβδομαδιαία</string>
+    <string name="calendar_menu_button">Ημερολόγιο</string>
+    <string name="help_menu_button">Βοήθεια</string>
+
+    <!--    Repeating Reminder Card View-->
+    <string name="notificationName">Επαναλαμβανόμενη υπενθύμιση</string>
+    <string name="notifyEvery">Συχνότητα Υπενθύμισης:</string>
+    <string name="fromTxt">Από:</string>
+    <string name="untilTxt">Μέχρι:</string>
+
+    <!--    Weekly Reminder Card View-->
+    <string name="weeklyReminderName">Εβδομαδιαία Υπενθύμιση</string>
+    <string name="scheduleReminderTxt">Προγραμματισμός Υπενθύμισης:</string>
+
+    <!--Week days-->
+    <string name="mondayCheckBox">Δευ</string>
+    <string name="tuesdayCheckBox">Τρι</string>
+    <string name="wednesdayCheckBox">Τετ</string>
+    <string name="thursdayCheckBox">Πεμ</string>
+    <string name="fridayCheckBox">Παρ</string>
+    <string name="saturdayCheckBox">Σαβ</string>
+    <string name="sundayCheckBox">Κυρ</string>
+
+    <!--    Calendar Reminder Card View-->
+    <string name="calendarName">Ημερολόγιο Δραστηριότητας</string>
+    <string name="countDaysText">Σύνολο Ημερών: </string>
+
+    <string name="delete_reminder">Διαγραφή Υπενθύμισης;</string>
+    <string name="delete_calendar">Διαγραφή Ημερολογίου;</string>
+
+</resources>

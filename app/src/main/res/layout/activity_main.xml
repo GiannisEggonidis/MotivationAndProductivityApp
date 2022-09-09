@@ -43,6 +43,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/languagesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners"
+        android:elevation="5dp"
+        android:scaleX="1.19"
+        android:scaleY="1.19"
+        android:src="@drawable/ic_languages_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
         android:id="@+id/addNotificationPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
