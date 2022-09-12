@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView notificationPanelRecView;
     private NotificationPanelRecViewAdapter adapter = new NotificationPanelRecViewAdapter(this);
-    private ImageButton addNotificationPanel, languagesButton;
+    private ImageButton addNotificationPanel, languagesButton,enButton,grButton;
+    private Dialog languageDialog;
+
 
     private ArrayList<NotificationPanel> notificationPanel;
 
@@ -230,6 +233,8 @@ public class MainActivity extends AppCompatActivity {
         notificationPanelRecView = findViewById(R.id.notificationPanelRecView);
         addNotificationPanel = findViewById(R.id.addNotificationPanel);
         languagesButton = findViewById(R.id.languagesButton);
+        enButton = findViewById(R.id.enButton);
+        grButton = findViewById(R.id.grButton);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
@@ -249,6 +254,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
+    }
+
+    private void languageDialog(){
+
     }
 
 }
