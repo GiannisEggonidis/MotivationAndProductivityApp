@@ -77,37 +77,8 @@ public class MainActivity extends AppCompatActivity {
         {
             languagesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    ImageView imageGr = new ImageView(MainActivity.this);
-                    ImageView imageEn = new ImageView(MainActivity.this);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.AlertDialog);
-                    imageGr.setImageResource(R.drawable.greece);
-                    builder.setPositiveButton("En", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-
-                    }).setView(imageGr);
-                    imageEn.setImageResource(R.drawable.united_kingdom);
-                    builder.setNegativeButton("Ελ", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    }).setView(imageEn);
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                    Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
-                    /** Set negative button text attributes **/
-                    nbutton.setTextColor(Color.BLACK);
-                    nbutton.setTextSize(18);
-                    nbutton.setWidth(500);
-                    Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-                    /** Set positive button text attributes **/
-                    pbutton.setTextColor(Color.BLACK);
-                    pbutton.setTextSize(18);
-                    pbutton.setWidth(500);
+                public void onClick(View v) {
+                    languageAlertDialog();
                 }
             });
 
@@ -256,8 +227,32 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void languageDialog(){
+    private void languageAlertDialog(){
 
+        languageDialog = new Dialog(MainActivity.this,R.style.AlertDialog);
+        languageDialog.setContentView(R.layout.language_dialog);
+        languageDialog.setTitle("Language");
+
+        enButton = (ImageButton)languageDialog.findViewById(R.id.enButton);
+        grButton = (ImageButton)languageDialog.findViewById(R.id.grButton);
+
+        enButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "English", Toast.LENGTH_SHORT).show();
+                languageDialog.cancel();
+            }
+        });
+
+        grButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Greek", Toast.LENGTH_SHORT).show();
+                languageDialog.cancel();
+            }
+        });
+
+        languageDialog.show();
     }
 
 }

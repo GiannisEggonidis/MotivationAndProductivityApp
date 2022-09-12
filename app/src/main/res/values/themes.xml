@@ -21,11 +21,18 @@
 
     <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:width">245dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="dialogCornerRadius">20dp</item>
         <item name="android:padding">2dp</item>
         <item name="android:textColor">#E6000000</item>
         <item name="android:textColorPrimary">#A60A0A0A</item>
         <item name="android:colorAccent">#0A0A0A</item>
+    </style>
+
+    <style name="LanguageAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
     </style>
 
 
