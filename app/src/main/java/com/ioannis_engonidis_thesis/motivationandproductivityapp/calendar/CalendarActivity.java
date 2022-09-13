@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -31,19 +34,23 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CalendarActivity extends AppCompatActivity {
-    ImageButton addCalendar;
+    ImageButton addCalendar,languagesButton,enButton,grButton;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
     private RecyclerView calendarRecView;
     private CalendarRecViewAdapter adapter = new CalendarRecViewAdapter(this);
+    private Dialog languageDialog;
+
     private ArrayList<Calendar> calendars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_calendar);
         initializeViews();
         menuClickFunction();
@@ -65,8 +72,17 @@ public class CalendarActivity extends AppCompatActivity {
             animationDrawable.setExitFadeDuration(4000);
             animationDrawable.start();
         }
+        /** Language Button  **/
+        {
+            languagesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    languageAlertDialog();
+                }
+            });
+        }
 
-        /** Add new repeating panel Button **/
+        /** Add new Calendar panel Button **/
         addCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +103,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                     ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
-                    calendars.add(new Calendar(maxValue, 0, "Calendar", calendarDays));
+                    calendars.add(new Calendar(maxValue, 0, getString(R.string.calendarName), calendarDays));
                     saveData();
 
                     adapter.notifyDataSetChanged();
@@ -108,6 +124,9 @@ public class CalendarActivity extends AppCompatActivity {
     private void initializeViews() {
         addCalendar = findViewById(R.id.addCalendar);
         calendarRecView = findViewById(R.id.calendarRecView);
+        languagesButton = findViewById(R.id.languagesButton);
+        enButton = findViewById(R.id.enButton);
+        grButton = findViewById(R.id.grButton);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
@@ -181,5 +200,55 @@ public class CalendarActivity extends AppCompatActivity {
         if (calendars == null) {
             calendars = new ArrayList<>();
         }
+    }
+
+    private void languageAlertDialog(){
+
+        languageDialog = new Dialog(CalendarActivity.this,R.style.AlertDialog);
+        languageDialog.setContentView(R.layout.language_dialog);
+        languageDialog.setTitle("Language");
+
+        enButton = (ImageButton)languageDialog.findViewById(R.id.enButton);
+        grButton = (ImageButton)languageDialog.findViewById(R.id.grButton);
+
+        enButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CalendarActivity.this, "English", Toast.LENGTH_SHORT).show();
+                setLocale("en");
+                CalendarActivity.this.recreate();
+                languageDialog.cancel();
+            }
+        });
+
+        grButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CalendarActivity.this, "Ελληνικά", Toast.LENGTH_SHORT).show();
+                setLocale("el");
+                CalendarActivity.this.recreate();
+                languageDialog.cancel();
+            }
+        });
+
+        languageDialog.show();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //save data to shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences("Language",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences preferences = getSharedPreferences("Language", Activity.MODE_PRIVATE);
+        String language = preferences.getString("My_Lang","");
+        setLocale(language);
     }
 }

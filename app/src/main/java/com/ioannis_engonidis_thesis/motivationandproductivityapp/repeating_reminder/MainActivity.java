@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         initializeViews();
@@ -73,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /** Language Button  **/
-        // TODO: 09/09/2022 set image buttons for AlertDialog 
         {
             languagesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     languageAlertDialog();
                 }
             });
-
-
         }
 
         /** Add new repeating panel Button **/
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                                 false, false, false,
                                 false, false, false, 28800000, "08:00", 72000000, "20:00"));
                         saveData();
-//                    Toast.makeText(MainActivity.this, "Created New Reminder\n" + "Total Reminders : " + notificationPanel.size(), Toast.LENGTH_SHORT).show();
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -240,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "English", Toast.LENGTH_SHORT).show();
+                setLocale("en");
+                MainActivity.this.recreate();
                 languageDialog.cancel();
             }
         });
@@ -247,12 +249,32 @@ public class MainActivity extends AppCompatActivity {
         grButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Greek", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Ελληνικά", Toast.LENGTH_SHORT).show();
+                setLocale("el");
+                MainActivity.this.recreate();
                 languageDialog.cancel();
             }
         });
 
         languageDialog.show();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //save data to shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences("Language",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences preferences = getSharedPreferences("Language", Activity.MODE_PRIVATE);
+        String language = preferences.getString("My_Lang","");
+        setLocale(language);
     }
 
 }

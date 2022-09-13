@@ -1,11 +1,11 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.Image;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,10 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -24,20 +22,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
+import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecViewAdapter.ViewHolder> {
+
     private String TAG = "CalendarRecViewAdapter";
 
     private ArrayList<Calendar> calendars = new ArrayList<>();
@@ -74,6 +75,9 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
             holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
                     , calendars.get(position).getCalendarDays(), cContext));
             holder.countDaysText.setText(R.string.countDaysText + calendars.get(position).getCalendarDays().size());
+
+            holder.calendarView.setTitleFormatter(new MonthArrayTitleFormatter(cContext.getResources().getTextArray(R.array.custom_months)));
+            holder.calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(cContext.getResources().getTextArray(R.array.custom_weekdays)));
 
         }
 
@@ -244,4 +248,5 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
         editor.putString("calendars", json);
         editor.apply();
     }
+
 }

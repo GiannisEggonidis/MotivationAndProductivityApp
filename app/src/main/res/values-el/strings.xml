@@ -12,6 +12,31 @@
         <item>6ω</item>
     </string-array>
 
+    <string-array name="custom_weekdays">
+        <item>Κυρ</item>
+        <item>Δευ</item>
+        <item>Τρι</item>
+        <item>Τετ</item>
+        <item>Πεμ</item>
+        <item>Παρ</item>
+        <item>Σαβ</item>
+    </string-array>
+
+    <string-array name="custom_months">
+        <item>Ιανουαρίου</item>
+        <item>Φεβρουαρίου</item>
+        <item>Μαρτίου</item>
+        <item>Απριλίου</item>
+        <item>Μαΐου</item>
+        <item>Ιουνίου</item>
+        <item>Ιουλίου</item>
+        <item>Αυγούστου</item>
+        <item>Σεπτεμβρίου</item>
+        <item>Οκτωβρίου</item>
+        <item>Νοεμβρίου</item>
+        <item>Δεκεμβρίου</item>
+    </string-array>
+
     <!--Floating Menu-->
     <string name="repeating_menu_button">Επαναλαμβανόμενη</string>
     <string name="weekly_menu_button">Εβδομαδιαία</string>
@@ -19,14 +44,14 @@
     <string name="help_menu_button">Βοήθεια</string>
 
     <!--    Repeating Reminder Card View-->
-    <string name="notificationName">Επαναλαμβανόμενη υπενθύμιση</string>
+    <string name="notificationName">Επαναλαμβ Υπενθύμιση</string>
     <string name="notifyEvery">Συχνότητα Υπενθύμισης:</string>
     <string name="fromTxt">Από:</string>
     <string name="untilTxt">Μέχρι:</string>
 
     <!--    Weekly Reminder Card View-->
-    <string name="weeklyReminderName">Εβδομαδιαία Υπενθύμιση</string>
-    <string name="scheduleReminderTxt">Προγραμματισμός Υπενθύμισης:</string>
+    <string name="weeklyReminderName">Εβδομαδ Υπενθύμιση</string>
+    <string name="scheduleReminderTxt">Ώρα Υπενθύμισης:</string>
 
     <!--Week days-->
     <string name="mondayCheckBox">Δευ</string>
