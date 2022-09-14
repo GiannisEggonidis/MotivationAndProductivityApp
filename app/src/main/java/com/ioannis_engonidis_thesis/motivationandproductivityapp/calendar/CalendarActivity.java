@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -86,6 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
         addCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                materialDesignFAM.close(true);
                 if (calendars.size() >= 4) {
                     Toast.makeText(CalendarActivity.this, "Calendars Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
@@ -178,6 +180,17 @@ public class CalendarActivity extends AppCompatActivity {
                 Toast.makeText(CalendarActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            materialDesignFAM.close(true);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void saveData() {

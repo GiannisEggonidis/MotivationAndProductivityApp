@@ -20,12 +20,16 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -42,12 +46,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout mainLayout;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
     private RecyclerView notificationPanelRecView;
     private NotificationPanelRecViewAdapter adapter = new NotificationPanelRecViewAdapter(this);
-    private ImageButton addNotificationPanel, languagesButton,enButton,grButton;
+    private ImageButton addNotificationPanel, languagesButton, enButton, grButton;
     private Dialog languageDialog;
 
 
@@ -62,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         initializeViews();
         loadData();
         menuClickFunction();
+
+        Toast toast = new Toast(getApplicationContext());
+
 
         adapter.setNotificationPanel(notificationPanel);
         notificationPanelRecView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             addNotificationPanel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    materialDesignFAM.close(true);
                     if (notificationPanel.size() >= 4) {
                         Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                     } else {
@@ -156,8 +165,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void menuClickFunction() {
+
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                materialDesignFAM.close(true);
+            }
+        });
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Toast.makeText(MainActivity.this, "Repeating Reminder Menu", Toast.LENGTH_SHORT).show();
 
             }
@@ -206,6 +224,9 @@ public class MainActivity extends AppCompatActivity {
         languagesButton = findViewById(R.id.languagesButton);
         enButton = findViewById(R.id.enButton);
         grButton = findViewById(R.id.grButton);
+
+        mainLayout = findViewById(R.id.main_layout);
+
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
@@ -227,14 +248,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void languageAlertDialog(){
+    private void languageAlertDialog() {
 
-        languageDialog = new Dialog(MainActivity.this,R.style.AlertDialog);
+        languageDialog = new Dialog(MainActivity.this, R.style.AlertDialog);
         languageDialog.setContentView(R.layout.language_dialog);
         languageDialog.setTitle("Language");
 
-        enButton = (ImageButton)languageDialog.findViewById(R.id.enButton);
-        grButton = (ImageButton)languageDialog.findViewById(R.id.grButton);
+        enButton = (ImageButton) languageDialog.findViewById(R.id.enButton);
+        grButton = (ImageButton) languageDialog.findViewById(R.id.grButton);
 
         enButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,14 +287,14 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //save data to shared preferences
-        SharedPreferences.Editor editor = getSharedPreferences("Language",MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
+        SharedPreferences.Editor editor = getSharedPreferences("Language", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
         editor.apply();
     }
 
-    public void loadLocale(){
+    public void loadLocale() {
         SharedPreferences preferences = getSharedPreferences("Language", Activity.MODE_PRIVATE);
-        String language = preferences.getString("My_Lang","");
+        String language = preferences.getString("My_Lang", "");
         setLocale(language);
     }
 

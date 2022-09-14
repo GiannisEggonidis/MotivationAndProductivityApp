@@ -22,8 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;

@@ -11,22 +11,23 @@
         android:elevation="9dp"
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_buttonSpacing="5dp"
-        fab:menu_buttonToggleAnimation="@anim/fab_slide_in_from_left"
+        fab:menu_buttonSpacing="8dp"
         fab:menu_colorNormal="@color/buttonColor"
         fab:menu_colorPressed="#BAE7F0FD"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_label=""
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/ic_menu_button"
-        fab:menu_labels_colorNormal="@color/background"
+        fab:menu_fab_show_animation="@anim/fab_scale_up"
+        fab:menu_labels_style="@style/MenuLabels"
+
         fab:menu_labels_colorPressed="@color/buttonColor"
         fab:menu_labels_colorRipple="@color/buttonColor"
-        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_cornerRadius="25dp"
         fab:menu_labels_ellipsize="none"
         fab:menu_labels_margin="0dp"
         fab:menu_labels_maxLines="-1"
-        fab:menu_labels_padding="2dp"
+        fab:menu_labels_padding="8dp"
         fab:menu_labels_position="right"
         fab:menu_labels_showShadow="true"
         fab:menu_labels_singleLine="false"
@@ -49,8 +50,7 @@
             fab:fab_colorNormal="@color/buttonColor"
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Settings"
-            fab:fab_size="mini" />
+            fab:fab_label="Settings" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item4"
@@ -62,7 +62,8 @@
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
             fab:fab_label="@string/help_menu_button"
-            fab:fab_size="mini" />
+
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item3"
@@ -74,7 +75,8 @@
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
             fab:fab_label="@string/calendar_menu_button"
-            fab:fab_size="mini" />
+
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item2"
@@ -86,7 +88,8 @@
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
             fab:fab_label="@string/weekly_menu_button"
-            fab:fab_size="mini" />
+
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item1"
@@ -98,6 +101,7 @@
             fab:fab_colorPressed="#BAE7F0FD"
             fab:fab_colorRipple="#99d4d4d4"
             fab:fab_label="@string/repeating_menu_button"
-            fab:fab_size="mini" />
+
+             />
     </com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>

@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -81,6 +82,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         addWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                materialDesignFAM.close(true);
                 if (weeklyReminder.size() >= 5) {
                     Toast.makeText(WeeklyReminderActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
                 } else {
@@ -198,6 +200,18 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                 Toast.makeText(WeeklyReminderActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            materialDesignFAM.close(true);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void onBackPressed() {
