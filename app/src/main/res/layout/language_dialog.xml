@@ -8,7 +8,9 @@
         <ImageButton
             android:id="@+id/enButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:backgroundTint="@color/transparent"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="14dp"
@@ -22,7 +24,9 @@
         <ImageButton
             android:id="@+id/grButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:backgroundTint="@color/transparent"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="14dp"

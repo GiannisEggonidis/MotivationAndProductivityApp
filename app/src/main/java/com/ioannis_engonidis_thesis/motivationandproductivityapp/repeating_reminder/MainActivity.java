@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     materialDesignFAM.close(true);
                     if (notificationPanel.size() >= 4) {
-                        Toast.makeText(MainActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.maxRepeating), Toast.LENGTH_SHORT).show();
                     } else {
                         /** Generating new ID for reminder **/
                         int maxValue = 1;
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "Repeating Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.repeating_menu_toast), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(refresh);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(MainActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.weekly_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(MainActivity.this, "Calendar Activity Tracker", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.calendar_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 

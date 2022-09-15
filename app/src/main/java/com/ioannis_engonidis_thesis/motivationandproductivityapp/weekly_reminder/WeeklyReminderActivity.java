@@ -84,7 +84,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 materialDesignFAM.close(true);
                 if (weeklyReminder.size() >= 5) {
-                    Toast.makeText(WeeklyReminderActivity.this, "Reminder Limit Reached", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WeeklyReminderActivity.this, getString(R.string.maxWeekly), Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
                     int maxValue = 100;
@@ -166,14 +166,14 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(WeeklyReminderActivity.this, "Repeating Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeeklyReminderActivity.this, getString(R.string.repeating_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(WeeklyReminderActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeeklyReminderActivity.this, getString(R.string.weekly_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -185,7 +185,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(WeeklyReminderActivity.this, "Calendar Activity Tracker", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeeklyReminderActivity.this, getString(R.string.calendar_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 

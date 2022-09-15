@@ -89,7 +89,7 @@ public class CalendarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 materialDesignFAM.close(true);
                 if (calendars.size() >= 4) {
-                    Toast.makeText(CalendarActivity.this, "Calendars Limit Reached", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CalendarActivity.this, getString(R.string.maxCalendar), Toast.LENGTH_SHORT).show();
                 } else {
                     /** Generating new ID for reminder **/
                     int maxValue = 0;
@@ -146,7 +146,7 @@ public class CalendarActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(CalendarActivity.this, "Repeating Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CalendarActivity.this, getString(R.string.repeating_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -158,14 +158,14 @@ public class CalendarActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
-                Toast.makeText(CalendarActivity.this, "Weekly Reminder Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CalendarActivity.this, getString(R.string.weekly_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CalendarActivity.this, "Calendar Activity Tracker", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CalendarActivity.this, getString(R.string.calendar_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 

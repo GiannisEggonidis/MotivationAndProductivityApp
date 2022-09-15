@@ -43,6 +43,12 @@
     <string name="calendar_menu_button">Ημερολόγιο</string>
     <string name="help_menu_button">Βοήθεια</string>
 
+    <!--Floating Menu Toast-->
+    <string name="repeating_menu_toast">Επαναλαμβανόμενες Υπενθυμίσεις</string>
+    <string name="weekly_menu_toast">Εβδομαδιαίες Υπενθυμίσεις</string>
+    <string name="calendar_menu_toast">Ημερολόγιο Δραστηριοτήτων</string>
+    <string name="help_menu_toast">Βοήθεια</string>
+
     <!--    Repeating Reminder Card View-->
     <string name="notificationName">Επαναλαμβ Υπενθύμιση</string>
     <string name="notifyEvery">Συχνότητα Υπενθύμισης:</string>
@@ -68,5 +74,10 @@
 
     <string name="delete_reminder">Διαγραφή Υπενθύμισης;</string>
     <string name="delete_calendar">Διαγραφή Ημερολογίου;</string>
+
+    <!--  Max Values  -->
+    <string name="maxRepeating">Όριο Επαναλαμβ. Υπενθυμίσεων</string>
+    <string name="maxWeekly">Όριο Εβδομαδιαίων Υπενθυμίσεων</string>
+    <string name="maxCalendar">Όριο Ημερολογίων</string>
 
 </resources>
