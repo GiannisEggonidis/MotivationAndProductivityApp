@@ -35,10 +35,8 @@
     <include
         android:id="@+id/include"
         layout="@layout/floating_action_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,14 +45,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corners"
         android:elevation="5dp"
         android:scaleX="1.19"
         android:scaleY="1.19"
         android:src="@drawable/ic_languages_button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton

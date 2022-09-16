@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_layout"
     android:background="@drawable/gradient_background_list"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".repeating_reminder.MainActivity">
 
 
@@ -17,8 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.207"
-        >
+        app:layout_constraintVertical_bias="0.207">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notificationPanelRecView"
@@ -32,27 +33,20 @@
 
     </RelativeLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/floating_action_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/languagesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
+        android:translationZ="0dp"
         android:background="@drawable/rounded_corners"
         android:elevation="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:scaleX="1.19"
         android:scaleY="1.19"
         android:src="@drawable/ic_languages_button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -61,6 +55,7 @@
         android:id="@+id/addNotificationPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:translationZ="0dp"
         android:background="@drawable/rounded_corners"
         android:elevation="5dp"
         android:scaleX="1.4"
@@ -71,6 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <include
+        android:id="@+id/include"
+        android:elevation="10dp"
+        layout="@layout/floating_action_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

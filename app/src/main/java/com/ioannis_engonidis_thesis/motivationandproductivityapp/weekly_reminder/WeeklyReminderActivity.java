@@ -73,6 +73,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
             languagesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    materialDesignFAM.close(true);
                     languageAlertDialog();
                 }
             });
@@ -158,6 +159,8 @@ public class WeeklyReminderActivity extends AppCompatActivity {
     }
 
     private void menuClickFunction() {
+        materialDesignFAM.setClosedOnTouchOutside(true);
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,18 +203,6 @@ public class WeeklyReminderActivity extends AppCompatActivity {
                 Toast.makeText(WeeklyReminderActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            materialDesignFAM.close(true);
-
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void onBackPressed() {

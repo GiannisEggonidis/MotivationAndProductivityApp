@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             languagesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    materialDesignFAM.close(true);
                     languageAlertDialog();
                 }
             });
@@ -166,12 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void menuClickFunction() {
 
-        mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                materialDesignFAM.close(true);
-            }
-        });
+        materialDesignFAM.setClosedOnTouchOutside(true);
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
