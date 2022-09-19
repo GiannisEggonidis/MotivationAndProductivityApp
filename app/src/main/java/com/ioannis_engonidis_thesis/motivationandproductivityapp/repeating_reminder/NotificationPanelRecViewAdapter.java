@@ -564,11 +564,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
-                                System.out.println("Trigger time ms: " + triggerTime + " ++++ Until time ms: " + untilMS + " Next Counter: " + counter);
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -594,7 +593,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -620,7 +619,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -646,7 +645,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -672,7 +671,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -698,7 +697,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -745,15 +744,21 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
 
+                    System.out.println("\n***Tuesday***\n");
+
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -767,18 +772,24 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -804,7 +815,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -830,7 +841,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -856,7 +867,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -882,7 +893,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -908,7 +919,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -955,15 +966,20 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
+                    System.out.println("\n***Wednesday***\n");
 
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -977,18 +993,24 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1014,7 +1036,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1040,7 +1062,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1066,7 +1088,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1092,7 +1114,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1118,7 +1140,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1165,14 +1187,15 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
+                    System.out.println("\n***Thursday***\n");
 
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1198,7 +1221,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1224,7 +1247,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1250,7 +1273,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1276,7 +1299,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1302,7 +1325,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1328,7 +1351,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1382,7 +1405,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1408,7 +1431,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1434,7 +1457,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1460,7 +1483,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1486,7 +1509,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1512,7 +1535,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1538,7 +1561,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1592,7 +1615,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1618,7 +1641,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1644,7 +1667,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1670,7 +1693,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1696,7 +1719,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1722,7 +1745,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1748,7 +1771,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1802,7 +1825,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                     switch (pickInterval) {
                         case 0:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1828,7 +1851,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 1:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1854,7 +1877,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 2:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1880,7 +1903,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 3:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1906,7 +1929,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 4:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1932,7 +1955,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 5:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -1958,7 +1981,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                             }
                             break;
                         case 6:
-                            triggerTime = fromMS ;
+                            triggerTime = fromMS;
                             counter = 1;
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -2001,43 +2024,43 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 switch (pickInterval) {
                     case 0:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 30)
+                                , currentTime.getTime() + (1000 * 60 * 30)
                                 , 1000 * 60 * 30
                                 , pendingIntent);
                         break;
                     case 1:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60)
+                                , currentTime.getTime() + (1000 * 60 * 60)
                                 , 1000 * 60 * 60
                                 , pendingIntent);
                         break;
                     case 2:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60 * 2)
+                                , currentTime.getTime() + (1000 * 60 * 60 * 2)
                                 , 1000 * 60 * 60 * 2
                                 , pendingIntent);
                         break;
                     case 3:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60 * 3)
+                                , currentTime.getTime() + (1000 * 60 * 60 * 3)
                                 , 1000 * 60 * 60 * 3
                                 , pendingIntent);
                         break;
                     case 4:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60 * 4)
+                                , currentTime.getTime() + (1000 * 60 * 60 * 4)
                                 , 1000 * 60 * 60 * 4
                                 , pendingIntent);
                         break;
                     case 5:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60 * 5)
+                                , currentTime.getTime() + (1000 * 60 * 60 * 5)
                                 , 1000 * 60 * 60 * 5
                                 , pendingIntent);
                         break;
                     case 6:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime()+(1000 * 60 * 60 * 6)
+                                , currentTime.getTime() + (1000 * 60 * 60 * 6)
                                 , 1000 * 60 * 60 * 6
                                 , pendingIntent);
                         break;

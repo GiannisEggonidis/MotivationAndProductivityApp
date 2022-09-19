@@ -36,7 +36,7 @@ public class WeeklyReminderReceiver extends BroadcastReceiver {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         channelID = String.valueOf(intent.getIntExtra("weeklyReminderID", 1));
         NotificationChannel channel = manager.getNotificationChannel(channelID);
-        String channelName = (String) channel.getName();
+         String channelName = (String) channel.getName();
 
         Notification notification = new NotificationCompat.Builder(context, channelID)
                 .setSmallIcon(R.drawable.ic_repeating_reminder_notification_icon)
