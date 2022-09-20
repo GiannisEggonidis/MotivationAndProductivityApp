@@ -3,13 +3,13 @@
     <string name="app_name">MotivationAndProductivityApp</string>
 
     <string-array name="hoursSpinnerValues">
-        <item>30λ</item>
-        <item>1ω</item>
-        <item>2ω</item>
-        <item>3ω</item>
-        <item>4ω</item>
-        <item>5ω</item>
-        <item>6ω</item>
+        <item>1 ώρα</item>
+        <item>2 ώρες</item>
+        <item>3 ώρες</item>
+        <item>4 ώρες</item>
+        <item>6 ώρες</item>
+        <item>8 ώρες</item>
+        <item>12 ώρες</item>
     </string-array>
 
     <string-array name="custom_weekdays">

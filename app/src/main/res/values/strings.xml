@@ -2,13 +2,13 @@
     <string name="app_name">MotivationAndProductivityApp</string>
 
     <string-array name="hoursSpinnerValues">
-        <item>30m</item>
-        <item>1h</item>
-        <item>2h</item>
-        <item>3h</item>
-        <item>4h</item>
-        <item>5h</item>
-        <item>6h</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>4 hours</item>
+        <item>6 hours</item>
+        <item>8 hours</item>
+        <item>12 hours</item>
     </string-array>
 
     <string-array name="custom_weekdays">

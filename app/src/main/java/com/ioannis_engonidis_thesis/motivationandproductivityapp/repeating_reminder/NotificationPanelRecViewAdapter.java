@@ -241,6 +241,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
             holder.deleteNotificationPanel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AlertDialog);
                         builder.setTitle(notificationPanel.get(holder.getAdapterPosition()).getNotificationName());
@@ -266,6 +267,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
                                 notificationPanel.remove(holder.getAdapterPosition());
                                 notifyDataSetChanged();
+
 
                                 saveData();
                             }
@@ -464,8 +466,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
     }
 
     /**
-     * TODO: 07/09/2022 Fix schedule method it seems that only Mondays schedule work.
-     * TODO:            Try souts inside weekdays to check if & loop functionality. Try to make alarmManagers and pendingIntents into arrays.
+     * TODO: 20/09/2022 Change variables to match the spinner values.
      */
     private void scheduleNotification(String notificationName, int notificationID, int pickInterval
             , boolean notificationSwitch
@@ -1197,6 +1198,10 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                         case 0:
                             triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -1210,11 +1215,17 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
@@ -1398,15 +1409,21 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
+
+                    System.out.println("\n***Friday***\n");
 
                     switch (pickInterval) {
                         case 0:
                             triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -1420,11 +1437,17 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
@@ -1608,15 +1631,21 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
+
+                    System.out.println("\n***Saturday***\n");
 
                     switch (pickInterval) {
                         case 0:
                             triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -1630,11 +1659,17 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);
@@ -1818,15 +1853,21 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                     untilCalendar.set(Calendar.MINUTE, untilMinutes);
                     untilCalendar.set(Calendar.SECOND, 0);
                     untilCalendar.set(Calendar.MILLISECOND, 0);
-                    untilMS = fromCalendar.getTime().getTime();
+                    untilMS = untilCalendar.getTime().getTime();
 
                     long triggerTime;
                     int counter;
+
+                    System.out.println("\n***Sunday***\n");
 
                     switch (pickInterval) {
                         case 0:
                             triggerTime = fromMS;
                             counter = 1;
+                            Date triggerDate = new Date(triggerTime);
+                            Date untilDate = new Date(untilMS);
+                            Date fromDate = new Date(fromMS);
+                            System.out.println("\nTEST in switch\n" + "Trigger Time: " + triggerTime + triggerDate + "\nuntilMS: " + untilMS + untilDate + "\nfromMS: " + fromMS + fromDate);
                             while (triggerTime <= untilMS) {
                                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                         mContext
@@ -1840,11 +1881,17 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , triggerTime + weekMs
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime + weekMs);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 } else {
                                     manager.setRepeating(AlarmManager.RTC_WAKEUP
                                             , triggerTime
                                             , weekMs
                                             , pendingIntent);
+                                    dateTriggerTime = new Date(triggerTime);
+                                    System.out.println("\nAlarm Counter: " + counter + " === " + "Trigger Date and Time:  " + dateTriggerTime);
+                                    System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
                                 triggerTime = triggerTime + (1000 * 60 * 30);

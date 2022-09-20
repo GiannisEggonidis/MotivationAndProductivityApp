@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity {
             addNotificationPanel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    materialDesignFAM.close(true);
-                    if (notificationPanel.size() >= 4) {
+                    if (notificationPanel.size() >= 2) {
                         Toast.makeText(MainActivity.this, getString(R.string.maxRepeating), Toast.LENGTH_SHORT).show();
                     } else {
                         /** Generating new ID for reminder **/
@@ -123,10 +122,14 @@ public class MainActivity extends AppCompatActivity {
                                 false, false, false,
                                 false, false, false, 28800000, "08:00", 72000000, "20:00"));
                         saveData();
+                        if (notificationPanel.size()>=2){
+                            addNotificationPanel.setVisibility(View.INVISIBLE);
+                        }
                         adapter.notifyDataSetChanged();
                     }
                 }
             });
+
         }
     }
 
