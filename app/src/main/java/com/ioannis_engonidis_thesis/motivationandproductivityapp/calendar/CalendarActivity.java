@@ -17,6 +17,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanel;
@@ -37,8 +40,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CalendarActivity extends AppCompatActivity {
-    ImageButton addCalendar,languagesButton,enButton,grButton;
+public class CalendarActivity extends AppCompatActivity implements HideAddButton {
+    ImageButton addCalendar, languagesButton, enButton, grButton;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
@@ -60,10 +63,10 @@ public class CalendarActivity extends AppCompatActivity {
 
         adapter.setCalendars(calendars);
 //        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
-        calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
+        calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         calendarRecView.setAdapter(adapter);
-//        SnapHelper helper = new LinearSnapHelper();
-//        helper.attachToRecyclerView(calendarRecView);
+        SnapHelper helper = new LinearSnapHelper();
+        helper.attachToRecyclerView(calendarRecView);
 
         /** Animated Background Configuration **/
         {
@@ -85,35 +88,45 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         /** Add new Calendar panel Button **/
-        addCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                materialDesignFAM.close(true);
-                if (calendars.size() >= 4) {
-                    Toast.makeText(CalendarActivity.this, getString(R.string.maxCalendar), Toast.LENGTH_SHORT).show();
-                } else {
-                    /** Generating new ID for reminder **/
-                    int maxValue = 0;
-                    int indexOfMaxValue = 0;
-                    if (calendars.size() != 0) {
-                        for (int i = 0; i < calendars.size(); i++) {
-                            if (calendars.get(i).getCalendarID() > maxValue) {
-                                indexOfMaxValue = i;
+        {
+            addCalendar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    materialDesignFAM.close(true);
+                    if (calendars.size() >= 4) {
+                        Toast.makeText(CalendarActivity.this, getString(R.string.maxCalendar), Toast.LENGTH_SHORT).show();
+                    } else {
+                        /** Generating new ID for reminder **/
+                        int maxValue = 0;
+                        int indexOfMaxValue = 0;
+                        if (calendars.size() != 0) {
+                            for (int i = 0; i < calendars.size(); i++) {
+                                if (calendars.get(i).getCalendarID() > maxValue) {
+                                    indexOfMaxValue = i;
+                                }
                             }
+                            maxValue = calendars.get(indexOfMaxValue).getCalendarID() + 1;
                         }
-                        maxValue = calendars.get(indexOfMaxValue).getCalendarID() + 1;
+
+                        ArrayList<CalendarDay> calendarDays = new ArrayList<>();
+
+                        calendars.add(new Calendar(maxValue, 0, getString(R.string.calendarName), calendarDays));
+                        saveData();
+
+                        adapter.notifyDataSetChanged();
+                        if (calendars.size() >= 4) {
+                            Animation fadeOut = AnimationUtils.loadAnimation(CalendarActivity.this, R.anim.fade_anim);
+                            addCalendar.startAnimation(fadeOut);
+                            addCalendar.setVisibility(View.INVISIBLE);
+                        }
                     }
-
-                    ArrayList<CalendarDay> calendarDays = new ArrayList<>();
-
-                    calendars.add(new Calendar(maxValue, 0, getString(R.string.calendarName), calendarDays));
-                    saveData();
-
-                    adapter.notifyDataSetChanged();
                 }
-            }
-        });
+            });
 
+            if (calendars.size() >= 2) {
+                addCalendar.setVisibility(View.INVISIBLE);
+            } else addCalendar.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onBackPressed() {
@@ -208,14 +221,14 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
-    private void languageAlertDialog(){
+    private void languageAlertDialog() {
 
-        languageDialog = new Dialog(CalendarActivity.this,R.style.AlertDialog);
+        languageDialog = new Dialog(CalendarActivity.this, R.style.AlertDialog);
         languageDialog.setContentView(R.layout.language_dialog);
         languageDialog.setTitle("Language");
 
-        enButton = (ImageButton)languageDialog.findViewById(R.id.enButton);
-        grButton = (ImageButton)languageDialog.findViewById(R.id.grButton);
+        enButton = (ImageButton) languageDialog.findViewById(R.id.enButton);
+        grButton = (ImageButton) languageDialog.findViewById(R.id.grButton);
 
         enButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,14 +260,19 @@ public class CalendarActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //save data to shared preferences
-        SharedPreferences.Editor editor = getSharedPreferences("Language",MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
+        SharedPreferences.Editor editor = getSharedPreferences("Language", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
         editor.apply();
     }
 
-    public void loadLocale(){
+    public void loadLocale() {
         SharedPreferences preferences = getSharedPreferences("Language", Activity.MODE_PRIVATE);
-        String language = preferences.getString("My_Lang","");
+        String language = preferences.getString("My_Lang", "");
         setLocale(language);
+    }
+
+    @Override
+    public void hideButton() {
+        addCalendar.setVisibility(View.VISIBLE);
     }
 }

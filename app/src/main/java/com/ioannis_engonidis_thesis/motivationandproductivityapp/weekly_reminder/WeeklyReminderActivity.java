@@ -18,6 +18,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
@@ -36,14 +39,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class WeeklyReminderActivity extends AppCompatActivity {
+public class WeeklyReminderActivity extends AppCompatActivity implements HideAddButton {
 
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5;
 
     private RecyclerView weeklyReminderPanelRecView;
     private WeeklyReminderRecViewAdapter adapter = new WeeklyReminderRecViewAdapter(this);
-    private ImageButton addWeeklyReminderPanel,languagesButton,enButton,grButton;
+    private ImageButton addWeeklyReminderPanel, languagesButton, enButton, grButton;
     private Dialog languageDialog;
 
     private ArrayList<WeeklyReminder> weeklyReminder;
@@ -80,34 +83,45 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         }
 
         /** Add new Weekly panel Button **/
-        addWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                materialDesignFAM.close(true);
-                if (weeklyReminder.size() >= 5) {
-                    Toast.makeText(WeeklyReminderActivity.this, getString(R.string.maxWeekly), Toast.LENGTH_SHORT).show();
-                } else {
-                    /** Generating new ID for reminder **/
-                    int maxValue = 100;
-                    int indexOfMaxValue = 0;
-                    if (weeklyReminder.size() != 0) {
-                        for (int i = 0; i < weeklyReminder.size(); i++) {
-                            if (weeklyReminder.get(i).getWeeklyReminderId() > maxValue) {
-                                indexOfMaxValue = i ;
+        {
+            addWeeklyReminderPanel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    materialDesignFAM.close(true);
+                    if (weeklyReminder.size() >= 5) {
+                        Toast.makeText(WeeklyReminderActivity.this, getString(R.string.maxWeekly), Toast.LENGTH_SHORT).show();
+                    } else {
+                        /** Generating new ID for reminder **/
+                        int maxValue = 100;
+                        int indexOfMaxValue = 0;
+                        if (weeklyReminder.size() != 0) {
+                            for (int i = 0; i < weeklyReminder.size(); i++) {
+                                if (weeklyReminder.get(i).getWeeklyReminderId() > maxValue) {
+                                    indexOfMaxValue = i;
+                                }
                             }
+                            maxValue = weeklyReminder.get(indexOfMaxValue).getWeeklyReminderId() + 1;
                         }
-                        maxValue = weeklyReminder.get(indexOfMaxValue).getWeeklyReminderId() + 1;
+
+
+                        weeklyReminder.add(new WeeklyReminder(false, false, false, false
+                                , false, false, false, false, getString(R.string.weeklyReminderName)
+                                , "17:00", maxValue, 61200000));
+                        saveData();
+                        adapter.notifyDataSetChanged();
+                        if (weeklyReminder.size() >= 5) {
+                            Animation fadeOut = AnimationUtils.loadAnimation(WeeklyReminderActivity.this, R.anim.fade_anim);
+                            addWeeklyReminderPanel.setVisibility(View.INVISIBLE);
+                            addWeeklyReminderPanel.startAnimation(fadeOut);
+                        }
                     }
-
-
-                    weeklyReminder.add(new WeeklyReminder(false,false,false,false
-                    ,false,false,false,false,getString(R.string.weeklyReminderName)
-                    ,"17:00",maxValue,61200000));
-                    saveData();
-                    adapter.notifyDataSetChanged();
                 }
-            }
-        });
+            });
+            if (weeklyReminder.size() >= 2){
+                addWeeklyReminderPanel.setVisibility(View.INVISIBLE);
+            }else addWeeklyReminderPanel.setVisibility(View.VISIBLE);
+
+        }
     }
 
     private void saveData() {
@@ -120,7 +134,7 @@ public class WeeklyReminderActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("weeklySharedPreferences",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("weeklySharedPreferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("weekly_reminder", null);
         Type type = new TypeToken<ArrayList<WeeklyReminder>>() {
@@ -213,14 +227,14 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         return;
     }
 
-    private void languageAlertDialog(){
+    private void languageAlertDialog() {
 
-        languageDialog = new Dialog(WeeklyReminderActivity.this,R.style.AlertDialog);
+        languageDialog = new Dialog(WeeklyReminderActivity.this, R.style.AlertDialog);
         languageDialog.setContentView(R.layout.language_dialog);
         languageDialog.setTitle("Language");
 
-        enButton = (ImageButton)languageDialog.findViewById(R.id.enButton);
-        grButton = (ImageButton)languageDialog.findViewById(R.id.grButton);
+        enButton = (ImageButton) languageDialog.findViewById(R.id.enButton);
+        grButton = (ImageButton) languageDialog.findViewById(R.id.grButton);
 
         enButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,14 +266,19 @@ public class WeeklyReminderActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //save data to shared preferences
-        SharedPreferences.Editor editor = getSharedPreferences("Language",MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
+        SharedPreferences.Editor editor = getSharedPreferences("Language", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
         editor.apply();
     }
 
-    public void loadLocale(){
+    public void loadLocale() {
         SharedPreferences preferences = getSharedPreferences("Language", Activity.MODE_PRIVATE);
-        String language = preferences.getString("My_Lang","");
+        String language = preferences.getString("My_Lang", "");
         setLocale(language);
+    }
+
+    @Override
+    public void hideButton() {
+        addWeeklyReminderPanel.setVisibility(View.VISIBLE);
     }
 }

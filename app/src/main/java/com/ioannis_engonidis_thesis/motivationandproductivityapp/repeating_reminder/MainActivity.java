@@ -24,6 +24,8 @@ import android.text.Layout;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +37,7 @@ import com.google.gson.reflect.TypeToken;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
@@ -44,7 +47,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HideAddButton {
 
     ConstraintLayout mainLayout;
     FloatingActionMenu materialDesignFAM;
@@ -122,13 +125,19 @@ public class MainActivity extends AppCompatActivity {
                                 false, false, false,
                                 false, false, false, 28800000, "08:00", 72000000, "20:00"));
                         saveData();
-                        if (notificationPanel.size()>=2){
+                        if (notificationPanel.size() >= 2) {
+                            Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_anim);
+                            addNotificationPanel.startAnimation(fadeOut);
                             addNotificationPanel.setVisibility(View.INVISIBLE);
                         }
                         adapter.notifyDataSetChanged();
                     }
                 }
             });
+
+            if (notificationPanel.size() >= 2){
+                addNotificationPanel.setVisibility(View.INVISIBLE);
+            }else addNotificationPanel.setVisibility(View.VISIBLE);
 
         }
     }
@@ -297,4 +306,8 @@ public class MainActivity extends AppCompatActivity {
         setLocale(language);
     }
 
+    @Override
+    public void hideButton() {
+        addNotificationPanel.setVisibility(View.VISIBLE);
+    }
 }

@@ -5,10 +5,9 @@
     android:id="@+id/calendarCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="45dp"
-    android:layout_marginBottom="45dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+
+    android:layout_marginLeft="45dp"
+    android:layout_marginRight="45dp"
     android:outlineAmbientShadowColor="@color/purple_700"
     android:outlineSpotShadowColor="@color/teal_700"
     app:cardCornerRadius="8dp"
@@ -68,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/calendarName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="0dp"
             app:mcv_dateTextAppearance="@color/purple_500" />
 
         <TextView
@@ -77,9 +76,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/calendarView"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/sans_francisco_pro_text_regular"
-            android:paddingBottom="6dp"
+            android:paddingBottom="4dp"
             android:text="Text" />
 
     </RelativeLayout>

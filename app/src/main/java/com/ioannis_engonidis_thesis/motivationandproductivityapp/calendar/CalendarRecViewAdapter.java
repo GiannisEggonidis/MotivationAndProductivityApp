@@ -187,6 +187,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                                 calendars.remove(holder.getPosition());
                                 notifyDataSetChanged();
                                 saveData();
+                                holder.activity.hideButton();
                             }
                         });
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -231,6 +232,8 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
         private Spinner pickColor;
         private ImageButton deleteCalendar;
         private MaterialCalendarView calendarView;
+
+        private CalendarActivity activity = (CalendarActivity)cContext;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

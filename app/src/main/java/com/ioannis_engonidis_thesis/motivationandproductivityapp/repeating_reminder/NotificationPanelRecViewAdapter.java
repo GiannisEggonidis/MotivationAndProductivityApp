@@ -270,6 +270,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
 
                                 saveData();
+
+                                holder.activity.hideButton();
                             }
                         });
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -2165,6 +2167,8 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         private TextView notifyEvery, fromHours, untilHours;
         private ImageButton deleteNotificationPanel;
         private RelativeLayout scheduleTime, checkBoxes;
+
+        private MainActivity activity = (MainActivity)mContext;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

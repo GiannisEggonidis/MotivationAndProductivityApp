@@ -113,6 +113,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
                                 notifyDataSetChanged();
 
                                 saveData();
+                                holder.activity.hideButton();
                             }
                         });
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -359,6 +360,7 @@ public class WeeklyReminderRecViewAdapter extends RecyclerView.Adapter<WeeklyRem
         private ImageButton deleteWeeklyReminderPanel;
         private CheckBox weeklyReminderMondayCheckBox, weeklyReminderTuesdayCheckBox, weeklyReminderWednesdayCheckBox, weeklyReminderThursdayCheckBox, weeklyReminderFridayCheckBox, weeklyReminderSaturdayCheckBox, weeklyReminderSundayCheckBox;
 
+        private WeeklyReminderActivity activity = (WeeklyReminderActivity) wContext;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             weeklyReminderName = itemView.findViewById(R.id.weeklyReminderName);
