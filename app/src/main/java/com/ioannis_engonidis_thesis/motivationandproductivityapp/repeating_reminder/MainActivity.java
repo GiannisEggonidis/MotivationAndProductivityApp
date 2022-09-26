@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
                         saveData();
                         if (notificationPanel.size() >= 2) {
                             Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_anim);
-                            addNotificationPanel.startAnimation(fadeOut);
                             addNotificationPanel.setVisibility(View.INVISIBLE);
+                            addNotificationPanel.startAnimation(fadeOut);
                         }
                         adapter.notifyDataSetChanged();
                     }

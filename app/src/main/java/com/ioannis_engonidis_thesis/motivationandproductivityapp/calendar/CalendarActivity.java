@@ -63,7 +63,7 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
 
         adapter.setCalendars(calendars);
 //        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
-        calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         calendarRecView.setAdapter(adapter);
         SnapHelper helper = new LinearSnapHelper();
         helper.attachToRecyclerView(calendarRecView);
@@ -116,8 +116,8 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
                         adapter.notifyDataSetChanged();
                         if (calendars.size() >= 4) {
                             Animation fadeOut = AnimationUtils.loadAnimation(CalendarActivity.this, R.anim.fade_anim);
-                            addCalendar.startAnimation(fadeOut);
                             addCalendar.setVisibility(View.INVISIBLE);
+                            addCalendar.startAnimation(fadeOut);
                         }
                     }
                 }
