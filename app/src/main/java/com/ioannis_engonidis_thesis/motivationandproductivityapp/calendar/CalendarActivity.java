@@ -8,20 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
@@ -29,12 +27,9 @@ import com.google.gson.reflect.TypeToken;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanel;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -65,8 +60,6 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
 //        calendarRecView.setLayoutManager(new LinearLayoutManager(this));
         calendarRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         calendarRecView.setAdapter(adapter);
-        SnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(calendarRecView);
 
         /** Animated Background Configuration **/
         {
@@ -123,7 +116,7 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
                 }
             });
 
-            if (calendars.size() >= 2) {
+            if (calendars.size() >= 4) {
                 addCalendar.setVisibility(View.INVISIBLE);
             } else addCalendar.setVisibility(View.VISIBLE);
         }
@@ -148,7 +141,6 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
         floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
-        floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
     private void menuClickFunction() {
@@ -185,17 +177,6 @@ public class CalendarActivity extends AppCompatActivity implements HideAddButton
             }
         });
 
-        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                overridePendingTransition(0, 0);
-                Intent refresh = new Intent(CalendarActivity.this, SettingsActivity.class);
-                overridePendingTransition(0, 0);
-                startActivity(refresh);//Start the same Activity
-                overridePendingTransition(0, 0);
-                Toast.makeText(CalendarActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 

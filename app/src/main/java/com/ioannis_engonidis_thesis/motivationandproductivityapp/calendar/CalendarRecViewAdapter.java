@@ -1,7 +1,5 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar;
 
-import static java.lang.String.valueOf;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -79,7 +77,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
             holder.calendarView.removeDecorators();
             holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
                     , calendars.get(position).getCalendarDays(), cContext));
-            holder.countDaysText.setText(R.string.countDaysText + String.valueOf(calendars.get(position).getCalendarDays().size()));
+            holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
 
             holder.calendarView.setTitleFormatter(new MonthArrayTitleFormatter(cContext.getResources().getTextArray(R.array.custom_months)));
             holder.calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(cContext.getResources().getTextArray(R.array.custom_weekdays)));
@@ -131,13 +129,13 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    calendars.get(holder.getAdapterPosition()).setCalendarName(valueOf(holder.calendarName.getText()));
+                    calendars.get(holder.getAdapterPosition()).setCalendarName(String.valueOf(holder.calendarName.getText()));
                     saveData();
                 }
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    calendars.get(holder.getAdapterPosition()).setCalendarName(valueOf(holder.calendarName.getText()));
+                    calendars.get(holder.getAdapterPosition()).setCalendarName(String.valueOf(holder.calendarName.getText()));
                     saveData();
                 }
             });
@@ -155,8 +153,8 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                         holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
 
-                        System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays() + "Counted Days " + calendars.get(position).getCalendarDays().size());
-                        holder.countDaysText.setText(R.string.countDaysText + valueOf(calendars.get(position).getCalendarDays().size()));
+                        System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
+                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
                         saveData();
                     } else {
                         calendars.get(holder.getAdapterPosition()).getCalendarDays().add(holder.calendarView.getSelectedDate());
@@ -164,8 +162,8 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                         holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(holder.getAbsoluteAdapterPosition()).getPickColor()
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
 
-                        System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays() + "Counted Days " + calendars.get(position).getCalendarDays().size());
-                        holder.countDaysText.setText(R.string.countDaysText + valueOf(calendars.get(position).getCalendarDays().size()));
+                        System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
+                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
                         saveData();
 
                     }

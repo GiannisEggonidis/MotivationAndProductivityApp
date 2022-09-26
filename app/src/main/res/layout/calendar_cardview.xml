@@ -5,7 +5,6 @@
     android:id="@+id/calendarCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="35dp"
@@ -81,7 +80,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/sans_francisco_pro_text_regular"
             android:paddingBottom="4dp"
-            android:text="Text" />
+             />
 
     </RelativeLayout>
 

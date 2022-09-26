@@ -20,7 +20,7 @@
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__red.xml" value="0.1875" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/drawable/spinner__yellow.xml" value="0.1875" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_calendar.xml" value="0.30427350427350425" />
-        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_main.xml" value="0.30427350427350425" />
+        <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_main.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_settings.xml" value="0.2" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/activity_weekly_reminder.xml" value="0.30427350427350425" />
         <entry key="..\:/Users/Giannis/AndroidStudioProjects/MotivationAndProductivityApp/app/src/main/res/layout/calendar_cardview.xml" value="0.33" />
@@ -33,7 +33,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

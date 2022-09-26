@@ -47,18 +47,6 @@
         fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/material_design_floating_action_menu_item5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="9dp"
-            android:src="@drawable/ic_settings_button"
-            fab:fab_colorNormal="@color/buttonColor"
-            fab:fab_colorPressed="#BAE7F0FD"
-            fab:fab_colorRipple="#99d4d4d4"
-            fab:fab_label="Settings" />
-
-        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

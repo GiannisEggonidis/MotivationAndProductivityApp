@@ -9,14 +9,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.app.slice.SliceItem;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -38,8 +36,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

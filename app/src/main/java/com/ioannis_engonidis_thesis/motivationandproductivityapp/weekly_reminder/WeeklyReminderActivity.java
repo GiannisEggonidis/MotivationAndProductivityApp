@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,7 +15,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -31,9 +29,6 @@ import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanel;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.NotificationPanelReceiver;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -117,7 +112,7 @@ public class WeeklyReminderActivity extends AppCompatActivity implements HideAdd
                     }
                 }
             });
-            if (weeklyReminder.size() >= 2){
+            if (weeklyReminder.size() >= 5){
                 addWeeklyReminderPanel.setVisibility(View.INVISIBLE);
             }else addWeeklyReminderPanel.setVisibility(View.VISIBLE);
 
@@ -169,7 +164,6 @@ public class WeeklyReminderActivity extends AppCompatActivity implements HideAdd
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
         floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
-        floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
     private void menuClickFunction() {
@@ -206,17 +200,6 @@ public class WeeklyReminderActivity extends AppCompatActivity implements HideAdd
             }
         });
 
-        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                overridePendingTransition(0, 0);
-                Intent refresh = new Intent(WeeklyReminderActivity.this, SettingsActivity.class);
-                overridePendingTransition(0, 0);
-                startActivity(refresh);//Start the same Activity
-                overridePendingTransition(0, 0);
-                Toast.makeText(WeeklyReminderActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     public void onBackPressed() {

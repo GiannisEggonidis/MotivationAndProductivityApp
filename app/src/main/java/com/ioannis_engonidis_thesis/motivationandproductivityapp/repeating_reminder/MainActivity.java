@@ -40,7 +40,6 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
-import com.ioannis_engonidis_thesis.motivationandproductivityapp.settings.SettingsActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
 
 import java.lang.reflect.Type;
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
                                 false, false, false, 28800000, "08:00", 72000000, "20:00"));
                         saveData();
                         if (notificationPanel.size() >= 2) {
-                            Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_anim);
+                            Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_anim);
                             addNotificationPanel.setVisibility(View.INVISIBLE);
                             addNotificationPanel.startAnimation(fadeOut);
                         }
@@ -135,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
                 }
             });
 
-            if (notificationPanel.size() >= 2){
+            if (notificationPanel.size() >= 2) {
                 addNotificationPanel.setVisibility(View.INVISIBLE);
-            }else addNotificationPanel.setVisibility(View.VISIBLE);
+            } else addNotificationPanel.setVisibility(View.VISIBLE);
 
         }
     }
@@ -213,17 +212,6 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
             }
         });
 
-        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                overridePendingTransition(0, 0);
-                Intent refresh = new Intent(MainActivity.this, SettingsActivity.class);
-                overridePendingTransition(0, 0);
-                startActivity(refresh);//Start the same Activity
-                overridePendingTransition(0, 0);
-                Toast.makeText(MainActivity.this, "Settings Menu", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void initializeViews() {
@@ -240,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
         floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
-        floatingActionButton5 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
     }
 
     @Override
