@@ -1,6 +1,5 @@
 package com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,11 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.material.card.MaterialCardView;
+
 import com.google.gson.Gson;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -35,10 +32,8 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecViewAdapter.ViewHolder> {
 
@@ -77,7 +72,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
             holder.calendarView.removeDecorators();
             holder.calendarView.addDecorator(new CalendarDayDecorator(calendars.get(position).getPickColor()
                     , calendars.get(position).getCalendarDays(), cContext));
-            holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
+            holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + " " +calendars.get(position).getCalendarDays().size());
 
             holder.calendarView.setTitleFormatter(new MonthArrayTitleFormatter(cContext.getResources().getTextArray(R.array.custom_months)));
             holder.calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(cContext.getResources().getTextArray(R.array.custom_weekdays)));
@@ -154,7 +149,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
 
                         System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
-                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
+                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + " " + calendars.get(position).getCalendarDays().size());
                         saveData();
                     } else {
                         calendars.get(holder.getAdapterPosition()).getCalendarDays().add(holder.calendarView.getSelectedDate());
@@ -163,7 +158,7 @@ public class CalendarRecViewAdapter extends RecyclerView.Adapter<CalendarRecView
                                 , calendars.get(holder.getAdapterPosition()).getCalendarDays(), cContext));
 
                         System.out.println(calendars.get(holder.getAdapterPosition()).getCalendarDays());
-                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + calendars.get(position).getCalendarDays().size());
+                        holder.countDaysText.setText(cContext.getString(R.string.countDaysText) + " " + calendars.get(position).getCalendarDays().size());
                         saveData();
 
                     }

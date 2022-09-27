@@ -87,7 +87,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
         Intent bootIntent = new Intent(mContext, NotificationPanelRecViewAdapter.class);
         if ("android.intent.action.BOOT_COMPLETED".equals(bootIntent.getAction())) {
-            scheduleNotification(notificationPanel.get(holder.getAdapterPosition()).getNotificationName(), notificationPanel.get(holder.getAdapterPosition()).getId(), notificationPanel.get(holder.getAdapterPosition()).getPickInterval(), notificationPanel.get(holder.getAdapterPosition()).isNotificationSwitch(), notificationPanel.get(holder.getAdapterPosition()).isMondayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isTuesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isWednesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isThursdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isFridayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSaturdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSundayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isScheduleSwitch(), notificationPanel.get(holder.getAdapterPosition()).getFromHours(), notificationPanel.get(holder.getAdapterPosition()).getUntilHours());
+//            scheduleNotification(notificationPanel.get(holder.getAdapterPosition()).getNotificationName(), notificationPanel.get(holder.getAdapterPosition()).getId(), notificationPanel.get(holder.getAdapterPosition()).getPickInterval(), notificationPanel.get(holder.getAdapterPosition()).isNotificationSwitch(), notificationPanel.get(holder.getAdapterPosition()).isMondayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isTuesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isWednesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isThursdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isFridayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSaturdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSundayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isScheduleSwitch(), notificationPanel.get(holder.getAdapterPosition()).getFromHours(), notificationPanel.get(holder.getAdapterPosition()).getUntilHours());
         }
 
         scheduleNotification(notificationPanel.get(holder.getAdapterPosition()).getNotificationName(), notificationPanel.get(holder.getAdapterPosition()).getId(), notificationPanel.get(holder.getAdapterPosition()).getPickInterval(), notificationPanel.get(holder.getAdapterPosition()).isNotificationSwitch(), notificationPanel.get(holder.getAdapterPosition()).isMondayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isTuesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isWednesdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isThursdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isFridayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSaturdayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isSundayCheckBox(), notificationPanel.get(holder.getAdapterPosition()).isScheduleSwitch(), notificationPanel.get(holder.getAdapterPosition()).getFromHours(), notificationPanel.get(holder.getAdapterPosition()).getUntilHours());
@@ -467,9 +467,6 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         notifyDataSetChanged();
     }
 
-    /**
-     * TODO: 20/09/2022 Change variables to match the spinner values.
-     */
     private void scheduleNotification(String notificationName, int notificationID, int pickInterval
             , boolean notificationSwitch
             , boolean mondayCheckBox
@@ -504,6 +501,18 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         Intent intent = new Intent(mContext, NotificationPanelReceiver.class);
         intent.putExtra("repeatingTitle", notificationName);
         intent.putExtra("notificationID", notificationID);
+
+        cancelNotification((notificationID + 1) * 10000);
+
+        for (int i = 1; i <= 24; i++) {
+            cancelNotification((notificationID * 10000000) + 1000000 + i);
+            cancelNotification((notificationID * 10000000) + 2000000 + i);
+            cancelNotification((notificationID * 10000000) + 3000000 + i);
+            cancelNotification((notificationID * 10000000) + 4000000 + i);
+            cancelNotification((notificationID * 10000000) + 5000000 + i);
+            cancelNotification((notificationID * 10000000) + 6000000 + i);
+            cancelNotification((notificationID * 10000000) + 7000000 + i);
+        }
 
         if (notificationSwitch) {
 
@@ -566,7 +575,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
 
 
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -592,7 +601,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -618,7 +627,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -644,7 +653,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -670,7 +679,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -696,7 +705,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -722,7 +731,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -788,7 +797,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -814,7 +823,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -840,7 +849,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -866,7 +875,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -892,7 +901,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -918,7 +927,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -944,7 +953,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -1009,7 +1018,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -1035,7 +1044,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -1061,7 +1070,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -1087,7 +1096,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -1113,7 +1122,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -1139,7 +1148,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -1165,7 +1174,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -1230,7 +1239,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -1256,7 +1265,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -1282,7 +1291,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -1308,7 +1317,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -1334,7 +1343,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -1360,7 +1369,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -1386,7 +1395,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -1452,7 +1461,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -1478,7 +1487,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -1504,7 +1513,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -1530,7 +1539,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -1556,7 +1565,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -1582,7 +1591,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -1608,7 +1617,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -1674,7 +1683,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -1700,7 +1709,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -1726,7 +1735,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -1752,7 +1761,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -1778,7 +1787,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -1804,7 +1813,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -1830,7 +1839,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -1896,7 +1905,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                     System.out.println("Trigger time ms: " + (triggerTime + weekMs) + " ++++ Until time ms: " + untilMS + " Counter: " + counter);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 30);
+                                triggerTime = triggerTime + (1000 * 60 * 60);
                             }
                             break;
                         case 1:
@@ -1922,7 +1931,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
                             }
                             break;
                         case 2:
@@ -1948,7 +1957,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 2);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
                             }
                             break;
                         case 3:
@@ -1974,7 +1983,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 3);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
                             }
                             break;
                         case 4:
@@ -2000,7 +2009,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 4);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
                             }
                             break;
                         case 5:
@@ -2026,7 +2035,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 5);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 8);
                             }
                             break;
                         case 6:
@@ -2052,7 +2061,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                                             , pendingIntent);
                                 }
                                 counter++;
-                                triggerTime = triggerTime + (1000 * 60 * 60 * 6);
+                                triggerTime = triggerTime + (1000 * 60 * 60 * 12);
                             }
                             break;
                     }
@@ -2073,44 +2082,44 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
                 switch (pickInterval) {
                     case 0:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 30)
-                                , 1000 * 60 * 30
-                                , pendingIntent);
-                        break;
-                    case 1:
-                        manager.setRepeating(AlarmManager.RTC_WAKEUP
                                 , currentTime.getTime() + (1000 * 60 * 60)
                                 , 1000 * 60 * 60
                                 , pendingIntent);
                         break;
-                    case 2:
+                    case 1:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
                                 , currentTime.getTime() + (1000 * 60 * 60 * 2)
                                 , 1000 * 60 * 60 * 2
                                 , pendingIntent);
                         break;
-                    case 3:
+                    case 2:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
                                 , currentTime.getTime() + (1000 * 60 * 60 * 3)
                                 , 1000 * 60 * 60 * 3
                                 , pendingIntent);
                         break;
-                    case 4:
+                    case 3:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
                                 , currentTime.getTime() + (1000 * 60 * 60 * 4)
                                 , 1000 * 60 * 60 * 4
                                 , pendingIntent);
                         break;
+                    case 4:
+                        manager.setRepeating(AlarmManager.RTC_WAKEUP
+                                , currentTime.getTime() + (1000 * 60 * 60 * 6)
+                                , 1000 * 60 * 60 * 6
+                                , pendingIntent);
+                        break;
                     case 5:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 5)
-                                , 1000 * 60 * 60 * 5
+                                , currentTime.getTime() + (1000 * 60 * 60 * 8)
+                                , 1000 * 60 * 60 * 8
                                 , pendingIntent);
                         break;
                     case 6:
                         manager.setRepeating(AlarmManager.RTC_WAKEUP
-                                , currentTime.getTime() + (1000 * 60 * 60 * 6)
-                                , 1000 * 60 * 60 * 6
+                                , currentTime.getTime() + (1000 * 60 * 60 * 12)
+                                , 1000 * 60 * 60 * 12
                                 , pendingIntent);
                         break;
 
@@ -2120,7 +2129,7 @@ public class NotificationPanelRecViewAdapter extends RecyclerView.Adapter<Notifi
         } else {
             cancelNotification((notificationID + 1) * 10000);
 
-            for (int i = 1; i <= 48; i++) {
+            for (int i = 1; i <= 24; i++) {
                 cancelNotification((notificationID * 10000000) + 1000000 + i);
                 cancelNotification((notificationID * 10000000) + 2000000 + i);
                 cancelNotification((notificationID * 10000000) + 3000000 + i);

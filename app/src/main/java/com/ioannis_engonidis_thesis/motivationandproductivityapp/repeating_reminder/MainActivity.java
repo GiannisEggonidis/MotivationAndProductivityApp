@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
 
     }
 
+    // TODO: 27/09/2022 Create Help Menu Activity 
+    
     private void menuClickFunction() {
 
         materialDesignFAM.setClosedOnTouchOutside(true);
