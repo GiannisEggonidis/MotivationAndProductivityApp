@@ -13,13 +13,13 @@
     </string-array>
 
     <string-array name="custom_weekdays">
-        <item>Κυρ</item>
         <item>Δευ</item>
         <item>Τρι</item>
         <item>Τετ</item>
         <item>Πεμ</item>
         <item>Παρ</item>
         <item>Σαβ</item>
+        <item>Κυρ</item>
     </string-array>
 
     <string-array name="custom_months">

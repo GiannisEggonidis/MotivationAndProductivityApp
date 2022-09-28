@@ -69,7 +69,9 @@
             android:layout_below="@+id/calendarName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
-            app:mcv_dateTextAppearance="@color/purple_500" />
+            app:mcv_dateTextAppearance="@color/purple_500"
+            app:mcv_firstDayOfWeek="sunday"
+            />
 
         <TextView
             android:id="@+id/countDaysText"
