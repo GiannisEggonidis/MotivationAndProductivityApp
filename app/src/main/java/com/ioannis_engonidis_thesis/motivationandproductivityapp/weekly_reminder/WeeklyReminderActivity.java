@@ -25,6 +25,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.Help.HelpActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
@@ -197,6 +198,18 @@ public class WeeklyReminderActivity extends AppCompatActivity implements HideAdd
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
                 Toast.makeText(WeeklyReminderActivity.this, getString(R.string.calendar_menu_toast), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent start = new Intent(WeeklyReminderActivity.this, HelpActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(start);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(WeeklyReminderActivity.this, getString(R.string.help_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 

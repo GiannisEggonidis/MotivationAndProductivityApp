@@ -37,6 +37,7 @@ import com.google.gson.reflect.TypeToken;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.ioannis_engonidis_thesis.motivationandproductivityapp.Help.HelpActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.HideAddButton;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
@@ -194,9 +195,9 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
             @Override
             public void onClick(View view) {
                 overridePendingTransition(0, 0);
-                Intent refresh = new Intent(MainActivity.this, WeeklyReminderActivity.class);
+                Intent start = new Intent(MainActivity.this, WeeklyReminderActivity.class);
                 overridePendingTransition(0, 0);
-                startActivity(refresh);//Start the same Activity
+                startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
                 Toast.makeText(MainActivity.this, getString(R.string.weekly_menu_toast), Toast.LENGTH_SHORT).show();
             }
@@ -211,6 +212,18 @@ public class MainActivity extends AppCompatActivity implements HideAddButton {
                 startActivity(start);//Start the same Activity
                 overridePendingTransition(0, 0);
                 Toast.makeText(MainActivity.this, getString(R.string.calendar_menu_toast), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                overridePendingTransition(0, 0);
+                Intent start = new Intent(MainActivity.this, HelpActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(start);//Start the same Activity
+                overridePendingTransition(0, 0);
+                Toast.makeText(MainActivity.this, getString(R.string.help_menu_toast), Toast.LENGTH_SHORT).show();
             }
         });
 

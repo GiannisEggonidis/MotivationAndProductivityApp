@@ -36,29 +36,29 @@
         <item>December</item>
     </string-array>
 
-                                  <!--Floating Menu-->
+    <!--Floating Menu-->
     <string name="repeating_menu_button">Repeating</string>
     <string name="weekly_menu_button">Weekly</string>
     <string name="calendar_menu_button">Calendar</string>
     <string name="help_menu_button">Help</string>
 
-                                  <!--Floating Menu Toast-->
+    <!--Floating Menu Toast-->
     <string name="repeating_menu_toast">Repeating Reminder Menu</string>
     <string name="weekly_menu_toast">Weekly Reminder Menu</string>
     <string name="calendar_menu_toast">Activity Tracker Calendar Menu</string>
     <string name="help_menu_toast">Help Menu</string>
 
-                        <!--    Repeating Reminder Card View-->
+    <!--    Repeating Reminder Card View-->
     <string name="notificationName">Repeating Reminder</string>
     <string name="notifyEvery">Remind me every :</string>
     <string name="fromTxt">From:</string>
     <string name="untilTxt">Until:</string>
 
-                        <!--    Weekly Reminder Card View-->
+    <!--    Weekly Reminder Card View-->
     <string name="weeklyReminderName">Weekly Reminder</string>
     <string name="scheduleReminderTxt">Schedule Reminder:</string>
 
-                        <!--Week days-->
+    <!--Week days-->
     <string name="mondayCheckBox">Mon</string>
     <string name="tuesdayCheckBox">Tue</string>
     <string name="wednesdayCheckBox">Wed</string>
@@ -67,14 +67,14 @@
     <string name="saturdayCheckBox">Sat</string>
     <string name="sundayCheckBox">Sun</string>
 
-                        <!--    Calendar Reminder Card View-->
+    <!--    Calendar Reminder Card View-->
     <string name="calendarName">Activity Tracker Calendar</string>
     <string name="countDaysText">Total Days: </string>
 
     <string name="delete_reminder">Delete Reminder?</string>
     <string name="delete_calendar">Delete Calendar?</string>
 
-                        <!--  Max Values  -->
+    <!--  Max Values  -->
     <string name="maxRepeating">Repeating Reminder Limit</string>
     <string name="maxWeekly">Weekly Reminder Limit</string>
     <string name="maxCalendar">Calendar Limit</string>
