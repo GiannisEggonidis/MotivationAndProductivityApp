@@ -45,6 +45,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="117dp" />
 
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/imageSlider"
+        android:layout_width="390dp"
+        android:layout_height="520dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+
+        app:sliderAutoCycleEnabled="false"
+        />
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MotivationAndProductivityApp</string>
+    <string name="app_name">Friendly Reminder</string>
 
     <string-array name="hoursSpinnerValues">
         <item>1 hour</item>

@@ -19,6 +19,9 @@ import com.ioannis_engonidis_thesis.motivationandproductivityapp.R;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.calendar.CalendarActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.repeating_reminder.MainActivity;
 import com.ioannis_engonidis_thesis.motivationandproductivityapp.weekly_reminder.WeeklyReminderActivity;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.Locale;
 
@@ -26,6 +29,9 @@ public class HelpActivity extends AppCompatActivity {
     ImageButton languagesButton, enButton, grButton;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
+    SliderView sliderView;
+
+    int[] images;
 
     private Dialog languageDialog;
 
@@ -55,6 +61,16 @@ public class HelpActivity extends AppCompatActivity {
             });
         }
 
+        if (getResources().getConfiguration().locale.getLanguage().equalsIgnoreCase("en")) {
+            images = new int[]{R.drawable.guide_repeating_en, R.drawable.guide_weekly_en, R.drawable.guide_calendar_en};
+        } else {
+            images = new int[]{R.drawable.guide_repeating_gr, R.drawable.guide_weekly_gr, R.drawable.guide_calendar_gr};
+        }
+
+        SliderAdapter sliderAdapter = new SliderAdapter(images);
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.SLIDE);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
 
     }
 
@@ -160,6 +176,7 @@ public class HelpActivity extends AppCompatActivity {
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
         floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
+        sliderView = findViewById(R.id.imageSlider);
 
     }
 

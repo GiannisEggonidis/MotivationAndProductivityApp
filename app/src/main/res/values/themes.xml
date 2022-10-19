@@ -17,6 +17,8 @@
         <item name="colorAccent">#353535</item>
         <item name="android:colorEdgeEffect">@color/background</item>
 
+        <item name="android:dropDownListViewStyle">@style/MySpinner</item>
+
     </style>
 
     <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
@@ -42,6 +44,12 @@
         <item name="android:background">@color/background</item>
         <item name="menu_labels_cornerRadius">17dp</item>
         <item name="android:textColor">#0A0A0A</item>
+    </style>
+
+
+    <style name="MySpinner" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:divider">#2F1E1E1E</item>
     </style>
 
 </resources>
