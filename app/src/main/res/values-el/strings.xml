@@ -23,18 +23,18 @@
     </string-array>
 
     <string-array name="custom_months">
-        <item>Ιανουαρίου</item>
-        <item>Φεβρουαρίου</item>
-        <item>Μαρτίου</item>
-        <item>Απριλίου</item>
-        <item>Μαΐου</item>
-        <item>Ιουνίου</item>
-        <item>Ιουλίου</item>
-        <item>Αυγούστου</item>
-        <item>Σεπτεμβρίου</item>
-        <item>Οκτωβρίου</item>
-        <item>Νοεμβρίου</item>
-        <item>Δεκεμβρίου</item>
+        <item>Ιανουαρίος</item>
+        <item>Φεβρουάριος</item>
+        <item>Μάρτιος</item>
+        <item>Απρίλιος</item>
+        <item>Μαΐος</item>
+        <item>Ιούνιος</item>
+        <item>Ιούλιος</item>
+        <item>Αύγουστος</item>
+        <item>Σεπτέμβριος</item>
+        <item>Οκτώβριος</item>
+        <item>Νοέμβριος</item>
+        <item>Δεκέμβριος</item>
     </string-array>
 
     <!--Floating Menu-->
